@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{4cef9775-b424-410c-9dca-1891c3fe0a8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{e0d90426-4023-41b4-80c3-b15f0fbca8ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Board">
+      <UniqueIdentifier>{f3894328-80a4-4457-b57d-b2277867eea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{e64746c6-535a-48d3-b8d3-b20ea7c27f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{b13da211-b6e6-4b2a-9a2f-ba87bb09f490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bullet">
+      <UniqueIdentifier>{a1ba929b-7693-4265-8821-6e13bee9d4d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ship">
+      <UniqueIdentifier>{0afb280e-7d60-4f56-9fe2-371f4f4ce5b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Button">
+      <UniqueIdentifier>{1f75489d-6179-4bed-b152-a7122d0faea5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Timer">
+      <UniqueIdentifier>{e6788d27-aa69-4769-8cbe-e538646ef44c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Code\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\animation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\atlas.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\atlas_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\board.cpp">
+      <Filter>Board</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\effect.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\effect_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\game_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\resources_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\scene_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\txt_texture_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\scene_pool.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\bullet.cpp">
+      <Filter>Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\ship.cpp">
+      <Filter>Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\button.cpp">
+      <Filter>Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\timer.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Code\animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\atlas.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\atlas_manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\board.h">
+      <Filter>Board</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\effect.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\effect_manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\game_manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\resources_manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\scene_manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\txt_texture_manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\scene_pool.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\scene_type.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\tile.h">
+      <Filter>Board</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\bullet.h">
+      <Filter>Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\ship.h">
+      <Filter>Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\button.h">
+      <Filter>Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\timer.h">
+      <Filter>Timer</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
