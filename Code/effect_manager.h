@@ -12,10 +12,11 @@
 enum class EffectID
 {
 	SelectTarget,
-	WaterSplash_single,
-	WaterSplash_plural,
-	Explosion,
-	ExplosionTwice,
+	WaterSplash,
+	WaterSplashMultiple,
+	Explosion1,
+	Explosion2,
+	ExplosionMax,
 };
 
 typedef std::unordered_map<EffectID, Effect*> EffectPool;

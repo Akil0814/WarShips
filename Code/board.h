@@ -63,8 +63,8 @@ private:
 	int index_x = 0;
 	int index_y = 0;
 
-	int row = 10;
-	int col = 10;
+	int row = 20;
+	int col = 20;
 
 	TileBoard board;
 

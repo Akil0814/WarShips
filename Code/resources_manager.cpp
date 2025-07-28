@@ -90,7 +90,10 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 //---------------------------------------------------------------//
 //--------------------------音效资源------------------------------//
 
-	sound_pool[ResID::Sound_Fire1] = Mix_LoadWAV("res/sound/fire_1.wav");
+	sound_pool[ResID::Sound_Fire_1] = Mix_LoadWAV("res/sound/fire_1.wav");
+	sound_pool[ResID::Sound_Fire_2] = Mix_LoadWAV("res/sound/fire_2.wav");
+	sound_pool[ResID::Sound_Fire_3] = Mix_LoadWAV("res/sound/fire_3.wav");
+
 
 	for (const auto& pair : sound_pool)
 		if (!pair.second) return false;
@@ -98,7 +101,7 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 //---------------------------------------------------------------//
 //--------------------------音乐资源------------------------------//
 
-
+	music_pool[ResID::Music_main] = Mix_LoadMUS("");
 
 	
 	for (const auto& pair : music_pool)

@@ -6,12 +6,14 @@
 
 enum class AtlasID
 {
-	Missile,
+	MissileOnFire,
 	GetTarget,
-	MissingTarget,
-	Explosion,
-	ExplosionBig,
-
+	WaterSplash,
+	WaterSplash_Multiple,
+	Explosion1,
+	Explosion2,
+	ExplosionMax,
+	ExCalibur
 };
 
 typedef std::unordered_map<AtlasID, Atlas*>AtlasPool;

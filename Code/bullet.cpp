@@ -1,7 +1,7 @@
 #include"bullet.h"
 
 Bullet::Bullet() {
-    animation.set_frame(AtlasManager::instance()->get_atlas(AtlasID::Missile));
+    animation.set_frame(AtlasManager::instance()->get_atlas(AtlasID::MissileOnFire));
     animation.set_interval(0.1);
     animation.set_loop(true);
 }

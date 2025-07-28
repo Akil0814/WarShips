@@ -114,23 +114,23 @@ bool EffectManager::init_all_effect()
 	effect_pool[EffectID::SelectTarget] = e;
 
 	e = new Effect;
-	e->set_frame(AtlasManager::instance()->get_atlas(AtlasID::MissingTarget));
+	e->set_frame(AtlasManager::instance()->get_atlas(AtlasID::WaterSplash));
 	e->set_interval(0.1);
 	e->set_loop(false);
-	effect_pool[EffectID::WaterSplash_single] = e;
+	effect_pool[EffectID::WaterSplash] = e;
 
 	e = new Effect;
-	e->set_frame(AtlasManager::instance()->get_atlas(AtlasID::ExplosionBig));
+	e->set_frame(AtlasManager::instance()->get_atlas(AtlasID::Explosion1));
 	e->set_interval(0.1);
 	e->set_loop(false);
-	effect_pool[EffectID::Explosion] = e;
+	effect_pool[EffectID::Explosion1] = e;
 
 
 	e = new Effect;
-	e->set_frame(AtlasManager::instance()->get_atlas(AtlasID::Explosion));
+	e->set_frame(AtlasManager::instance()->get_atlas(AtlasID::Explosion2));
 	e->set_interval(0.1);
 	e->set_loop(false);
-	effect_pool[EffectID::ExplosionTwice] = e;
+	effect_pool[EffectID::Explosion2] = e;
 
 
 	for (const auto& pair : effect_pool)

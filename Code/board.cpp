@@ -54,14 +54,14 @@ void Board::on_update(double delta)
         find_target = false;
 
         if (board[index_y][index_x].has_ship())
-            EffectManager::instance()->show_effect(EffectID::Explosion, rect_explosion_target, 0, [this]()
+            EffectManager::instance()->show_effect(EffectID::Explosion1, rect_explosion_target, 0, [this]()
                 {
                     on_animation = false;
                     board[index_y][index_x].change_status(Tile::Status::Hit);
                     finish_hit = true;
                 });
         else
-            EffectManager::instance()->show_effect(EffectID::WaterSplash_single, rect_water_splash, 0,[this]()
+            EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0,[this]()
                 {
                     on_animation = false;
                     board[index_y][index_x].change_status(Tile::Status::Miss);
