@@ -166,6 +166,20 @@
       <AdditionalLibraryDirectories>thirdparty\SDL2\lib\x64;thirdparty\SDL2_gfx\lib\x64;thirdparty\SDL2_image\lib\x64;thirdparty\SDL2_mixer\lib\x64;thirdparty\SDL2_ttf\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_gfx.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreLinkEvent>
+      <Command>@echo off</Command>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>@echo off
+set DLL_SRC_DIR=$(ProjectDir)thirdparty
+
+copy /Y "%DLL_SRC_DIR%\SDL2\lib\x64\SDL2.dll" "$(OutDir)"
+copy /Y "%DLL_SRC_DIR%\SDL2_gfx\lib\x64\SDL2_gfx.dll" "$(OutDir)"
+copy /Y "%DLL_SRC_DIR%\SDL2_image\lib\x64\SDL2_image.dll" "$(OutDir)"
+copy /Y "%DLL_SRC_DIR%\SDL2_mixer\lib\x64\SDL2_mixer.dll" "$(OutDir)"
+copy /Y "%DLL_SRC_DIR%\SDL2_ttf\lib\x64\SDL2_ttf.dll" "$(OutDir)"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
