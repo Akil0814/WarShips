@@ -1,111 +1,122 @@
 #include"resources_manager.h"
+#include<iostream>
 
 bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 {
 //---------------------------------------------------------------//
 //--------------------------字体资源------------------------------//
 
-	font_pool[ResID::Font_16] = TTF_OpenFont("res/Basketball.otf", 16);
-	font_pool[ResID::Font_24] = TTF_OpenFont("res/Basketball.otf", 24);
-	font_pool[ResID::Font_48] = TTF_OpenFont("res/Basketball.otf", 48);
-	font_pool[ResID::Font_72] = TTF_OpenFont("res/Basketball.otf", 72);
-	font_pool[ResID::Font_128] = TTF_OpenFont("res/Basketball.otf", 128);
+	//font_pool[ResID::Font_16] = TTF_OpenFont("res/Basketball.otf", 16);
+	//font_pool[ResID::Font_24] = TTF_OpenFont("res/Basketball.otf", 24);
+	//font_pool[ResID::Font_48] = TTF_OpenFont("res/Basketball.otf", 48);
+	//font_pool[ResID::Font_72] = TTF_OpenFont("res/Basketball.otf", 72);
+	//font_pool[ResID::Font_128] = TTF_OpenFont("res/Basketball.otf", 128);
 
+	std::cout << "font 1" << std::endl;
 	for (const auto& pair : font_pool)
-		if (!pair.second) return false;
+		if (!pair.second)return false;
+	std::cout << "font 2" << std::endl;
 
 //---------------------------------------------------------------//
 //--------------------------纹理资源------------------------------//
 
-	texture_pool[ResID::Tex_SetTarget] = IMG_LoadTexture(renderer, "res/set_target.png");
-	texture_pool[ResID::Tex_Hand] = IMG_LoadTexture(renderer, "res/hand.png");
+	texture_pool[ResID::Tex_SetTarget] = IMG_LoadTexture(renderer, "../../res/set_target.png");
+	texture_pool[ResID::Tex_Hand] = IMG_LoadTexture(renderer, "../../res/hand.png");
 
 
-	texture_pool[ResID::Tex_Ship_1] = IMG_LoadTexture(renderer, "res/ship/Ship1.png");
-	texture_pool[ResID::Tex_Ship_2] = IMG_LoadTexture(renderer, "res/ship/Ship2.png");
-	texture_pool[ResID::Tex_Ship_3] = IMG_LoadTexture(renderer, "res/ship/Ship3.png");
-	texture_pool[ResID::Tex_Ship_4] = IMG_LoadTexture(renderer, "res/ship/Ship4.png");
-	texture_pool[ResID::Tex_Ship_5] = IMG_LoadTexture(renderer, "res/ship/Ship5.png");
+	//texture_pool[ResID::Tex_Ship_1] = IMG_LoadTexture(renderer, "../res/Ship/Ship1.png");
+	//texture_pool[ResID::Tex_Ship_2] = IMG_LoadTexture(renderer, "../res/Ship/Ship2.png");
+	//texture_pool[ResID::Tex_Ship_3] = IMG_LoadTexture(renderer, "../res/Ship/Ship3.png");
+	//texture_pool[ResID::Tex_Ship_4] = IMG_LoadTexture(renderer, "../res/Ship/Ship4.png");
+	//texture_pool[ResID::Tex_Ship_5] = IMG_LoadTexture(renderer, "../res/Ship/Ship5.png");
 
 
-	texture_pool[ResID::Tex_Tile_hit] = IMG_LoadTexture(renderer, "res/tile_hit.png");
-	texture_pool[ResID::Tex_Tile_miss] = IMG_LoadTexture(renderer, "res/tile_miss.png");
-	texture_pool[ResID::Tex_Tile_unknow] = IMG_LoadTexture(renderer, "res/tile_unknow.png");
+	//texture_pool[ResID::Tex_Tile_hit] = IMG_LoadTexture(renderer, "../res/tile_hit.png");
+	//texture_pool[ResID::Tex_Tile_miss] = IMG_LoadTexture(renderer, "../res/tile_miss.png");
+	//texture_pool[ResID::Tex_Tile_unknow] = IMG_LoadTexture(renderer, "../res/tile_unknow.png");
+	//
+	//texture_pool[ResID::Tex_MissileOnFire_0001] = IMG_LoadTexture(renderer, "../res/Missile_on_fire/missile_0001.png");
+	//texture_pool[ResID::Tex_MissileOnFire_0002] = IMG_LoadTexture(renderer, "../res/Missile_on_fire/missile_0002.png");
+	//texture_pool[ResID::Tex_MissileOnFire_0003] = IMG_LoadTexture(renderer, "../res/Missile_on_fire/missile_0003.png");
+	//
+	//texture_pool[ResID::Tex_GetTarget_0001] = IMG_LoadTexture(renderer, "../res/Get_target/get_target_0001.png");
+	//texture_pool[ResID::Tex_GetTarget_0002] = IMG_LoadTexture(renderer, "../res/Get_target/get_target_0002.png");
+	//texture_pool[ResID::Tex_GetTarget_0003] = IMG_LoadTexture(renderer, "../res/Get_target/get_target_0003.png");
+	//texture_pool[ResID::Tex_GetTarget_0004] = IMG_LoadTexture(renderer, "../res/Get_target/get_target_0004.png");
+	//texture_pool[ResID::Tex_GetTarget_0005] = IMG_LoadTexture(renderer, "../res/Get_target/get_target_0005.png");
 
-	texture_pool[ResID::Tex_MissileOnFire_0001] = IMG_LoadTexture(renderer, "res/missile_on_fire/missile_0001.png");
-	texture_pool[ResID::Tex_MissileOnFire_0002] = IMG_LoadTexture(renderer, "res/missile_on_fire/missile_0002.png");
-	texture_pool[ResID::Tex_MissileOnFire_0003] = IMG_LoadTexture(renderer, "res/missile_on_fire/missile_0003.png");
+	//texture_pool[ResID::Tex_Explosion2_0001] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0001.png");
+	//texture_pool[ResID::Tex_Explosion2_0002] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0002.png");
+	//texture_pool[ResID::Tex_Explosion2_0003] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0003.png");
+	//texture_pool[ResID::Tex_Explosion2_0004] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0004.png");
+	//texture_pool[ResID::Tex_Explosion2_0005] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0005.png");
+	//texture_pool[ResID::Tex_Explosion2_0006] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0006.png");
+	//texture_pool[ResID::Tex_Explosion2_0007] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0007.png");
+	//texture_pool[ResID::Tex_Explosion2_0008] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0008.png");
+	//texture_pool[ResID::Tex_Explosion2_0009] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0009.png");
+	//texture_pool[ResID::Tex_Explosion2_0010] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0010.png");
+	//texture_pool[ResID::Tex_Explosion2_0011] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0011.png");
+	//texture_pool[ResID::Tex_Explosion2_0012] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0012.png");
+	//texture_pool[ResID::Tex_Explosion2_0013] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0013.png");
+	//texture_pool[ResID::Tex_Explosion2_0014] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0014.png");
+	//texture_pool[ResID::Tex_Explosion2_0015] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0015.png");
+	//texture_pool[ResID::Tex_Explosion2_0016] = IMG_LoadTexture(renderer, "../res/Explosion_2/explosion_0016.png");
+	//
+	//texture_pool[ResID::Tex_Explosion1_0001] = IMG_LoadTexture(renderer, "../res/Explosion_1/explosion_big_0001.png");
+	//texture_pool[ResID::Tex_Explosion1_0002] = IMG_LoadTexture(renderer, "../res/Explosion_1/explosion_big_0002.png");
+	//texture_pool[ResID::Tex_Explosion1_0003] = IMG_LoadTexture(renderer, "../res/Explosion_1/explosion_big_0003.png");
+	//texture_pool[ResID::Tex_Explosion1_0004] = IMG_LoadTexture(renderer, "../res/Explosion_1/explosion_big_0004.png");
+	//texture_pool[ResID::Tex_Explosion1_0005] = IMG_LoadTexture(renderer, "../res/Explosion_1/explosion_big_0005.png");
+	//texture_pool[ResID::Tex_Explosion1_0006] = IMG_LoadTexture(renderer, "../res/Explosion_1/explosion_big_0006.png");
+	//texture_pool[ResID::Tex_Explosion1_0007] = IMG_LoadTexture(renderer, "../res/Explosion_1/explosion_big_0007.png");
+	//texture_pool[ResID::Tex_Explosion1_0008] = IMG_LoadTexture(renderer, "../res/Explosion_1/explosion_big_0008.png");
+	//texture_pool[ResID::Tex_Explosion1_0009] = IMG_LoadTexture(renderer, "../res/Explosion_1/explosion_big_0009.png");
+	//texture_pool[ResID::Tex_Explosion1_0010] = IMG_LoadTexture(renderer, "../res/Explosion_1/explosion_big_0010.png");
+	//texture_pool[ResID::Tex_Explosion1_0011] = IMG_LoadTexture(renderer, "../res/Explosion_1/explosion_big_0011.png");
+	//texture_pool[ResID::Tex_Explosion1_0012] = IMG_LoadTexture(renderer, "../res/Explosion_1/explosion_big_0012.png");
+	//
+	//texture_pool[ResID::Tex_WaterSplash_0001] = IMG_LoadTexture(renderer, "../res/WaterSplash/missed_0001.png");
+	//texture_pool[ResID::Tex_WaterSplash_0002] = IMG_LoadTexture(renderer, "../res/WaterSplash/missed_0002.png");
+	//texture_pool[ResID::Tex_WaterSplash_0003] = IMG_LoadTexture(renderer, "../res/WaterSplash/missed_0003.png");
+	//texture_pool[ResID::Tex_WaterSplash_0004] = IMG_LoadTexture(renderer, "../res/WaterSplash/missed_0004.png");
+	//texture_pool[ResID::Tex_WaterSplash_0005] = IMG_LoadTexture(renderer, "../res/WaterSplash/missed_0005.png");
+	//texture_pool[ResID::Tex_WaterSplash_0006] = IMG_LoadTexture(renderer, "../res/WaterSplash/missed_0006.png");
+	//texture_pool[ResID::Tex_WaterSplash_0007] = IMG_LoadTexture(renderer, "../res/WaterSplash/missed_0007.png");
+	//texture_pool[ResID::Tex_WaterSplash_0008] = IMG_LoadTexture(renderer, "../res/WaterSplash/missed_0008.png");
+	//texture_pool[ResID::Tex_WaterSplash_0009] = IMG_LoadTexture(renderer, "../res/WaterSplash/missed_0009.png");
+	//texture_pool[ResID::Tex_WaterSplash_0010] = IMG_LoadTexture(renderer, "../res/WaterSplash/missed_0010.png");
 
-	texture_pool[ResID::Tex_GetTarget_0001] = IMG_LoadTexture(renderer, "res/get_target/get_target_0001.png");
-	texture_pool[ResID::Tex_GetTarget_0002] = IMG_LoadTexture(renderer, "res/get_target/get_target_0002.png");
-	texture_pool[ResID::Tex_GetTarget_0003] = IMG_LoadTexture(renderer, "res/get_target/get_target_0003.png");
-	texture_pool[ResID::Tex_GetTarget_0004] = IMG_LoadTexture(renderer, "res/get_target/get_target_0004.png");
-	texture_pool[ResID::Tex_GetTarget_0005] = IMG_LoadTexture(renderer, "res/get_target/get_target_0005.png");
-
-	texture_pool[ResID::Tex_Explosion2_0001] = IMG_LoadTexture(renderer, "res/explosion/explosion_0001.png");
-	texture_pool[ResID::Tex_Explosion2_0002] = IMG_LoadTexture(renderer, "res/explosion/explosion_0002.png");
-	texture_pool[ResID::Tex_Explosion2_0003] = IMG_LoadTexture(renderer, "res/explosion/explosion_0003.png");
-	texture_pool[ResID::Tex_Explosion2_0004] = IMG_LoadTexture(renderer, "res/explosion/explosion_0004.png");
-	texture_pool[ResID::Tex_Explosion2_0005] = IMG_LoadTexture(renderer, "res/explosion/explosion_0005.png");
-	texture_pool[ResID::Tex_Explosion2_0006] = IMG_LoadTexture(renderer, "res/explosion/explosion_0006.png");
-	texture_pool[ResID::Tex_Explosion2_0007] = IMG_LoadTexture(renderer, "res/explosion/explosion_0007.png");
-	texture_pool[ResID::Tex_Explosion2_0008] = IMG_LoadTexture(renderer, "res/explosion/explosion_0008.png");
-	texture_pool[ResID::Tex_Explosion2_0009] = IMG_LoadTexture(renderer, "res/explosion/explosion_0009.png");
-	texture_pool[ResID::Tex_Explosion2_0010] = IMG_LoadTexture(renderer, "res/explosion/explosion_0010.png");
-	texture_pool[ResID::Tex_Explosion2_0011] = IMG_LoadTexture(renderer, "res/explosion/explosion_0011.png");
-	texture_pool[ResID::Tex_Explosion2_0012] = IMG_LoadTexture(renderer, "res/explosion/explosion_0012.png");
-	texture_pool[ResID::Tex_Explosion2_0013] = IMG_LoadTexture(renderer, "res/explosion/explosion_0013.png");
-	texture_pool[ResID::Tex_Explosion2_0014] = IMG_LoadTexture(renderer, "res/explosion/explosion_0014.png");
-	texture_pool[ResID::Tex_Explosion2_0015] = IMG_LoadTexture(renderer, "res/explosion/explosion_0015.png");
-	texture_pool[ResID::Tex_Explosion2_0016] = IMG_LoadTexture(renderer, "res/explosion/explosion_0016.png");
-
-	texture_pool[ResID::Tex_Explosion1_0001] = IMG_LoadTexture(renderer, "res/explosion_big/explosion_big_0001.png");
-	texture_pool[ResID::Tex_Explosion1_0002] = IMG_LoadTexture(renderer, "res/explosion_big/explosion_big_0002.png");
-	texture_pool[ResID::Tex_Explosion1_0003] = IMG_LoadTexture(renderer, "res/explosion_big/explosion_big_0003.png");
-	texture_pool[ResID::Tex_Explosion1_0004] = IMG_LoadTexture(renderer, "res/explosion_big/explosion_big_0004.png");
-	texture_pool[ResID::Tex_Explosion1_0005] = IMG_LoadTexture(renderer, "res/explosion_big/explosion_big_0005.png");
-	texture_pool[ResID::Tex_Explosion1_0006] = IMG_LoadTexture(renderer, "res/explosion_big/explosion_big_0006.png");
-	texture_pool[ResID::Tex_Explosion1_0007] = IMG_LoadTexture(renderer, "res/explosion_big/explosion_big_0007.png");
-	texture_pool[ResID::Tex_Explosion1_0008] = IMG_LoadTexture(renderer, "res/explosion_big/explosion_big_0008.png");
-	texture_pool[ResID::Tex_Explosion1_0009] = IMG_LoadTexture(renderer, "res/explosion_big/explosion_big_0009.png");
-	texture_pool[ResID::Tex_Explosion1_0010] = IMG_LoadTexture(renderer, "res/explosion_big/explosion_big_0010.png");
-	texture_pool[ResID::Tex_Explosion1_0011] = IMG_LoadTexture(renderer, "res/explosion_big/explosion_big_0011.png");
-	texture_pool[ResID::Tex_Explosion1_0012] = IMG_LoadTexture(renderer, "res/explosion_big/explosion_big_0012.png");
-
-	texture_pool[ResID::Tex_WaterSplash_0001] = IMG_LoadTexture(renderer, "res/miss_target/missed_0001.png");
-	texture_pool[ResID::Tex_WaterSplash_0002] = IMG_LoadTexture(renderer, "res/miss_target/missed_0002.png");
-	texture_pool[ResID::Tex_WaterSplash_0003] = IMG_LoadTexture(renderer, "res/miss_target/missed_0003.png");
-	texture_pool[ResID::Tex_WaterSplash_0004] = IMG_LoadTexture(renderer, "res/miss_target/missed_0004.png");
-	texture_pool[ResID::Tex_WaterSplash_0005] = IMG_LoadTexture(renderer, "res/miss_target/missed_0005.png");
-	texture_pool[ResID::Tex_WaterSplash_0006] = IMG_LoadTexture(renderer, "res/miss_target/missed_0006.png");
-	texture_pool[ResID::Tex_WaterSplash_0007] = IMG_LoadTexture(renderer, "res/miss_target/missed_0007.png");
-	texture_pool[ResID::Tex_WaterSplash_0008] = IMG_LoadTexture(renderer, "res/miss_target/missed_0008.png");
-	texture_pool[ResID::Tex_WaterSplash_0009] = IMG_LoadTexture(renderer, "res/miss_target/missed_0009.png");
-	texture_pool[ResID::Tex_WaterSplash_0010] = IMG_LoadTexture(renderer, "res/miss_target/missed_0010.png");
-
+	std::cout << "text 1" << std::endl;
 
 	for (const auto& pair : texture_pool)
 		if (!pair.second) return false;
 
+	std::cout << "text 2" << std::endl;
+
 //---------------------------------------------------------------//
 //--------------------------音效资源------------------------------//
 
-	sound_pool[ResID::Sound_Fire_1] = Mix_LoadWAV("res/sound/fire_1.wav");
-	sound_pool[ResID::Sound_Fire_2] = Mix_LoadWAV("res/sound/fire_2.wav");
-	sound_pool[ResID::Sound_Fire_3] = Mix_LoadWAV("res/sound/fire_3.wav");
+	//sound_pool[ResID::Sound_Fire_1] = Mix_LoadWAV("../res/Sound/fire_1.wav");
+	//sound_pool[ResID::Sound_Fire_2] = Mix_LoadWAV("../res/Sound/fire_2.wav");
+	//sound_pool[ResID::Sound_Fire_3] = Mix_LoadWAV("../res/Sound/fire_3.wav");
 
+	std::cout << "sound 1" << std::endl;
 
 	for (const auto& pair : sound_pool)
 		if (!pair.second) return false;
+	std::cout << "sound 2" << std::endl;
 
 //---------------------------------------------------------------//
 //--------------------------音乐资源------------------------------//
 
-	music_pool[ResID::Music_main] = Mix_LoadMUS("");
+	//music_pool[ResID::Music_main] = Mix_LoadMUS("");
 
-	
+	std::cout << "music 1" << std::endl;
+
 	for (const auto& pair : music_pool)
 		if (!pair.second) return false;
+	std::cout << "music 2" << std::endl;
+
 
 	return true;
 }
