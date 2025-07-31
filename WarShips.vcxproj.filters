@@ -38,118 +38,148 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Code\main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\animation.cpp">
-      <Filter>Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\atlas.cpp">
-      <Filter>Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\atlas_manager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\board.cpp">
-      <Filter>Board</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\effect.cpp">
-      <Filter>Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\effect_manager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\game_manager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\resources_manager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\scene_manager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\txt_texture_manager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\scene_pool.cpp">
+    <ClCompile Include="setup_scene.h">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Code\player.cpp">
-      <Filter>Player</Filter>
+    <ClCompile Include="game_scene.h">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Code\bullet.cpp">
-      <Filter>Bullet</Filter>
+    <ClCompile Include="setting_scene.h">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Code\ship.cpp">
+    <ClCompile Include="timer.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="ship.cpp">
       <Filter>Ship</Filter>
     </ClCompile>
-    <ClCompile Include="Code\button.cpp">
+    <ClCompile Include="player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="scene_pool.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="atlas_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="effect_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="game_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="resources_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="scene_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="txt_texture_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="button.cpp">
       <Filter>Button</Filter>
     </ClCompile>
-    <ClCompile Include="Code\timer.cpp">
-      <Filter>Timer</Filter>
+    <ClCompile Include="bullet.cpp">
+      <Filter>Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="board.cpp">
+      <Filter>Board</Filter>
+    </ClCompile>
+    <ClCompile Include="animation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="atlas.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="effect.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="game_scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="setting_scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="setup_scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="settlement.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Code\animation.h">
-      <Filter>Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\atlas.h">
-      <Filter>Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\atlas_manager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\board.h">
-      <Filter>Board</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\effect.h">
-      <Filter>Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\effect_manager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\game_manager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\resources_manager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\scene_manager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\txt_texture_manager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\scene_pool.h">
+    <ClInclude Include="menu_scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Code\scene_type.h">
+    <ClInclude Include="settlement_scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Code\manager.h">
-      <Filter>Manager</Filter>
+    <ClInclude Include="timer.h">
+      <Filter>Timer</Filter>
     </ClInclude>
-    <ClInclude Include="Code\scene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\tile.h">
-      <Filter>Board</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\player.h">
-      <Filter>Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\bullet.h">
-      <Filter>Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\ship.h">
+    <ClInclude Include="ship.h">
       <Filter>Ship</Filter>
     </ClInclude>
-    <ClInclude Include="Code\button.h">
+    <ClInclude Include="player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_pool.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_type.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="atlas_manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="effect_manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="game_manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="resources_manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="txt_texture_manager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
       <Filter>Button</Filter>
     </ClInclude>
-    <ClInclude Include="Code\timer.h">
-      <Filter>Timer</Filter>
+    <ClInclude Include="bullet.h">
+      <Filter>Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="board.h">
+      <Filter>Board</Filter>
+    </ClInclude>
+    <ClInclude Include="tile.h">
+      <Filter>Board</Filter>
+    </ClInclude>
+    <ClInclude Include="animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="atlas.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="effect.h">
+      <Filter>Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -53,7 +53,8 @@ void Ship::on_input(const SDL_Event& event)
 	}
 }
 
-void Ship::init_ship(SDL_Texture* texture,int size,SDL_Point first_pos)
+void Ship::init_ship(SDL_Texture* texture, SDL_Point first_pos,
+						int size, int hp, int atk_time, int defense_time, bool have_skill)
 {
 	ship_texture = texture;
 	ship_size = size;

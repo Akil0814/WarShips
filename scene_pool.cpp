@@ -8,31 +8,31 @@ Scene* ScenePool::get_scene(SceneType type)
 	{
 	case SceneType::Menu:
 		if (cheek_invalid(menu_scene))
-			//menu_scene = new MenuScene;
+			menu_scene = new MenuScene;
 		return menu_scene;
 		break;
 
 	case SceneType::Setting:
 		if (cheek_invalid(setting_scene))
-			//setting_scene = new SettingScene;
+			setting_scene = new SettingScene;
 		return setting_scene;
 		break;
 
 	case SceneType::Game:
 		if (cheek_invalid(game_scene))
-			//game_scene = new GameScene;
+			game_scene = new GameScene;
 		return game_scene;
 		break;
 
 	case SceneType::Setup:
 		if (cheek_invalid(setup_scene))
-			//setup_scene = new SetupScene;
+			setup_scene = new SetupScene;
 		return setup_scene;
 		break;
 
 	case SceneType::Settlement:
 		if (cheek_invalid(settlement_scene))
-			//settlement_scene = new SettlementScene;
+			settlement_scene = new SettlementScene;
 			return settlement_scene;
 		break;
 

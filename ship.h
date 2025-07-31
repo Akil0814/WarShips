@@ -8,7 +8,8 @@ public:
 	Ship()=default;
 	~Ship() = default;
 
-	void init_ship(SDL_Texture* texture, int size, SDL_Point first_pos);
+	void init_ship(SDL_Texture* texture,SDL_Point first_pos,
+					int size,int hp,int datk_time,int defense_time,bool have_skill);
 
 	void on_update(double delta);
 	void on_render(SDL_Renderer* renderer);
@@ -40,7 +41,10 @@ private:
 	int dy = 0;
 
 	int hp = 0;
+	int atk_time = 0;
+	int defense_time = 0;
 	int ship_size = 0;
+	bool have_skill = false;
 
 	bool horizontal = true;
 	bool ship_in_move = false;
