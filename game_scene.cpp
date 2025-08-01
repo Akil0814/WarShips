@@ -1,6 +1,8 @@
 #include"game_scene.h"
+
 GameScene::GameScene()
 {
+
 }
 
 GameScene::~GameScene()

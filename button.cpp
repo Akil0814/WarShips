@@ -4,11 +4,11 @@ Button::Button(SDL_Rect rect_button, SDL_Rect rect_message, SDL_Texture* texture
 	Mix_Chunk* sound_effect_down, Mix_Chunk* sound_effect_up)
 {
 	this->rect_button = rect_button;
+	this->rect_message = rect_message;
 
 	if (texture_message != nullptr)
 	{
 		have_message = true;
-		this->rect_message = rect_message;
 		this->texture_message = texture_message;
 	}
 
@@ -111,11 +111,14 @@ void Button::on_input(const SDL_Event& event)
 	if (on_hold)
 		return;
 
+
+
 	switch (event.type)
 	{
 	case SDL_MOUSEMOTION:
 		if (status == Status::Idle && check_cursor_hit(event.motion.x, event.motion.y))
 			status = Status::Hovered;
+
 		else if (status == Status::Hovered && !check_cursor_hit(event.motion.x, event.motion.y))
 			status = Status::Idle;
 		break;
@@ -156,6 +159,15 @@ void Button::on_input(const SDL_Event& event)
 	}
 }
 
+void Button::on_update(double delta)
+{
+	if (status == Status::Hovered)
+	{
+		if (on_hovered)
+			on_hovered();
+	}
+}
+
 bool Button::check_cursor_hit(int x, int y)const
 {
 	return x >= rect_button.x && x < (rect_button.x + rect_button.w) &&
@@ -165,6 +177,11 @@ bool Button::check_cursor_hit(int x, int y)const
 void Button::set_on_click(std::function<void()> func)
 {
 	on_click = std::move(func);
+}
+
+void Button::set_on_hovered(std::function<void()> func)
+{
+	on_hovered = std::move(func);
 }
 
 Button::Status Button::get_status()const

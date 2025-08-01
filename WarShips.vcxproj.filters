@@ -36,6 +36,9 @@
     <Filter Include="Timer">
       <UniqueIdentifier>{e6788d27-aa69-4769-8cbe-e538646ef44c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Skill">
+      <UniqueIdentifier>{e524b746-a2c1-47c1-ba36-03d1443975a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="setup_scene.h">
@@ -113,6 +116,18 @@
     <ClCompile Include="settlement.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="skill.cpp">
+      <Filter>Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="tile.cpp">
+      <Filter>Board</Filter>
+    </ClCompile>
+    <ClCompile Include="ship_type.h">
+      <Filter>Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="ship_factory.cpp">
+      <Filter>Ship</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu_scene.h">
@@ -180,6 +195,15 @@
     </ClInclude>
     <ClInclude Include="effect.h">
       <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="skill.h">
+      <Filter>Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="skill_type.h">
+      <Filter>Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="ship_factory.h">
+      <Filter>Ship</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

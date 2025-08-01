@@ -9,15 +9,15 @@ GameManager::GameManager()
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 	SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
 
-	window = SDL_CreateWindow("Battle Ship!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 600, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("WarShip!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 600, SDL_WINDOW_SHOWN);
 	init_assert(window, u8"SDL_CreateWindow Error");
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);//硬件加速 垂直同步 目标纹理
 	init_assert(renderer, u8"SDL_CreateRenderer Error");
 
-	init_assert(ResourcesManager::instance()->load_from_file(renderer), u8"加载游戏资源失败！");
-	init_assert(AtlasManager::instance()->load_atlas(), u8"加载游戏图集资源失败！");
-	init_assert(EffectManager::instance()->init_all_effect(), u8"加载游戏特效资源失败！");
+	init_assert(ResourcesManager::instance()->load_from_file(renderer), u8"Fall to load Game Resources！");
+	init_assert(AtlasManager::instance()->load_atlas(), u8"Fall to load Atlas Data！");
+	init_assert(EffectManager::instance()->init_all_effect(), u8"Fall to load Effect Data！");
 }
 
 GameManager::~GameManager()
@@ -91,6 +91,26 @@ void GameManager::switch_scene(SceneType type)
 {
 	SceneManager::instance()->switch_to(ScenePool::instance()->get_scene(type));
 }
+
+void GameManager::create_player()
+{
+	if (player1 == nullptr)
+		player1 = new Player;
+
+	if (player2 == nullptr)
+		player2 = new Player;
+}
+
+
+void GameManager::destroy_player()
+{
+	if (player1 != nullptr)
+		delete player1;
+
+	if (player2 != nullptr)
+		delete player2;
+}
+
 
 Player* GameManager::get_player1()
 {

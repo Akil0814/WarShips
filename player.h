@@ -31,8 +31,6 @@ private:
 	bool current_ship_last_hor_state = true;
 
 	Ship* current_ship = nullptr;
-	SDL_Point current_ship_last_pos = {0,0};
-
 
 	std::vector<Ship*> ship_list;
 	Board board;

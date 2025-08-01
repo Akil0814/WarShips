@@ -1,4 +1,5 @@
 #include"txt_texture_manager.h"
+
 SDL_Texture* TxtTextureManager::get_txt_texture(SDL_Renderer* renderer,TTF_Font* font,const std::string& text,
 												bool is_bold, const SDL_Color& color)
 {

@@ -25,6 +25,9 @@ public:
 
 	void switch_scene(SceneType type);
 
+	void create_player();
+	void destroy_player();
+
 	SDL_Renderer* get_renderer()const;
 	SDL_Window* get_window()const;
 

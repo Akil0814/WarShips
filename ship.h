@@ -1,5 +1,7 @@
 #pragma once
 #include<SDL.h>
+#include"board.h"
+#include"tile.h"
 #include"effect_manager.h"
 
 class Ship

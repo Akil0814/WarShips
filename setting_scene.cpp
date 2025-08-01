@@ -1,4 +1,5 @@
 #include"setting_scene.h"
+
 SettingScene::SettingScene()
 {
 }

@@ -2,11 +2,13 @@
 
 MenuScene::MenuScene()
 	:button_start({ 100,50,200,70 }, { 100,50,200,70 },
-		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_48), "   Start   "),
+		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_128), "   Start   "),
 		nullptr, nullptr)
 {
 	button_start.set_on_click([]
 		{
+			GameManager::instance()->create_player();
+			GameManager::instance()->switch_scene(SceneType::Setup);
 		});
 }
 

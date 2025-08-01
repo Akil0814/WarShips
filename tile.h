@@ -2,51 +2,33 @@
 #define SIZE_TILE 30
 #include<SDL.h>
 
+class Ship;
+
 class Tile {
 public:
-    enum class Status { Unknown, Miss, Hit};
+    enum class Status { Unknown, Miss, Hit, Defend, Detected };
 
     Tile() = default;
 
-    Status get_status() const
-    {
-        return status;
-    }
+    Status get_status() const;
 
-    void change_status(Status status)
-    {
-        this->status = status;
-    }
+    void change_status(Status status);
 
-    bool has_ship()const
-    {
-        return have_ship;
-    }
+    bool has_ship()const;
 
-    void place_ship()
-    {
-        have_ship = true;
-    }
+    void place_ship();
 
-    void move_ship()
-    {
-        have_ship = false;
-    }
+    void move_ship();
 
-    void mark_miss()
-    {
-        if (status == Status::Unknown)
-            status = Status::Miss;
-    }
+    void mark_miss();
 
-    void mark_hit()
-    {
-        if (status == Status::Unknown && have_ship)
-            status = Status::Hit;
-    }
+    void mark_hit();
 
 private:
 
     Status status = Status::Unknown;
+
+    Ship* ship_on_tile = nullptr;
+
     bool   have_ship = false;
 };

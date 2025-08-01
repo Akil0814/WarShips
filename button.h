@@ -28,6 +28,9 @@ public:
 			Mix_Chunk* sound_effect_down, Mix_Chunk* sound_effect_up,
 			SDL_Color color_idle,SDL_Color color_hovered, SDL_Color color_pushed, SDL_Color color_frame);
 
+	Button(SDL_Rect rect_button,Mix_Chunk* sound_effect_down, Mix_Chunk* sound_effect_up,
+		SDL_Texture* texture_idle, SDL_Texture* texture_hovered, SDL_Texture* texture_pushed);
+
 	Button(SDL_Rect rect_button, SDL_Rect rect_message, SDL_Texture* texture_message,
 			Mix_Chunk* sound_effect_down, Mix_Chunk* sound_effect_up,
 			SDL_Texture* texture_idle,SDL_Texture* texture_hovered, SDL_Texture* texture_pushed);
@@ -36,8 +39,11 @@ public:
 
 	void on_render(SDL_Renderer* renderer);
 	void on_input(const SDL_Event& event);
+	void on_update(double delta);
 
 	void set_on_click(std::function<void()> func);
+	void set_on_hovered(std::function<void()> func);
+
 	void set_status(Status status);
 
 	void change_rect_button(SDL_Rect new_rect_button);
@@ -80,6 +86,7 @@ private:
 	Status status = Status::Idle;
 
 	std::function<void()> on_click = nullptr;
+	std::function<void()> on_hovered = nullptr;
 
 	bool have_sound_effect_down = false;
 	bool have_sound_effect_up = false;

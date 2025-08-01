@@ -10,7 +10,7 @@ void Ship::on_update(double delta)
 
 void Ship::on_render(SDL_Renderer* renderer)
 {
-	static SDL_Point pivot{ 25, 25 };
+	static SDL_Point pivot{ SIZE_TILE/2, SIZE_TILE/2 };//Ðý×ªÖÐÐÄ
 	if (horizontal)
 		SDL_RenderCopyEx(renderer, ship_texture, nullptr, &render_rect, 0, &pivot, SDL_FLIP_NONE);
 	else
@@ -54,12 +54,16 @@ void Ship::on_input(const SDL_Event& event)
 }
 
 void Ship::init_ship(SDL_Texture* texture, SDL_Point first_pos,
-						int size, int hp, int atk_time, int defense_time, bool have_skill)
+					int size, int hp, int atk_time, int defense_time, bool have_skill)
 {
 	ship_texture = texture;
-	ship_size = size;
-	render_rect.h = 50, render_rect.w = 50 * size;
 	set_position(first_pos);
+	ship_size = size;
+	this->hp = hp;
+	this->atk_time = atk_time;
+	this->defense_time = defense_time;
+	this->have_skill = have_skill;
+	render_rect.h = SIZE_TILE, render_rect.w = SIZE_TILE * size;
 }
 
 void Ship::rotate_ship()
@@ -76,12 +80,12 @@ void Ship::update_rect()
 	render_rect.x = absolute_position.x;
 	render_rect.y = absolute_position.y;
 	if (horizontal) {
-		collision_rect.w = 50 * ship_size;
-		collision_rect.h = 50;
+		collision_rect.w = SIZE_TILE * ship_size;
+		collision_rect.h = SIZE_TILE;
 	}
 	else {
-		collision_rect.w = 50;
-		collision_rect.h = 50 * ship_size;
+		collision_rect.w = SIZE_TILE;
+		collision_rect.h = SIZE_TILE * ship_size;
 	}
 }
 

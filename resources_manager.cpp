@@ -1,4 +1,5 @@
 #include"resources_manager.h"
+
 #include<iostream>
 
 bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
@@ -6,11 +7,11 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	//---------------------------------------------------------------//
 	//--------------------------×ÖÌå×ÊÔ´------------------------------//
 
-	font_pool[ResID::Font_16] = TTF_OpenFont("res/Basketball.otf", 16);
-	font_pool[ResID::Font_24] = TTF_OpenFont("res/Basketball.otf", 24);
-	font_pool[ResID::Font_48] = TTF_OpenFont("res/Basketball.otf", 48);
-	font_pool[ResID::Font_72] = TTF_OpenFont("res/Basketball.otf", 72);
-	font_pool[ResID::Font_128] = TTF_OpenFont("res/Basketball.otf", 128);
+	font_pool[ResID::Font_48] = TTF_OpenFont("res/Gastroe.otf", 48);
+	font_pool[ResID::Font_72] = TTF_OpenFont("res/Gastroe.otf", 72);
+	font_pool[ResID::Font_128] = TTF_OpenFont("res/Gastroe.otf", 128);
+	font_pool[ResID::Font_256] = TTF_OpenFont("res/Gastroe.otf", 256);
+	font_pool[ResID::Font_512] = TTF_OpenFont("res/Gastroe.otf", 512);
 
 	std::cout << "font check" << std::endl;
 	for (const auto& pair : font_pool)
@@ -22,7 +23,6 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 
 	texture_pool[ResID::Tex_SetTarget] = IMG_LoadTexture(renderer, "res/set_target.png");
 	texture_pool[ResID::Tex_Hand] = IMG_LoadTexture(renderer, "res/hand.png");
-
 
 	texture_pool[ResID::Tex_Ship_1] = IMG_LoadTexture(renderer, "res/Ship/Ship1.png");
 	texture_pool[ResID::Tex_Ship_2] = IMG_LoadTexture(renderer, "res/Ship/Ship2.png");

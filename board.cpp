@@ -176,12 +176,14 @@ void Board::draw_board(SDL_Renderer* renderer)
         board_render_x, board_render_y,
         col * SIZE_TILE, row * SIZE_TILE
     };
-    SDL_SetRenderDrawColor(renderer, 30, 63, 102, 255);
+    SDL_SetRenderDrawColor(renderer, 75,100,133, 255);
     SDL_RenderFillRect(renderer, &board_rect);
 
     // Íø¸ñÏß
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-    SDL_SetRenderDrawColor(renderer, 10, 55, 50, 120);
+    SDL_SetRenderDrawColor(renderer, 30, 63, 102, 255);
+
+    //SDL_SetRenderDrawColor(renderer, 10, 55, 50, 120);
     // ÊúÏß
     for (int i = 0; i <= col; ++i) 
     {
