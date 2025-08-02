@@ -30,6 +30,17 @@ enum class ResID
 //---------------------------------------------------------------//
 //--------------------------ÎÆÀí×ÊÔ´------------------------------//
 
+	Tex_Num_0,
+	Tex_Num_1,
+	Tex_Num_2,
+	Tex_Num_3,
+	Tex_Num_4,
+	Tex_Num_5,
+	Tex_Num_6,
+	Tex_Num_7,
+	Tex_Num_8,
+	Tex_Num_9,
+	Tex_Coin,
 
 	Tex_SetTarget,
 	Tex_Hand,

@@ -21,6 +21,20 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	//---------------------------------------------------------------//
 	//--------------------------ÎÆÀí×ÊÔ´------------------------------//
 
+	texture_pool[ResID::Tex_Num_0] = IMG_LoadTexture(renderer, "res/Num/num0.png");
+	texture_pool[ResID::Tex_Num_1] = IMG_LoadTexture(renderer, "res/Num/num1.png");
+	texture_pool[ResID::Tex_Num_2] = IMG_LoadTexture(renderer, "res/Num/num2.png");
+	texture_pool[ResID::Tex_Num_3] = IMG_LoadTexture(renderer, "res/Num/num3.png");
+	texture_pool[ResID::Tex_Num_4] = IMG_LoadTexture(renderer, "res/Num/num4.png");
+	texture_pool[ResID::Tex_Num_5] = IMG_LoadTexture(renderer, "res/Num/num5.png");
+	texture_pool[ResID::Tex_Num_6] = IMG_LoadTexture(renderer, "res/Num/num6.png");
+	texture_pool[ResID::Tex_Num_7] = IMG_LoadTexture(renderer, "res/Num/num7.png");
+	texture_pool[ResID::Tex_Num_8] = IMG_LoadTexture(renderer, "res/Num/num8.png");
+	texture_pool[ResID::Tex_Num_9] = IMG_LoadTexture(renderer, "res/Num/num9.png");
+
+	texture_pool[ResID::Tex_Coin] = IMG_LoadTexture(renderer, "res/UI/coin.png");
+
+
 	texture_pool[ResID::Tex_SetTarget] = IMG_LoadTexture(renderer, "res/set_target.png");
 	texture_pool[ResID::Tex_Hand] = IMG_LoadTexture(renderer, "res/hand.png");
 

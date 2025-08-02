@@ -14,19 +14,28 @@ class SetupScene :public Scene
 private:
 	Button next_button;
 	Button start_button;
+	Button reset_button;
 
 	Button get_ship_test;
 
 	SDL_Texture* text_player1 = nullptr;
 	SDL_Texture* text_player2 = nullptr;
+	SDL_Texture* text_shop = nullptr;
 
-	SDL_Rect player_ship;
-	SDL_Rect ship_market;
-	SDL_Rect other_market;
+
+	SDL_Rect side_rect = { 650,30,600,660 };
+
+	SDL_Rect coin_tex = { 1100,30,50,50 };
+
+	SDL_Rect player_txt = { 660,30,90,40 };
+	SDL_Rect shop_txt = { 660,360,220,40 };
 
 	Player* p1 = nullptr;
 	Player* p2 = nullptr;
 	Player* current_player = nullptr;
+
+private:
+	void draw_rect(SDL_Renderer* renderer);
 
 public:
 	SetupScene();
