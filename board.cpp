@@ -6,8 +6,8 @@ SDL_Texture* Board::tile_miss = nullptr;
 Board::Board()
 {
     // 初始化贴图
-    tile_hit = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_hit);
-    tile_miss = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_miss);
+    //tile_hit = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_hit);
+    //tile_miss = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_miss);
 
     // 初始化棋盘数据
     board.assign(row, std::vector<Tile>(col));

@@ -5,6 +5,8 @@
 #include"player.h"
 #include"button.h"
 #include"scene_type.h"
+#include"ship_factory.h"
+#include"ship_type.h"
 #include"game_manager.h"
 #include"resources_manager.h"
 #include"txt_texture_manager.h"
@@ -16,7 +18,17 @@ private:
 	Button start_button;
 	Button reset_button;
 
-	Button get_ship_test;
+	Button get_Destroyer;
+	Button get_LightCruiser;
+	Button get_HeavyCruiser;
+	Button get_SuperCruiser;
+	Button get_BattleCruiser;
+	Button get_Battleship;
+	Button get_AviationBattleship;
+	Button get_AircraftCarrier;
+	Button get_LightCarrier;
+	Button get_Submarine;
+	Button get_RepairShip;
 
 	SDL_Texture* text_player1 = nullptr;
 	SDL_Texture* text_player2 = nullptr;
@@ -36,6 +48,7 @@ private:
 
 private:
 	void draw_rect(SDL_Renderer* renderer);
+	void try_add_ship(ShipType new_ship,int cost);
 
 public:
 	SetupScene();

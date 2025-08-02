@@ -70,3 +70,18 @@ void Player::draw_cover(SDL_Renderer* renderer)
 	board.draw_cover(renderer);
 }
 
+void Player::add_ship(Ship* new_ship)
+{
+	if(new_ship!=nullptr)
+		ship_list.push_back(new_ship);
+}
+
+
+bool Player::spend_coin(int cost)
+{
+	if (cost > coin_have)
+		return false;
+
+	coin_have -= cost;
+	return true;
+}

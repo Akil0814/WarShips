@@ -15,9 +15,11 @@ public:
 	void on_update(double delta);
 	void on_update(double delta, bool setup);
 
-
 	void on_input(const SDL_Event& event);
 	void on_input(const SDL_Event& event, bool setup);
+
+	void add_ship(Ship* new_ship);
+	bool spend_coin(int cost);
 
 	bool finish_round();
 
@@ -25,6 +27,8 @@ public:
 	void set_board_pos(SDL_Point pos);
 
 private:
+
+	int coin_have = 100;
 
 	bool is_win = false;
 	bool have_ship_in_move = false;
