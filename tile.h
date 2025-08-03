@@ -16,7 +16,7 @@ public:
 
     bool has_ship()const;
 
-    void place_ship();
+    void place_ship(Ship* sihp);
 
     void move_ship();
 

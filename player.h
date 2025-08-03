@@ -25,6 +25,7 @@ public:
 
 	void draw_cover(SDL_Renderer* renderer);
 	void set_board_pos(SDL_Point pos);
+	Board* get_board();
 
 private:
 

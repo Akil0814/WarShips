@@ -23,21 +23,15 @@ void Board::on_render(SDL_Renderer* renderer)
 
     // 渲染所有格子状态
     for (int y = 0; y < row; ++y) {
-        for (int x = 0; x < col; ++x) {
+        for (int x = 0; x < col; ++x)
+        {
             SDL_Rect rect = {
                 board_render_x + x * SIZE_TILE,
                 board_render_y + y * SIZE_TILE,
-                SIZE_TILE, SIZE_TILE
-            };
-            switch (board[y][x].get_status()) {
-            case Tile::Status::Miss:
-                SDL_RenderCopy(renderer, tile_miss, nullptr, &rect);
-                break;
-            case Tile::Status::Hit:
-                SDL_RenderCopy(renderer, tile_hit, nullptr, &rect);
-                break;
-            default:
-                break;
+                SIZE_TILE, SIZE_TILE};
+            switch (board[y][x].get_status())
+            {
+
             }
         }
     }
@@ -183,7 +177,6 @@ void Board::draw_board(SDL_Renderer* renderer)
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(renderer, 30, 63, 102, 255);
 
-    //SDL_SetRenderDrawColor(renderer, 10, 55, 50, 120);
     // 竖线
     for (int i = 0; i <= col; ++i) 
     {
@@ -204,8 +197,10 @@ void Board::draw_board(SDL_Renderer* renderer)
     }
 }
 
-SDL_Point Board::place_ship(SDL_Point pos, int ship_size, bool is_horizontal)
+bool Board::place_ship(Ship* ship,SDL_Point pos, int ship_size, bool is_horizontal)
 {
+
+
     int x = (pos.x - board_render_x) / SIZE_TILE;
     int y = (pos.y - board_render_y) / SIZE_TILE;
 
@@ -221,20 +216,20 @@ SDL_Point Board::place_ship(SDL_Point pos, int ship_size, bool is_horizontal)
         {
             for (int i = 0; i < ship_size; ++i)
             {
-                board[y][x+i].place_ship();
+                board[y][x+i].place_ship(ship);
             }
         }
         else
         {
             for (int i = 0; i < ship_size; ++i)
             {
-                board[y + i][x].place_ship();
+                board[y + i][x].place_ship(ship);
             }
         }
         show_board();
-        return { (x * SIZE_TILE) + board_render_x,(y * SIZE_TILE) + board_render_y };
+        return true;
     }
-    return { -1,-1 };
+    return false;
 }
 
 void Board::move_ship(SDL_Point pos, int ship_size, bool is_horizontal)
@@ -265,8 +260,6 @@ void Board::move_ship(SDL_Point pos, int ship_size, bool is_horizontal)
 
 bool Board::check_available(int x,int y, int ship_size, bool is_horizontal)
 {
-
-
     // 基本边界和已有船检测
     if (x < 0 || x >= col || y < 0 || y >= row)
         return false;
@@ -316,6 +309,7 @@ bool Board::finish_hit_time()const
 {
     return finish_hit;
 }
+
 void Board::reset_hit_time()
 {
     finish_hit = false;

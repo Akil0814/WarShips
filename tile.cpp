@@ -16,8 +16,9 @@ bool Tile::has_ship()const
     return have_ship;
 }
 
-void Tile::place_ship()
+void Tile::place_ship(Ship* ship)
 {
+    ship_on_tile = ship;
     have_ship = true;
 }
 

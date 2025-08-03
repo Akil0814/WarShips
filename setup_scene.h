@@ -4,6 +4,7 @@
 #include"scene.h"
 #include"player.h"
 #include"button.h"
+#include"board.h"
 #include"scene_type.h"
 #include"ship_factory.h"
 #include"ship_type.h"
@@ -14,6 +15,7 @@
 class SetupScene :public Scene
 {
 private:
+
 	Button next_button;
 	Button start_button;
 	Button reset_button;
@@ -29,6 +31,10 @@ private:
 	Button get_LightCarrier;
 	Button get_Submarine;
 	Button get_RepairShip;
+
+	ShipType current_view_ship = ShipType::Destroyer;
+	
+	std::vector<Button*> shop_item_list;
 
 	SDL_Texture* text_player1 = nullptr;
 	SDL_Texture* text_player2 = nullptr;

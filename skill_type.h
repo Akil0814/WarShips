@@ -1,6 +1,8 @@
 #pragma once
 enum class SkillType
 {
+	NONE,
+
 	Detect_3x3,
 	Detect_13C,
 

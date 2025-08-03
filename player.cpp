@@ -42,12 +42,12 @@ void Player::on_update(double delta, bool setup)
 void Player::on_input(const SDL_Event& event)
 {
 	board.on_input(event);
-
 }
 
 void Player::on_input(const SDL_Event& event,bool setup)
 {
-
+	for (auto& ship : ship_list)
+		ship->on_input(event);
 }
 
 void Player::set_board_pos(SDL_Point pos)
@@ -85,3 +85,9 @@ bool Player::spend_coin(int cost)
 	coin_have -= cost;
 	return true;
 }
+
+Board* Player::get_board()
+{
+	return &board;
+}
+
