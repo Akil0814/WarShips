@@ -28,6 +28,7 @@ public:
 	void set_board_pos(SDL_Point point);
 
 	SDL_Point place_ship(Ship* ship,SDL_Point pos, int ship_size, bool is_horizontal);
+	void show_place_feasibility(SDL_Renderer* renderer,SDL_Point pos, int ship_size, bool is_horizontal);
 	void move_ship(SDL_Point pos, int ship_size, bool is_horizontal);
 
 	bool is_inside(int x, int y) const;

@@ -2,7 +2,7 @@
 #include<iostream>
 
 void Ship::init_ship(SDL_Texture* texture, SDL_Point first_pos, Board* board,
-					int size, int hp, int atk_time, int defense_time, SkillType skill1, SkillType skill2)
+					int size, int hp, int atk_time, int defense_time, SkillType skill1,int time_1, SkillType skill2,int time_2)
 {
 
 	ship_texture = texture;
@@ -19,7 +19,9 @@ void Ship::init_ship(SDL_Texture* texture, SDL_Point first_pos, Board* board,
 	this->defense_time = defense_time;
 
 	this->skill_1 = skill1;
+	skill1_time = time_1;
 	this->skill_2 = skill2;
+	skill2_time = time_2;
 }
 
 void Ship::on_update(double delta)
@@ -29,6 +31,11 @@ void Ship::on_update(double delta)
 
 void Ship::on_render(SDL_Renderer* renderer)
 {
+	if (ship_in_move)
+	{
+		player_board->show_place_feasibility(renderer, absolute_position, ship_size, horizontal);
+	}
+
 	static SDL_Point pivot{ SIZE_TILE/2, SIZE_TILE/2 };//Ðý×ªÖÐÐÄ
 	if (horizontal)
 		SDL_RenderCopyEx(renderer, ship_texture, nullptr, &render_rect, 0, &pivot, SDL_FLIP_NONE);
@@ -158,7 +165,7 @@ bool Ship::is_in_board()
 {
 	return ship_in_board;
 }
-
+ 
 void Ship::take_damage()
 {
 	if (defense_time > 0)

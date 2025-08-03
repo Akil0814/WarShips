@@ -12,4 +12,5 @@ enum class SkillType
 	Attack_3x3,
 
 	Repair,
+	Invisible
 };

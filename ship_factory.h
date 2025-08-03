@@ -18,7 +18,9 @@ public:
 	}
 
 	Ship* creat_ship(ShipType type,Board* player_board);
+
 	void update_pos();
+	void reset_pos();
 
 private:
 	ShipFactory() = default;

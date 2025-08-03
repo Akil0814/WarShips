@@ -5,11 +5,6 @@ SDL_Texture* Board::tile_miss = nullptr;
 
 Board::Board()
 {
-    // 初始化贴图
-    //tile_hit = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_hit);
-    //tile_miss = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_miss);
-
-    // 初始化棋盘数据
     board.assign(row, std::vector<Tile>(col));
 }
 
@@ -318,4 +313,43 @@ void Board::draw_cover(SDL_Renderer* renderer)
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 54);
     SDL_Rect rect = { board_render_x,board_render_y,SIZE_TILE * col ,SIZE_TILE * row };
     SDL_RenderFillRect(renderer, &rect);
+}
+
+void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int ship_size, bool is_horizontal)
+{
+    if (!is_inside(pos.x, pos.y))
+        return;
+
+    if (check_available(pos.x, pos.y,ship_size,is_horizontal))
+    {
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 50);
+    }
+    else
+    {
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 50);
+    }
+
+    int x = ((pos.x ) / SIZE_TILE)* SIZE_TILE;
+    int y = ((pos.y) / SIZE_TILE)* SIZE_TILE;
+    int l = 30;
+    int h = 30;
+
+    if ((pos.x) % SIZE_TILE > SIZE_TILE / 2)
+        x++;
+
+    if ((pos.y - board_render_y) % SIZE_TILE > SIZE_TILE / 2)
+        y++;
+    if (is_horizontal)
+    {
+        l = ship_size * SIZE_TILE;
+    }
+    else
+    {
+        h = ship_size * SIZE_TILE;
+    }
+
+    SDL_Rect rect = { x, y,l,h};
+
+    SDL_RenderFillRect(renderer, &rect);
+
 }

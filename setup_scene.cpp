@@ -1,29 +1,29 @@
 #include"setup_scene.h"
 
 SetupScene::SetupScene()
-	:next_button({ 800,500,100,50 }, { 815,505,70,40 },
+	:next_button({ 30,650,80,40 }, { 35,655,70,30 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "NEXT"),
 		nullptr, nullptr),
-	start_button({ 800,500,100,50 }, { 815,505,70,40 },
+	start_button({ 30,650,80,40 }, { 35,655,70,30 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "START"),
 		nullptr, nullptr),
 	reset_button({ 500,650,80,40 }, { 505,655,70,30 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "Reset"),
 		nullptr, nullptr),
 
-	get_LightCruiser({ 665, 415, 120,  40 },{ 665, 415, 120,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_2),nullptr, nullptr),
-	get_HeavyCruiser({ 665, 475, 120,  40 },{ 665, 475, 120,  40 }, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_2),nullptr, nullptr),
-	get_SuperCruiser({ 665, 535, 120,  40 },{ 665, 535, 120,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_2),nullptr, nullptr),
-	get_BattleCruiser({ 665, 595, 160,  40 },{ 665, 595, 160,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_4),nullptr, nullptr),
+	get_LightCruiser({ 665, 415, 120,  40 },{ 665, 415, 120,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_LightCruiser),nullptr, nullptr),
+	get_HeavyCruiser({ 665, 475, 120,  40 },{ 665, 475, 120,  40 }, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_HeavyCruiser),nullptr, nullptr),
+	get_SuperCruiser({ 665, 535, 120,  40 },{ 665, 535, 120,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_SuperCruiser),nullptr, nullptr),
+	get_BattleCruiser({ 665, 595, 160,  40 },{ 665, 595, 160,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_BattleCruiser),nullptr, nullptr),
 
-	get_AviationBattleship({ 805, 415, 200,  40 },{ 805, 415, 200,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_5),nullptr, nullptr),
-	get_AircraftCarrier({ 805, 475, 200,  40 },{ 805, 475, 200,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_5),nullptr, nullptr),
-	get_LightCarrier({ 805, 535, 200,  40 },{ 805, 535, 200,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_5),nullptr, nullptr),
-	get_Battleship({ 845, 595, 160,  40 },{ 845, 595, 160,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_4),nullptr, nullptr),
+	get_AviationBattleship({ 805, 415, 200,  40 },{ 805, 415, 200,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_AviationBattleship),nullptr, nullptr),
+	get_AircraftCarrier({ 805, 475, 200,  40 },{ 805, 475, 200,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_AircraftCarrier),nullptr, nullptr),
+	get_LightCarrier({ 805, 535, 200,  40 },{ 805, 535, 200,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_LightCarrier),nullptr, nullptr),
+	get_Battleship({ 845, 595, 160,  40 },{ 845, 595, 160,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Battleship),nullptr, nullptr),
 
-	get_Destroyer({ 1025, 415,  80,  40 },{ 1025, 415,  80,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_1),nullptr, nullptr),
-	get_Submarine({ 1025, 475, 120,  40 },{ 1025, 475, 120,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_3),nullptr, nullptr),
-	get_RepairShip({ 1025, 535, 120,  40 },{ 1025, 535, 120,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_3),nullptr, nullptr)
+	get_Destroyer({ 1025, 415,  80,  40 },{ 1025, 415,  80,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Destroyer),nullptr, nullptr),
+	get_Submarine({ 1025, 475, 120,  40 },{ 1025, 475, 120,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Submarine),nullptr, nullptr),
+	get_RepairShip({ 1025, 535, 120,  40 },{ 1025, 535, 120,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_RepairShip),nullptr, nullptr)
 {
 	shop_item_list.push_back(&get_LightCruiser);
 	shop_item_list.push_back(&get_HeavyCruiser);
@@ -56,6 +56,16 @@ void SetupScene::on_enter()
 	text_player2 = TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "Player2:");
 	text_shop = TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "Shop: click to buy");
 
+	next_button.set_on_click([this]
+		{
+			ShipFactory::instance()->reset_pos();
+			next_player();
+		});
+	start_button.set_on_click([this]
+		{
+			ShipFactory::instance()->reset_pos();
+			GameManager::instance()->switch_scene(SceneType::Game);
+		});
 	reset_button.set_on_click([this] { });
 
 
@@ -100,6 +110,11 @@ void SetupScene::on_update(double delta)
 
 void SetupScene::on_render(SDL_Renderer* renderer)
 {
+	if (current_player == p1)
+		next_button.on_render(renderer);
+	else
+		start_button.on_render(renderer);
+
 	current_player->on_render(renderer, true);
 	reset_button.on_render(renderer);
 	if(current_player==p1)
@@ -152,9 +167,9 @@ void SetupScene::on_render(SDL_Renderer* renderer)
 			default:
 				break;
 			}
-
-			SDL_Rect test = { 100,100,500,500 };
-			SDL_RenderFillRect(renderer, &test);
+			SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Test_Ship_detel), 210);
+			static SDL_Rect test = { 50,30,525,600 };
+			SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Test_Ship_detel), nullptr, &test);
 		}
 	}
 
@@ -173,6 +188,11 @@ void SetupScene::on_input(const SDL_Event& event)
 	for (auto& iter : shop_item_list)
 		iter->on_input(event);
 	current_player->on_input(event,true);
+
+	if (current_player == p1)
+		next_button.on_input(event);
+	else
+		start_button.on_input(event);
 }
 
 void SetupScene::draw_rect(SDL_Renderer* renderer)
@@ -195,4 +215,8 @@ void SetupScene::try_add_ship(ShipType new_ship, int cost)
 	std::cout << "test2" << std::endl;
 }
 
+void SetupScene::next_player()
+{
+	current_player == p1 ? current_player = p2 : current_player = p1;
+}
 

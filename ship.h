@@ -15,14 +15,18 @@ public:
 	~Ship() = default;
 
 	void init_ship(SDL_Texture* texture,SDL_Point first_pos,Board* board,
-					int size,int hp,int datk_time,int defense_time, SkillType skill1 = SkillType::NONE, SkillType skill2 = SkillType::NONE);
+					int size,int hp,int datk_time,int defense_time,
+					SkillType skill1 = SkillType::NONE,int time_1=0,SkillType skill2 = SkillType::NONE, int time_2 = 0);
 
 	void on_update(double delta);
 	void on_render(SDL_Renderer* renderer);
 	void on_input(const SDL_Event& event);
 
 	SkillType get_skill_1();
+	int get_skill_1_time();
 	SkillType get_skill_2();
+	int get_skill_2_time();
+
 	bool is_in_board();
 	void take_damage();
 	bool is_sink();
@@ -43,7 +47,11 @@ private:
 	int defense_time = 0;
 
 	SkillType skill_1 = SkillType::NONE;
+	int skill1_time = 0;
+
 	SkillType skill_2 = SkillType::NONE;
+	int skill2_time = 0;
+
 	Board* player_board = nullptr;
 
 private:

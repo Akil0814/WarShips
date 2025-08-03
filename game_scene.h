@@ -1,4 +1,6 @@
 #pragma once
+#include<SDL.h>
+#include"player.h"
 #include"scene.h"
 #include"button.h"
 #include"scene_type.h"
@@ -10,6 +12,12 @@ class GameScene :public Scene
 {
 private:
 
+	Player* p1 = nullptr;
+	Player* p2 = nullptr;
+
+	Player* current_player = nullptr;
+	SDL_Texture* text_player1 = nullptr;
+	SDL_Texture* text_player2 = nullptr;
 public:
 	GameScene();
 	~GameScene();
@@ -20,4 +28,6 @@ public:
 	void on_update(double delta);
 	void on_render(SDL_Renderer* renderer);
 	void on_input(const SDL_Event& event);
+
+	Player* get_other_player();
 };

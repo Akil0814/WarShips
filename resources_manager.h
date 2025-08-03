@@ -51,11 +51,20 @@ enum class ResID
 	//Tex_Tile_unknow,
 
 	//舰船贴图
-	Tex_Ship_1,
-	Tex_Ship_2,
-	Tex_Ship_3,
-	Tex_Ship_4,
-	Tex_Ship_5,
+	Tex_Test_Ship_detel,/////////////////////////////////////////////////////////
+
+
+	Tex_Ship_Destroyer,//驱逐
+	Tex_Ship_LightCruiser,//轻巡
+	Tex_Ship_HeavyCruiser,//重巡
+	Tex_Ship_SuperCruiser,//超巡
+	Tex_Ship_BattleCruiser,//战巡
+	Tex_Ship_Battleship,//战列
+	Tex_Ship_AviationBattleship,//航战
+	Tex_Ship_AircraftCarrier,//航母
+	Tex_Ship_LightCarrier,//轻航
+	Tex_Ship_Submarine,//潜艇
+	Tex_Ship_RepairShip,
 
 ////--------------动画特效类资源----------------////
 	//特殊宝具动画

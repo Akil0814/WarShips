@@ -55,6 +55,7 @@ private:
 private:
 	void draw_rect(SDL_Renderer* renderer);
 	void try_add_ship(ShipType new_ship,int cost);
+	void next_player();
 
 public:
 	SetupScene();

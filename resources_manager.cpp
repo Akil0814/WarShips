@@ -38,11 +38,18 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	texture_pool[ResID::Tex_SetTarget] = IMG_LoadTexture(renderer, "res/set_target.png");
 	texture_pool[ResID::Tex_Hand] = IMG_LoadTexture(renderer, "res/hand.png");
 
-	texture_pool[ResID::Tex_Ship_1] = IMG_LoadTexture(renderer, "res/Ship/Ship1.png");
-	texture_pool[ResID::Tex_Ship_2] = IMG_LoadTexture(renderer, "res/Ship/Ship2.png");
-	texture_pool[ResID::Tex_Ship_3] = IMG_LoadTexture(renderer, "res/Ship/Ship3.png");
-	texture_pool[ResID::Tex_Ship_4] = IMG_LoadTexture(renderer, "res/Ship/Ship4.png");
-	texture_pool[ResID::Tex_Ship_5] = IMG_LoadTexture(renderer, "res/Ship/Ship5.png");
+	texture_pool[ResID::Tex_Test_Ship_detel] = IMG_LoadTexture(renderer, "res/Ship/test_d.png");
+	texture_pool[ResID::Tex_Ship_Destroyer] = IMG_LoadTexture(renderer, "res/Ship/Destroyer.png");
+	texture_pool[ResID::Tex_Ship_LightCruiser] = IMG_LoadTexture(renderer, "res/Ship/LightCruiser.png");
+	texture_pool[ResID::Tex_Ship_HeavyCruiser] = IMG_LoadTexture(renderer, "res/Ship/HeavyCruiser.png");
+	texture_pool[ResID::Tex_Ship_SuperCruiser] = IMG_LoadTexture(renderer, "res/Ship/SuperCruiser.png");
+	texture_pool[ResID::Tex_Ship_BattleCruiser] = IMG_LoadTexture(renderer, "res/Ship/BattleCruiser.png");
+	texture_pool[ResID::Tex_Ship_Battleship] = IMG_LoadTexture(renderer, "res/Ship/Battleship.png");
+	texture_pool[ResID::Tex_Ship_AviationBattleship] = IMG_LoadTexture(renderer, "res/Ship/AviationBattleship.png");
+	texture_pool[ResID::Tex_Ship_AircraftCarrier] = IMG_LoadTexture(renderer, "res/Ship/AircraftCarrier.png");
+	texture_pool[ResID::Tex_Ship_LightCarrier] = IMG_LoadTexture(renderer, "res/Ship/LightCarrier.png");
+	texture_pool[ResID::Tex_Ship_Submarine] = IMG_LoadTexture(renderer, "res/Ship/Submarine.png");
+	texture_pool[ResID::Tex_Ship_RepairShip] = IMG_LoadTexture(renderer, "res/Ship/RepairShip.png");
 
 	//texture_pool[ResID::Tex_ExCalibur_0001] = IMG_LoadTexture(renderer, "res/ExCalibur/");
 	
