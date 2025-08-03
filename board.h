@@ -27,7 +27,7 @@ public:
 	void set_size(int row, int col);
 	void set_board_pos(SDL_Point point);
 
-	bool place_ship(Ship* ship,SDL_Point pos, int ship_size, bool is_horizontal);
+	SDL_Point place_ship(Ship* ship,SDL_Point pos, int ship_size, bool is_horizontal);
 	void move_ship(SDL_Point pos, int ship_size, bool is_horizontal);
 
 	bool is_inside(int x, int y) const;

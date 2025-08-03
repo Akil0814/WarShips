@@ -128,6 +128,9 @@
     <ClCompile Include="ship_factory.cpp">
       <Filter>Ship</Filter>
     </ClCompile>
+    <ClCompile Include="skill_factory.cpp">
+      <Filter>Skill</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu_scene.h">
@@ -204,6 +207,9 @@
     </ClInclude>
     <ClInclude Include="ship_factory.h">
       <Filter>Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="skill_factory.h">
+      <Filter>Skill</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

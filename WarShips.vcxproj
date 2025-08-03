@@ -45,6 +45,7 @@
     <ClCompile Include="ship_factory.cpp" />
     <ClCompile Include="ship_type.h" />
     <ClCompile Include="skill.cpp" />
+    <ClCompile Include="skill_factory.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="txt_texture_manager.cpp" />
@@ -71,6 +72,7 @@
     <ClInclude Include="ship.h" />
     <ClInclude Include="ship_factory.h" />
     <ClInclude Include="skill.h" />
+    <ClInclude Include="skill_factory.h" />
     <ClInclude Include="skill_type.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="timer.h" />

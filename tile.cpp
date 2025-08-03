@@ -13,18 +13,17 @@ void Tile::change_status(Status status)
 
 bool Tile::has_ship()const
 {
-    return have_ship;
+    return ship_on_tile;
 }
 
 void Tile::place_ship(Ship* ship)
 {
     ship_on_tile = ship;
-    have_ship = true;
 }
 
 void Tile::move_ship()
 {
-    have_ship = false;
+    ship_on_tile = nullptr;
 }
 
 void Tile::mark_miss()

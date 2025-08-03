@@ -2,6 +2,9 @@
 #include<vector>
 #include"board.h"
 #include"ship.h"
+#include"skill.h"
+#include"skill_type.h"
+#include"skill_factory.h"
 
 class Player
 {
@@ -19,6 +22,8 @@ public:
 	void on_input(const SDL_Event& event, bool setup);
 
 	void add_ship(Ship* new_ship);
+	void finish_setting();
+
 	bool spend_coin(int cost);
 
 	bool finish_round();
@@ -29,7 +34,7 @@ public:
 
 private:
 
-	int coin_have = 100;
+	int coin_have = 210;
 
 	bool is_win = false;
 	bool have_ship_in_move = false;
@@ -37,7 +42,10 @@ private:
 
 	Ship* current_ship = nullptr;
 
+	int atk_time_each_round = 0;
 	std::vector<Ship*> ship_list;
+	std::vector<Skill*> skill_list;
+
 	Board board;
 };
 

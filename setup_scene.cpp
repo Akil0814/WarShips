@@ -56,7 +56,7 @@ void SetupScene::on_enter()
 	text_player2 = TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "Player2:");
 	text_shop = TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "Shop: click to buy");
 
-	reset_button.set_on_click([]{});
+	reset_button.set_on_click([this] { });
 
 
 	get_Destroyer.set_on_hovered([this] {current_view_ship= ShipType::Destroyer; });
@@ -117,15 +117,12 @@ void SetupScene::on_render(SDL_Renderer* renderer)
 			switch (current_view_ship)
 			{
 			case ShipType::Destroyer:
-				SDL_SetRenderDrawColor(renderer, 100, 0, 0, 255);
 
 				break;
 			case ShipType::LightCruiser:
-				SDL_SetRenderDrawColor(renderer, 200, 0, 0, 255);
 
 				break;
 			case ShipType::HeavyCruiser:
-				SDL_SetRenderDrawColor(renderer, 0,200, 0, 255);
 
 				break;
 			case ShipType::SuperCruiser:

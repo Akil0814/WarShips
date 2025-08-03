@@ -2,26 +2,24 @@
 #include<iostream>
 
 void Ship::init_ship(SDL_Texture* texture, SDL_Point first_pos, Board* board,
-					int size, int hp, int atk_time, int defense_time, SkillType skill)
+					int size, int hp, int atk_time, int defense_time, SkillType skill1, SkillType skill2)
 {
 
 	ship_texture = texture;
-	set_position(first_pos);
 	last_position = first_pos;
 	player_board = board;
 
 	ship_size = size;
 	render_rect.h = SIZE_TILE, render_rect.w = SIZE_TILE * size;
+	set_position(first_pos);
+
 
 	this->hp = hp;
 	this->atk_time = atk_time;
 	this->defense_time = defense_time;
 
-	if (!(skill == SkillType::NONE))
-	{
-		this->ship_skill = skill;
-		have_skill = true;
-	}
+	this->skill_1 = skill1;
+	this->skill_2 = skill2;
 }
 
 void Ship::on_update(double delta)
@@ -40,60 +38,72 @@ void Ship::on_render(SDL_Renderer* renderer)
 
 void Ship::on_input(const SDL_Event& event)
 {
-
 	if (event.type == SDL_MOUSEBUTTONDOWN && check_cursor_hit(event.button.x, event.button.y))
 	{
-		if (event.button.button == SDL_BUTTON_LEFT)
+
+		if (event.button.button == SDL_BUTTON_LEFT)//¿ªÊ¼ÍÏ×§´¬Ö»
 		{
 			ship_in_move = true;
 			delta.x = event.button.x - collision_rect.x;
 			delta.y = event.button.y - collision_rect.y;
+			player_board->move_ship({ absolute_position.x,absolute_position.y }, ship_size, horizontal);
 		}
-		else if (event.button.button == SDL_BUTTON_RIGHT)
+
+		if (event.button.button == SDL_BUTTON_RIGHT)//Ðý×ª´¬Ö»
 		{
-			if (!ship_in_move&&ship_in_board)
+			if (!ship_in_move && ship_in_board)
 			{
-				ship_rotate = true;
-				rotate_ship();
+				player_board->move_ship({ absolute_position.x,absolute_position.y }, ship_size, horizontal);
+				SDL_Point new_pos = player_board->place_ship(this, { absolute_position.x,absolute_position.y }, ship_size, !horizontal);
+				if (new_pos.x >= 0)
+					rotate_ship();
+				else
+					player_board->place_ship(this, { last_position.x,last_position.y }, ship_size, horizontal);
 			}
 		}
 		std::cout << "in if 1" << std::endl;
 	}
 
-	if (ship_in_move && event.type == SDL_MOUSEMOTION)
+	if (ship_in_move && event.type == SDL_MOUSEMOTION)//ÍÏ×§ÖÐ
 	{
 		set_position({ event.motion.x - delta.x, event.motion.y - delta.y });
 		std::cout << "in if 2" << std::endl;
-
 	}
 
-	if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
+	if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT && ship_in_move)//Í£Ö¹ÍÏ×§
 	{
 		ship_in_move = false;
-		delta = {0};
+		delta = { 0 };
 
 		if (player_board->is_inside(event.button.x, event.button.y))
 		{
-			if (player_board->place_ship(this, { event.button.x,event.button.y }, ship_size, horizontal))
+			SDL_Point new_pos = player_board->place_ship(this, { absolute_position.x,absolute_position.y }, ship_size, horizontal);
+			if (new_pos.x>=0)
 			{
-				set_position(absolute_position);
-				ship_in_board;
+				set_position(new_pos);
+				ship_in_board=true;
+				last_position = new_pos;
 			}
 			else
+			{
+				player_board->place_ship(this, { last_position.x,last_position.y }, ship_size, horizontal);
 				set_position(last_position);
+			}
+		}
+		else
+		{
+			set_position(last_position);
+			if (ship_in_board != false)
+				player_board->place_ship(this, { last_position.x,last_position.y }, ship_size, horizontal);
 		}
 		std::cout << "in if 3" << std::endl;
-
 	}
 
-	if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_RIGHT)
+	if (event.window.event == SDL_WINDOWEVENT_LEAVE && ship_in_move)
 	{
-		if (ship_rotate)
-		{
-			ship_rotate = false;
-		}
-		std::cout << "in if 4" << std::endl;
-
+		ship_in_move = false;
+		delta = { 0 };
+		set_position(last_position);
 	}
 
 }
@@ -128,13 +138,43 @@ void Ship::set_position(const SDL_Point& pos)
 	update_rect();
 }
 
-const SDL_Point& Ship::get_position()const
-{
-	return absolute_position;
-}
-
 bool Ship::check_cursor_hit(int x, int y)const
 {
 	return x >= collision_rect.x && x < (collision_rect.x + collision_rect.w) &&
 		y >= collision_rect.y && y < (collision_rect.y + collision_rect.h);
+}
+
+SkillType Ship::get_skill_1()
+{
+	return skill_1;
+}
+
+SkillType Ship::get_skill_2()
+{
+	return skill_2;
+}
+
+bool Ship::is_in_board()
+{
+	return ship_in_board;
+}
+
+void Ship::take_damage()
+{
+	if (defense_time > 0)
+		defense_time--;
+	else
+		hp--;
+	if (hp <= 0)
+		sink = true;
+}
+
+bool Ship::is_sink()
+{
+	return sink;
+}
+
+int Ship::get_atk_time()
+{
+	return atk_time;
 }

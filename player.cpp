@@ -91,3 +91,25 @@ Board* Player::get_board()
 	return &board;
 }
 
+void Player::finish_setting()
+{
+	auto it = std::remove_if(ship_list.begin(), ship_list.end(),
+		[](auto& e) { return !e->is_in_board(); });
+	ship_list.erase(it, ship_list.end());
+
+	for (auto ship : ship_list)
+	{
+		atk_time_each_round = atk_time_each_round + ship->get_atk_time();
+
+		if (ship->get_skill_1() != SkillType::NONE)
+		{
+			skill_list.push_back(SkillFactory::instance()->get_skill(ship->get_skill_1()));
+		}
+		if (ship->get_skill_2() != SkillType::NONE)
+		{
+			skill_list.push_back(SkillFactory::instance()->get_skill(ship->get_skill_2()));
+		}
+	}
+}
+
+

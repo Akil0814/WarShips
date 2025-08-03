@@ -197,26 +197,24 @@ void Board::draw_board(SDL_Renderer* renderer)
     }
 }
 
-bool Board::place_ship(Ship* ship,SDL_Point pos, int ship_size, bool is_horizontal)
+SDL_Point Board::place_ship(Ship* ship, SDL_Point pos, int ship_size, bool is_horizontal)
 {
-
-
     int x = (pos.x - board_render_x) / SIZE_TILE;
     int y = (pos.y - board_render_y) / SIZE_TILE;
 
-    if ((pos.x-board_render_x) % SIZE_TILE > SIZE_TILE / 2)
+    if ((pos.x - board_render_x) % SIZE_TILE > SIZE_TILE / 2)
         x++;
 
-    if ((pos.y-board_render_y) % SIZE_TILE > SIZE_TILE / 2)
+    if ((pos.y - board_render_y) % SIZE_TILE > SIZE_TILE / 2)
         y++;
 
-    if (check_available(x,y, ship_size, is_horizontal))
+    if (check_available(x, y, ship_size, is_horizontal))
     {
         if (is_horizontal)
         {
             for (int i = 0; i < ship_size; ++i)
             {
-                board[y][x+i].place_ship(ship);
+                board[y][x + i].place_ship(ship);
             }
         }
         else
@@ -227,9 +225,9 @@ bool Board::place_ship(Ship* ship,SDL_Point pos, int ship_size, bool is_horizont
             }
         }
         show_board();
-        return true;
+        return { (x * SIZE_TILE) + board_render_x,(y * SIZE_TILE) + board_render_y };
     }
-    return false;
+    return { -1,-1 };
 }
 
 void Board::move_ship(SDL_Point pos, int ship_size, bool is_horizontal)
