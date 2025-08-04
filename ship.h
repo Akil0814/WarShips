@@ -69,8 +69,10 @@ private:
 	SDL_Rect render_rect = { 0 };
 
 	bool horizontal = true;
-	bool ship_in_move = false;
-	bool ship_in_board = false;
 	bool sink = false;
+
+	bool ship_in_move = false;
+	bool ship_in_rotate = false;
+	bool ship_in_board = false;
 
 };

@@ -38,7 +38,8 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	texture_pool[ResID::Tex_SetTarget] = IMG_LoadTexture(renderer, "res/set_target.png");
 	texture_pool[ResID::Tex_Hand] = IMG_LoadTexture(renderer, "res/hand.png");
 
-	texture_pool[ResID::Tex_Test_Ship_detel] = IMG_LoadTexture(renderer, "res/Ship/test_d.png");
+	texture_pool[ResID::Tex_Test_Ship_detel] = IMG_LoadTexture(renderer, "res/Ship/ship_inform.png");
+
 	texture_pool[ResID::Tex_Ship_Destroyer] = IMG_LoadTexture(renderer, "res/Ship/Destroyer.png");
 	texture_pool[ResID::Tex_Ship_LightCruiser] = IMG_LoadTexture(renderer, "res/Ship/LightCruiser.png");
 	texture_pool[ResID::Tex_Ship_HeavyCruiser] = IMG_LoadTexture(renderer, "res/Ship/HeavyCruiser.png");

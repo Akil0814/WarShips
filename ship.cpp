@@ -32,9 +32,10 @@ void Ship::on_update(double delta)
 void Ship::on_render(SDL_Renderer* renderer)
 {
 	if (ship_in_move)
-	{
 		player_board->show_place_feasibility(renderer, absolute_position, ship_size, horizontal);
-	}
+
+	if (ship_in_rotate)
+		player_board->show_place_feasibility(renderer, absolute_position, ship_size, !horizontal);
 
 	static SDL_Point pivot{ SIZE_TILE/2, SIZE_TILE/2 };//旋转中心
 	if (horizontal)
@@ -48,7 +49,7 @@ void Ship::on_input(const SDL_Event& event)
 	if (event.type == SDL_MOUSEBUTTONDOWN && check_cursor_hit(event.button.x, event.button.y))
 	{
 
-		if (event.button.button == SDL_BUTTON_LEFT)//开始拖拽船只
+		if (event.button.button == SDL_BUTTON_LEFT && !ship_in_rotate)//开始拖拽船只逻辑
 		{
 			ship_in_move = true;
 			delta.x = event.button.x - collision_rect.x;
@@ -56,27 +57,15 @@ void Ship::on_input(const SDL_Event& event)
 			player_board->move_ship({ absolute_position.x,absolute_position.y }, ship_size, horizontal);
 		}
 
-		if (event.button.button == SDL_BUTTON_RIGHT)//旋转船只
+		if (event.button.button == SDL_BUTTON_RIGHT && !ship_in_move && ship_in_board)//开始旋转船只逻辑
 		{
-			if (!ship_in_move && ship_in_board)
-			{
-				player_board->move_ship({ absolute_position.x,absolute_position.y }, ship_size, horizontal);
-				SDL_Point new_pos = player_board->place_ship(this, { absolute_position.x,absolute_position.y }, ship_size, !horizontal);
-				if (new_pos.x >= 0)
-				{
-					rotate_ship();
-					Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Put_In_Water), 0);
-				}
-				else
-					player_board->place_ship(this, { last_position.x,last_position.y }, ship_size, horizontal);
-			}
+			ship_in_rotate = true;
+			player_board->move_ship({ absolute_position.x,absolute_position.y }, ship_size, horizontal);
 		}
 	}
 
 	if (ship_in_move && event.type == SDL_MOUSEMOTION)//拖拽中
-	{
 		set_position({ event.motion.x - delta.x, event.motion.y - delta.y });
-	}
 
 	if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT && ship_in_move)//停止拖拽
 	{
@@ -97,14 +86,35 @@ void Ship::on_input(const SDL_Event& event)
 			{
 				player_board->place_ship(this, { last_position.x,last_position.y }, ship_size, horizontal);
 				set_position(last_position);
+				Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
 			}
 		}
 		else
 		{
 			set_position(last_position);
+			Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
 			if (ship_in_board != false)
+			{
 				player_board->place_ship(this, { last_position.x,last_position.y }, ship_size, horizontal);
+			}
 		}
+	}
+
+	if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_RIGHT && ship_in_rotate && !ship_in_move)//完成旋转逻辑
+	{
+		ship_in_rotate = false;
+		SDL_Point new_pos = player_board->place_ship(this, { absolute_position.x,absolute_position.y }, ship_size, !horizontal);
+		if (new_pos.x >= 0)
+		{
+			rotate_ship();
+			Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Put_In_Water), 0);
+		}
+		else
+		{
+			player_board->place_ship(this, { last_position.x,last_position.y }, ship_size, horizontal);
+			Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
+		}
+
 	}
 
 	if (event.window.event == SDL_WINDOWEVENT_LEAVE && ship_in_move)
@@ -112,6 +122,7 @@ void Ship::on_input(const SDL_Event& event)
 		ship_in_move = false;
 		delta = { 0 };
 		set_position(last_position);
+		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
 	}
 
 }
