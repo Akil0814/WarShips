@@ -18,10 +18,12 @@ void GameScene::on_enter()
 	current_player = p1;
 	current_player->set_board_pos({ 650,30 });
 	get_other_player()->set_board_pos({ 30,30 });
+
+	Mix_FadeInMusic(ResourcesManager::instance()->get_music(ResID::Music_In_Game), -1,3000);
 }
 void GameScene::on_exit()
 {
-
+	Mix_HaltMusic();
 }
 
 void GameScene::on_update(double delta)

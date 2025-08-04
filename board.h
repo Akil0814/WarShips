@@ -42,6 +42,7 @@ public:
 	void show_board();////////////////////////////////
 
 	void draw_cover(SDL_Renderer* renderer);
+	void reset_board();
 
 private:
 

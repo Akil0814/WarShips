@@ -117,6 +117,13 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	sound_pool[ResID::Sound_Fire_1] = Mix_LoadWAV("res/Sound/fire_1.wav");
 	sound_pool[ResID::Sound_Fire_2] = Mix_LoadWAV("res/Sound/fire_2.wav");
 	sound_pool[ResID::Sound_Fire_3] = Mix_LoadWAV("res/Sound/fire_3.wav");
+	sound_pool[ResID::Sound_Fire_3] = Mix_LoadWAV("res/Sound/fire_4.wav");
+
+	sound_pool[ResID::Sound_Click] = Mix_LoadWAV("res/Sound/click.wav");
+	sound_pool[ResID::Sound_Coin] = Mix_LoadWAV("res/Sound/coin.wav");
+	sound_pool[ResID::Sound_Error] = Mix_LoadWAV("res/Sound/error.wav");
+	sound_pool[ResID::Sound_Entering_Water] = Mix_LoadWAV("res/Sound/entering_water.wav");
+	sound_pool[ResID::Sound_Put_In_Water] = Mix_LoadWAV("res/Sound/put_in_water.wav");
 
 	std::cout << "sound check" << std::endl;
 
@@ -127,7 +134,9 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 //---------------------------------------------------------------//
 //--------------------------ÒôÀÖ×ÊÔ´------------------------------//
 
-	//music_pool[ResID::Music_main] = Mix_LoadMUS("");
+	music_pool[ResID::Music_Game_End] = Mix_LoadMUS("res/Sound/game_end.mp3");
+	music_pool[ResID::Music_In_Game] = Mix_LoadMUS("res/Sound/in_game.mp3");
+	music_pool[ResID::Music_Setup] = Mix_LoadMUS("res/Sound/setup.mp3");
 
 	std::cout << "music check" << std::endl;
 

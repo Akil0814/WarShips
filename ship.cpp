@@ -63,18 +63,19 @@ void Ship::on_input(const SDL_Event& event)
 				player_board->move_ship({ absolute_position.x,absolute_position.y }, ship_size, horizontal);
 				SDL_Point new_pos = player_board->place_ship(this, { absolute_position.x,absolute_position.y }, ship_size, !horizontal);
 				if (new_pos.x >= 0)
+				{
 					rotate_ship();
+					Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Put_In_Water), 0);
+				}
 				else
 					player_board->place_ship(this, { last_position.x,last_position.y }, ship_size, horizontal);
 			}
 		}
-		std::cout << "in if 1" << std::endl;
 	}
 
 	if (ship_in_move && event.type == SDL_MOUSEMOTION)//ÍÏ×§ÖÐ
 	{
 		set_position({ event.motion.x - delta.x, event.motion.y - delta.y });
-		std::cout << "in if 2" << std::endl;
 	}
 
 	if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT && ship_in_move)//Í£Ö¹ÍÏ×§
@@ -90,6 +91,7 @@ void Ship::on_input(const SDL_Event& event)
 				set_position(new_pos);
 				ship_in_board=true;
 				last_position = new_pos;
+				Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Put_In_Water), 0);
 			}
 			else
 			{
@@ -103,7 +105,6 @@ void Ship::on_input(const SDL_Event& event)
 			if (ship_in_board != false)
 				player_board->place_ship(this, { last_position.x,last_position.y }, ship_size, horizontal);
 		}
-		std::cout << "in if 3" << std::endl;
 	}
 
 	if (event.window.event == SDL_WINDOWEVENT_LEAVE && ship_in_move)
@@ -151,17 +152,17 @@ bool Ship::check_cursor_hit(int x, int y)const
 		y >= collision_rect.y && y < (collision_rect.y + collision_rect.h);
 }
 
-SkillType Ship::get_skill_1()
+SkillType Ship::get_skill_1()const
 {
 	return skill_1;
 }
 
-SkillType Ship::get_skill_2()
+SkillType Ship::get_skill_2()const
 {
 	return skill_2;
 }
 
-bool Ship::is_in_board()
+bool Ship::is_in_board()const
 {
 	return ship_in_board;
 }
@@ -176,12 +177,27 @@ void Ship::take_damage()
 		sink = true;
 }
 
-bool Ship::is_sink()
+bool Ship::is_sink()const
 {
 	return sink;
 }
 
-int Ship::get_atk_time()
+int Ship::get_atk_time()const
 {
 	return atk_time;
+}
+
+int Ship::get_skill_1_time()const
+{
+	return skill1_time;
+}
+
+int Ship::get_skill_2_time()const
+{
+	return skill2_time;
+}
+
+bool Ship::check_motion()const
+{
+	return ship_in_move;
 }

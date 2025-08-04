@@ -22,15 +22,17 @@ public:
 	void on_render(SDL_Renderer* renderer);
 	void on_input(const SDL_Event& event);
 
-	SkillType get_skill_1();
-	int get_skill_1_time();
-	SkillType get_skill_2();
-	int get_skill_2_time();
+	SkillType get_skill_1()const;
+	int get_skill_1_time()const;
+	SkillType get_skill_2()const;
+	int get_skill_2_time()const;
 
-	bool is_in_board();
 	void take_damage();
-	bool is_sink();
-	int get_atk_time();
+	bool is_in_board()const;
+	bool is_sink() const;
+	int get_atk_time() const;
+	bool check_motion()const;
+
 
 private:
 	void set_position(const SDL_Point& pos);

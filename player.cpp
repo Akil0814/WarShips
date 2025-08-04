@@ -24,6 +24,9 @@ void Player::on_render(SDL_Renderer* renderer,bool setup)
 
 	for (auto& ship : ship_list)
 		ship->on_render(renderer);
+
+	if (current_ship != nullptr)
+		current_ship->on_render(renderer);
 }
 
 
@@ -46,8 +49,27 @@ void Player::on_input(const SDL_Event& event)
 
 void Player::on_input(const SDL_Event& event,bool setup)
 {
-	for (auto& ship : ship_list)
-		ship->on_input(event);
+	if (have_ship_in_move == true)
+	{
+		current_ship->on_input(event);
+		if (!current_ship->check_motion())
+		{
+			have_ship_in_move = false;
+			current_ship = nullptr;
+		}
+	}
+	else
+	{
+		for (auto& ship : ship_list)
+		{
+			ship->on_input(event);
+			if (ship->check_motion())
+			{
+				have_ship_in_move = true;
+				current_ship = ship;
+			}
+		}
+	}
 }
 
 void Player::set_board_pos(SDL_Point pos)
@@ -96,20 +118,27 @@ void Player::finish_setting()
 	auto it = std::remove_if(ship_list.begin(), ship_list.end(),
 		[](auto& e) { return !e->is_in_board(); });
 	ship_list.erase(it, ship_list.end());
-
-	for (auto ship : ship_list)
-	{
-		atk_time_each_round = atk_time_each_round + ship->get_atk_time();
-
-		if (ship->get_skill_1() != SkillType::NONE)
-		{
-			skill_list.push_back(SkillFactory::instance()->get_skill(ship->get_skill_1()));
-		}
-		if (ship->get_skill_2() != SkillType::NONE)
-		{
-			skill_list.push_back(SkillFactory::instance()->get_skill(ship->get_skill_2()));
-		}
-	}
 }
+
+void Player::reset()
+{
+	board.reset_board();
+	coin_have = 210;
+	have_ship_in_move = false;
+	current_ship = nullptr;
+
+	for (auto iter : ship_list)
+	{
+		delete iter;
+	}
+	ship_list.clear();
+}
+
+int Player::get_coin()
+{
+	return coin_have;
+}
+
+
 
 

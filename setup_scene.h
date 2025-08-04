@@ -11,6 +11,7 @@
 #include"game_manager.h"
 #include"resources_manager.h"
 #include"txt_texture_manager.h"
+#include"number_board.h"
 
 class SetupScene :public Scene
 {
@@ -32,6 +33,8 @@ private:
 	Button get_Submarine;
 	Button get_RepairShip;
 
+	NumberBoard player_coin_num;
+
 	ShipType current_view_ship = ShipType::Destroyer;
 	
 	std::vector<Button*> shop_item_list;
@@ -43,7 +46,7 @@ private:
 
 	SDL_Rect side_rect = { 650,30,600,660 };
 
-	SDL_Rect coin_tex = { 1100,30,50,50 };
+	SDL_Rect coin_tex = { 1050,30,50,50 };
 
 	SDL_Rect player_txt = { 660,30,90,40 };
 	SDL_Rect shop_txt = { 660,360,220,40 };

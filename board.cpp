@@ -320,36 +320,39 @@ void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int sh
     if (!is_inside(pos.x, pos.y))
         return;
 
-    if (check_available(pos.x, pos.y,ship_size,is_horizontal))
-    {
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 50);
-    }
-    else
-    {
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 50);
-    }
-
-    int x = ((pos.x ) / SIZE_TILE)* SIZE_TILE;
-    int y = ((pos.y) / SIZE_TILE)* SIZE_TILE;
-    int l = 30;
-    int h = 30;
+    SDL_Point grid_pos =
+    {   (pos.x - board_render_x) / SIZE_TILE,
+        (pos.y - board_render_y) / SIZE_TILE};
 
     if ((pos.x) % SIZE_TILE > SIZE_TILE / 2)
-        x++;
+        grid_pos.x++;
 
-    if ((pos.y - board_render_y) % SIZE_TILE > SIZE_TILE / 2)
-        y++;
-    if (is_horizontal)
-    {
-        l = ship_size * SIZE_TILE;
-    }
-    else
-    {
-        h = ship_size * SIZE_TILE;
-    }
+    if ((pos.y) % SIZE_TILE > SIZE_TILE / 2)
+        grid_pos.y++;
 
-    SDL_Rect rect = { x, y,l,h};
+    bool valid = check_available(grid_pos.x, grid_pos.y, ship_size, is_horizontal);
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(renderer,
+        valid ? 255 : 255,
+        valid ? 255 : 0,
+        valid ? 255 : 0,
+        50);
+
+    int w = is_horizontal ? ship_size * SIZE_TILE : SIZE_TILE;
+    int h = is_horizontal ? SIZE_TILE : ship_size * SIZE_TILE;
+
+    SDL_Rect rect = {
+        board_render_x + grid_pos.x * SIZE_TILE,
+        board_render_y + grid_pos.y * SIZE_TILE,
+        w, h
+    };
 
     SDL_RenderFillRect(renderer, &rect);
 
+}
+
+void Board::reset_board()
+{
+    board.assign(row, std::vector<Tile>(col));
 }

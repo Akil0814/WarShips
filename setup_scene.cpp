@@ -3,13 +3,13 @@
 SetupScene::SetupScene()
 	:next_button({ 30,650,80,40 }, { 35,655,70,30 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "NEXT"),
-		nullptr, nullptr),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr),
 	start_button({ 30,650,80,40 }, { 35,655,70,30 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "START"),
-		nullptr, nullptr),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr),
 	reset_button({ 500,650,80,40 }, { 505,655,70,30 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "Reset"),
-		nullptr, nullptr),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr),
 
 	get_LightCruiser({ 665, 415, 120,  40 },{ 665, 415, 120,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_LightCruiser),nullptr, nullptr),
 	get_HeavyCruiser({ 665, 475, 120,  40 },{ 665, 475, 120,  40 }, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_HeavyCruiser),nullptr, nullptr),
@@ -38,6 +38,20 @@ SetupScene::SetupScene()
 	shop_item_list.push_back(&get_Destroyer);
 	shop_item_list.push_back(&get_Submarine);
 	shop_item_list.push_back(&get_RepairShip);
+
+	player_coin_num.init_texture({ ResourcesManager::instance()->get_texture(ResID::Tex_Num_0),
+		ResourcesManager::instance()->get_texture(ResID::Tex_Num_1),
+		ResourcesManager::instance()->get_texture(ResID::Tex_Num_2),
+		ResourcesManager::instance()->get_texture(ResID::Tex_Num_3),
+		ResourcesManager::instance()->get_texture(ResID::Tex_Num_4),
+		ResourcesManager::instance()->get_texture(ResID::Tex_Num_5),
+		ResourcesManager::instance()->get_texture(ResID::Tex_Num_6),
+		ResourcesManager::instance()->get_texture(ResID::Tex_Num_7),
+		ResourcesManager::instance()->get_texture(ResID::Tex_Num_8),
+		ResourcesManager::instance()->get_texture(ResID::Tex_Num_9) });
+
+	player_coin_num.set_rect_for_ones_place({ 1210,35,30,40 });
+
 }
 
 SetupScene::~SetupScene()
@@ -58,15 +72,23 @@ void SetupScene::on_enter()
 
 	next_button.set_on_click([this]
 		{
+			current_player->finish_setting();
 			ShipFactory::instance()->reset_pos();
 			next_player();
+			player_coin_num.set_number(current_player->get_coin());
 		});
 	start_button.set_on_click([this]
 		{
+			current_player->finish_setting();
 			ShipFactory::instance()->reset_pos();
 			GameManager::instance()->switch_scene(SceneType::Game);
 		});
-	reset_button.set_on_click([this] { });
+	reset_button.set_on_click([this]
+		{
+			current_player->reset();
+			player_coin_num.set_number(current_player->get_coin());
+			ShipFactory::instance()->reset_pos();
+		});
 
 
 	get_Destroyer.set_on_hovered([this] {current_view_ship= ShipType::Destroyer; });
@@ -95,10 +117,15 @@ void SetupScene::on_enter()
 	get_RepairShip.set_on_click([this] { try_add_ship(ShipType::RepairShip, 10); });
 
 	current_player = p1;
+
+	player_coin_num.set_number(current_player->get_coin());
+
+	Mix_FadeInMusic(ResourcesManager::instance()->get_music(ResID::Music_Setup),-1,3000);
 }
+
 void SetupScene::on_exit()
 {
-
+	Mix_HaltMusic();
 }
 
 void SetupScene::on_update(double delta)
@@ -110,6 +137,8 @@ void SetupScene::on_update(double delta)
 
 void SetupScene::on_render(SDL_Renderer* renderer)
 {
+	player_coin_num.on_render(renderer);
+
 	if (current_player == p1)
 		next_button.on_render(renderer);
 	else
@@ -176,7 +205,6 @@ void SetupScene::on_render(SDL_Renderer* renderer)
 	SDL_RenderCopy(renderer, text_shop, nullptr, &shop_txt);
 	SDL_RenderCopy(renderer,ResourcesManager::instance()->get_texture(ResID::Tex_Coin), nullptr, &coin_tex);
 
-
 	draw_rect(renderer);
 
 	SDL_SetRenderDrawColor(renderer, back_ground_color.r, back_ground_color.g, back_ground_color.b, back_ground_color.a);
@@ -204,15 +232,17 @@ void SetupScene::draw_rect(SDL_Renderer* renderer)
 
 void SetupScene::try_add_ship(ShipType new_ship, int cost)
 {
+
 	if (current_player->spend_coin(cost))
 	{
+		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Coin), 0);
 		current_player->add_ship(ShipFactory::instance()->creat_ship(new_ship,current_player->get_board()));
+		player_coin_num.set_number(current_player->get_coin());
 	}
 	else
 	{
-
+		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
 	}
-	std::cout << "test2" << std::endl;
 }
 
 void SetupScene::next_player()

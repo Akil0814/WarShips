@@ -1,10 +1,11 @@
 #pragma once
-#include<vector>
+#include<unordered_map>
 #include"board.h"
 #include"ship.h"
 #include"skill.h"
 #include"skill_type.h"
 #include"skill_factory.h"
+
 
 class Player
 {
@@ -23,8 +24,10 @@ public:
 
 	void add_ship(Ship* new_ship);
 	void finish_setting();
+	void reset();
 
 	bool spend_coin(int cost);
+	int get_coin();
 
 	bool finish_round();
 
@@ -38,14 +41,11 @@ private:
 
 	bool is_win = false;
 	bool have_ship_in_move = false;
-	bool current_ship_last_hor_state = true;
 
 	Ship* current_ship = nullptr;
 
 	int atk_time_each_round = 0;
 	std::vector<Ship*> ship_list;
-	std::vector<Skill*> skill_list;
-
 	Board board;
 };
 
