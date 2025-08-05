@@ -317,16 +317,16 @@ void Board::draw_cover(SDL_Renderer* renderer)
 
 void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int ship_size, bool is_horizontal)
 {
-    //pos.x - board_render_x>0?
-    //pos.y - board_render_y>0?
+
     SDL_Point grid_pos =
     {   (pos.x - board_render_x) / SIZE_TILE,
         (pos.y - board_render_y) / SIZE_TILE};
 
-    if ((pos.x) % SIZE_TILE > SIZE_TILE / 2)
+
+    if ((pos.x - board_render_x) % SIZE_TILE > SIZE_TILE / 2)
         grid_pos.x++;
 
-    if ((pos.y) % SIZE_TILE > SIZE_TILE / 2)
+    if ((pos.y - board_render_y) % SIZE_TILE > SIZE_TILE / 2)
         grid_pos.y++;
 
 

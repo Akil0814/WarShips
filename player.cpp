@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-	board.set_board_pos({30, 30});
+	board.set_board_pos({30, 50});
 }
 
 Player::~Player()
