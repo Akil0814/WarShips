@@ -196,8 +196,18 @@ void Board::draw_board(SDL_Renderer* renderer)
 
 SDL_Point Board::place_ship(Ship* ship, SDL_Point pos, int ship_size, bool is_horizontal)
 {
-    int x = (pos.x - board_render_x) / SIZE_TILE;
-    int y = (pos.y - board_render_y) / SIZE_TILE;
+    int x, y = 0;
+
+    if (pos.x - board_render_x < -(SIZE_TILE / 2) || pos.y - board_render_y < -(SIZE_TILE / 2))
+    {
+        x = std::floor(double(pos.x - board_render_x) / SIZE_TILE);
+        y = std::floor(double(pos.y - board_render_y) / SIZE_TILE);
+    }
+    else
+    {
+        x = (pos.x - board_render_x) / SIZE_TILE;
+        y = (pos.y - board_render_y) / SIZE_TILE;
+    }
 
     if ((pos.x - board_render_x) % SIZE_TILE > SIZE_TILE / 2)
         x++;
@@ -320,6 +330,7 @@ void Board::draw_cover(SDL_Renderer* renderer)
 void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int ship_size, bool is_horizontal)
 {
     SDL_Point grid_pos = { 0 };
+
 
     if (pos.x - board_render_x < -(SIZE_TILE / 2) || pos.y - board_render_y < -(SIZE_TILE / 2))
     {

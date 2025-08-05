@@ -74,7 +74,7 @@ void Ship::on_input(const SDL_Event& event)
 
 		if (player_board->is_inside(event.button.x, event.button.y))
 		{
-			SDL_Point new_pos = player_board->place_ship(this, { absolute_position.x,absolute_position.y }, ship_size, horizontal);
+			SDL_Point new_pos = player_board->place_ship(this, absolute_position, ship_size, horizontal);
 			if (new_pos.x>=0)
 			{
 				set_position(new_pos);
@@ -84,7 +84,7 @@ void Ship::on_input(const SDL_Event& event)
 			}
 			else
 			{
-				player_board->place_ship(this, { last_position.x,last_position.y }, ship_size, horizontal);
+				player_board->place_ship(this, last_position, ship_size, horizontal);
 				set_position(last_position);
 				Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
 			}
@@ -95,7 +95,7 @@ void Ship::on_input(const SDL_Event& event)
 			Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
 			if (ship_in_board != false)
 			{
-				player_board->place_ship(this, { last_position.x,last_position.y }, ship_size, horizontal);
+				player_board->place_ship(this, last_position, ship_size, horizontal);
 			}
 		}
 	}
@@ -103,7 +103,7 @@ void Ship::on_input(const SDL_Event& event)
 	if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_RIGHT && ship_in_rotate && !ship_in_move)//Íê³ÉÐý×ªÂß¼­
 	{
 		ship_in_rotate = false;
-		SDL_Point new_pos = player_board->place_ship(this, { absolute_position.x,absolute_position.y }, ship_size, !horizontal);
+		SDL_Point new_pos = player_board->place_ship(this,absolute_position, ship_size, !horizontal);
 		if (new_pos.x >= 0)
 		{
 			rotate_ship();
@@ -111,7 +111,7 @@ void Ship::on_input(const SDL_Event& event)
 		}
 		else
 		{
-			player_board->place_ship(this, { last_position.x,last_position.y }, ship_size, horizontal);
+			player_board->place_ship(this, last_position, ship_size, horizontal);
 			Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
 		}
 
