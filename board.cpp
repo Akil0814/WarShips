@@ -1,4 +1,6 @@
 #include "board.h"
+#include <cmath>
+
 
 SDL_Texture* Board::tile_hit = nullptr;
 SDL_Texture* Board::tile_miss = nullptr;
@@ -318,9 +320,36 @@ void Board::draw_cover(SDL_Renderer* renderer)
 void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int ship_size, bool is_horizontal)
 {
 
+    if (pos.x - board_render_x < -(SIZE_TILE / 2) || pos.y - board_render_y < -(SIZE_TILE / 2))
+    {
+        double g_pos_x = double(pos.x - board_render_x) / SIZE_TILE;
+        double g_pos_y = double(pos.y - board_render_y) / SIZE_TILE;
+
+        SDL_Point g_pos = { std::floor(g_pos_x),std::floor(g_pos_y) };
+
+        std::cout << "x " << g_pos.x << "y " << g_pos.y << std::endl;
+
+        if ((pos.x - board_render_x) % SIZE_TILE > SIZE_TILE / 2)
+            g_pos.x++;
+
+        if ((pos.y - board_render_y) % SIZE_TILE > SIZE_TILE / 2)
+            g_pos.y++;
+
+        SDL_Rect rect = {
+                board_render_x+g_pos.x* SIZE_TILE,
+                board_render_y+g_pos.y* SIZE_TILE,
+                is_horizontal ? ship_size * SIZE_TILE : SIZE_TILE,
+                is_horizontal ? SIZE_TILE : ship_size * SIZE_TILE };
+
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 50);
+        SDL_RenderFillRect(renderer, &rect);
+
+        return;
+    }
+
     SDL_Point grid_pos =
-    {   (pos.x - board_render_x) / SIZE_TILE,
-        (pos.y - board_render_y) / SIZE_TILE};
+    {double(pos.x - board_render_x) / SIZE_TILE,
+     double(pos.y - board_render_y) / SIZE_TILE};
 
 
     if ((pos.x - board_render_x) % SIZE_TILE > SIZE_TILE / 2)
@@ -336,7 +365,6 @@ void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int sh
                     is_horizontal ? ship_size * SIZE_TILE : SIZE_TILE,
                     is_horizontal ? SIZE_TILE : ship_size * SIZE_TILE };
 
-    std::cout << "x" << grid_pos.x << "y" << grid_pos.y << std::endl;//////////////////////
 
     bool valid = check_available(grid_pos.x, grid_pos.y, ship_size, is_horizontal);
 
