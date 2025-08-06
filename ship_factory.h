@@ -2,6 +2,7 @@
 #include<SDL.h>
 #include"ship.h"
 #include"ship_type.h"
+#include"destroyer.h"
 #include"board.h"
 
 class Board;

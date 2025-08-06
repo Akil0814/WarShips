@@ -4,15 +4,11 @@
 void Ship::init_ship(SDL_Texture* texture, SDL_Point first_pos, Board* board,
 					int size, int hp, int atk_time, int defense_time, SkillType skill1,int time_1, SkillType skill2,int time_2)
 {
-
 	ship_texture = texture;
-	last_position = first_pos;
 	player_board = board;
 
 	ship_size = size;
 	render_rect.h = SIZE_TILE, render_rect.w = SIZE_TILE * size;
-	set_position(first_pos);
-
 
 	this->hp = hp;
 	this->atk_time = atk_time;
@@ -201,4 +197,11 @@ int Ship::get_skill_2_time()const
 bool Ship::check_motion()const
 {
 	return ship_in_move;
+}
+
+void Ship::init_pos(SDL_Point first_pos)
+{
+	last_position = first_pos;
+	set_position(first_pos);
+
 }

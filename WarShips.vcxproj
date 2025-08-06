@@ -22,6 +22,7 @@
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="atlas.cpp" />
     <ClCompile Include="atlas_manager.cpp" />
+    <ClCompile Include="battleship.h" />
     <ClCompile Include="board.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="button.cpp" />
@@ -47,24 +48,33 @@
     <ClCompile Include="ship_type.h" />
     <ClCompile Include="skill.cpp" />
     <ClCompile Include="skill_factory.cpp" />
+    <ClCompile Include="super_cruiser.h" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="txt_texture_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="aircraft_carrier.h" />
     <ClInclude Include="animation.h" />
     <ClInclude Include="atlas.h" />
     <ClInclude Include="atlas_manager.h" />
+    <ClInclude Include="aviation_battleship.h" />
+    <ClInclude Include="battle_cruiser.h" />
     <ClInclude Include="board.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="button.h" />
+    <ClInclude Include="destroyer.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effect_manager.h" />
     <ClInclude Include="game_manager.h" />
+    <ClInclude Include="heavy_cruiser.h" />
+    <ClInclude Include="light_carrier.h" />
+    <ClInclude Include="l\light_cruiser.h" />
     <ClInclude Include="manager.h" />
     <ClInclude Include="menu_scene.h" />
     <ClInclude Include="number_board.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="repair_ship.h" />
     <ClInclude Include="resources_manager.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="scene_manager.h" />
@@ -76,6 +86,7 @@
     <ClInclude Include="skill.h" />
     <ClInclude Include="skill_factory.h" />
     <ClInclude Include="skill_type.h" />
+    <ClInclude Include="submarine.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="txt_texture_manager.h" />

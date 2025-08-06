@@ -8,7 +8,7 @@ Ship* ShipFactory::creat_ship(ShipType type,Board* board)
 	if (board == nullptr)
 		return nullptr;
 
-	Ship* new_ship = new Ship;
+	Ship* new_ship = nullptr;
 
 	switch (type)
 	{

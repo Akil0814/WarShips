@@ -18,6 +18,8 @@ public:
 					int size,int hp,int datk_time,int defense_time,
 					SkillType skill1 = SkillType::NONE,int time_1=0,SkillType skill2 = SkillType::NONE, int time_2 = 0);
 
+	void init_pos(SDL_Point first_pos);
+
 	void on_update(double delta);
 	void on_render(SDL_Renderer* renderer);
 	void on_input(const SDL_Event& event);
