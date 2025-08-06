@@ -20,6 +20,9 @@ enum class ResID
 //--------------------------ÒôĞ§×ÊÔ´------------------------------//
 	Sound_Coin,
 	Sound_Click,
+	Sound_Click_Up,
+	Sound_Click_Down,
+	Sound_Metal,
 	Sound_Error,
 	Sound_Put_In_Water,
 	Sound_Entering_Water,

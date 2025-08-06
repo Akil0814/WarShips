@@ -3,6 +3,8 @@ enum class SkillType
 {
 	NONE,
 
+	Missile,
+
 	Detect_3x3,
 	Detect_13C,
 

@@ -124,6 +124,10 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	sound_pool[ResID::Sound_Fire_3] = Mix_LoadWAV("res/Sound/fire_4.wav");
 
 	sound_pool[ResID::Sound_Click] = Mix_LoadWAV("res/Sound/click.wav");
+	sound_pool[ResID::Sound_Click_Up] = Mix_LoadWAV("res/Sound/click_up.wav");
+	sound_pool[ResID::Sound_Click_Down] = Mix_LoadWAV("res/Sound/click_down.wav");
+	sound_pool[ResID::Sound_Metal] = Mix_LoadWAV("res/Sound/metal.wav");
+
 	sound_pool[ResID::Sound_Coin] = Mix_LoadWAV("res/Sound/coin.wav");
 	sound_pool[ResID::Sound_Error] = Mix_LoadWAV("res/Sound/error.wav");
 	sound_pool[ResID::Sound_Entering_Water] = Mix_LoadWAV("res/Sound/entering_water.wav");

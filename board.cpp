@@ -38,36 +38,42 @@ void Board::on_update(double delta)
 {
     EffectManager::instance()->on_update(delta);//¾ÖÄÚ
 
-    if (find_target)
-    {
-        std::cout << "board find target" << std::endl;
-        find_target = false;
+    if (!find_target)
+        return;
+    find_target = false;
 
-        if (board[index_y][index_x].has_ship())
-            EffectManager::instance()->show_effect(EffectID::Explosion1, rect_explosion_target, 0, [this]()
-                {
-                    on_animation = false;
-                    board[index_y][index_x].change_status(Tile::Status::Hit);
-                    finish_hit = true;
-                });
-        else
-            EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0,[this]()
-                {
-                    on_animation = false;
-                    board[index_y][index_x].change_status(Tile::Status::Miss);
-                    finish_hit = true;
-                });
+    switch (current_skill)
+    {
+    case SkillType::NONE:
+        break;
+    case SkillType::Missile:
+        break;
+    case SkillType::Detect_3x3:
+        break;
+    case SkillType::Detect_13C:
+        break;
+    case SkillType::Attack_3L:
+        break;
+    case SkillType::Attack_5L:
+        break;
+    case SkillType::Attack_5C:
+        break;
+    case SkillType::Attack_3x3:
+        break;
+    case SkillType::Repair:
+        break;
+    case SkillType::Invisible:
+        break;
+    default:
+        break;
     }
 }
 
-void Board::on_input(const SDL_Event& event)
+void Board::on_input(const SDL_Event& event, SkillType type)
 {
     on_mouse_move(event);
-
-    if (on_animation) 
-        return;
-
     on_mouse_click(event);
+    current_skill = type;
 }
 
 void Board::set_size(int r, int c)
@@ -120,9 +126,9 @@ void Board::on_mouse_click(const SDL_Event& event)
             board_render_y + y * SIZE_TILE + SIZE_TILE / 2
         };
 
-        auto status = board[y][x].get_status();
+        Tile::Status status = board[y][x].get_status();
 
-        if (status == Tile::Status::Unknown)
+        if (status == Tile::Status::Unknown|| status == Tile::Status::Defend|| status == Tile::Status::Detected)
         {
             rect_select_target = {
                 board_render_x + x * SIZE_TILE - 20,
@@ -321,7 +327,7 @@ void Board::reset_hit_time()
 
 void Board::draw_cover(SDL_Renderer* renderer)
 {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 54);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 100);
     SDL_Rect rect = { board_render_x,board_render_y,SIZE_TILE * col ,SIZE_TILE * row };
     SDL_RenderFillRect(renderer, &rect);
 }
@@ -371,4 +377,9 @@ void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int sh
 void Board::reset_board()
 {
     board.assign(row, std::vector<Tile>(col));
+}
+
+bool Board::is_on_animation()
+{
+    return on_animation;
 }

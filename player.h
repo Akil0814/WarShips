@@ -19,7 +19,7 @@ public:
 	void on_update(double delta);
 	void on_update(double delta, bool setup);
 
-	void on_input(const SDL_Event& event);
+	void take_hit(const SDL_Event& event, SkillType type);
 	void on_input(const SDL_Event& event, bool setup);
 
 	void add_ship(Ship* new_ship);
