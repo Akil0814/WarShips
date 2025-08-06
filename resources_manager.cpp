@@ -33,6 +33,9 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	texture_pool[ResID::Tex_Num_9] = IMG_LoadTexture(renderer, "res/Num/num9.png");
 
 	texture_pool[ResID::Tex_Coin] = IMG_LoadTexture(renderer, "res/UI/coin.png");
+	texture_pool[ResID::Tex_Atk_Time] = IMG_LoadTexture(renderer, "res/UI/fire_time.png");
+	texture_pool[ResID::Tex_Range] = IMG_LoadTexture(renderer, "res/UI/range.png");
+	texture_pool[ResID::Tex_Bombs] = IMG_LoadTexture(renderer, "res/UI/bombs.png");
 
 
 	texture_pool[ResID::Tex_SetTarget] = IMG_LoadTexture(renderer, "res/set_target.png");

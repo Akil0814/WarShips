@@ -36,7 +36,6 @@ void Board::on_render(SDL_Renderer* renderer)
 
 void Board::on_update(double delta)
 {
-    std::cout << find_target;
     EffectManager::instance()->on_update(delta);//¾ÖÄÚ
 
     if (find_target)

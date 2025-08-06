@@ -50,7 +50,11 @@ enum class ResID
 	Tex_Num_7,
 	Tex_Num_8,
 	Tex_Num_9,
+
 	Tex_Coin,
+	Tex_Atk_Time,
+	Tex_Range,
+	Tex_Bombs,
 
 	Tex_SetTarget,
 	Tex_Hand,
@@ -74,7 +78,7 @@ enum class ResID
 	Tex_Ship_AircraftCarrier,//航母
 	Tex_Ship_LightCarrier,//轻航
 	Tex_Ship_Submarine,//潜艇
-	Tex_Ship_RepairShip,
+	Tex_Ship_RepairShip,//维修
 
 ////--------------动画特效类资源----------------////
 	//特殊宝具动画

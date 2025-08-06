@@ -28,8 +28,7 @@ public:
 
 	bool spend_coin(int cost);
 	int get_coin();
-
-	bool finish_round();
+	int get_atk_time();
 
 	void draw_cover(SDL_Renderer* renderer);
 	void set_board_pos(SDL_Point pos);
@@ -44,7 +43,7 @@ private:
 
 	Ship* current_ship = nullptr;
 
-	int atk_time_each_round = 0;
+	int atk_time = 0;
 	std::vector<Ship*> ship_list;
 	Board board;
 };

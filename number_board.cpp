@@ -18,6 +18,7 @@ void NumberBoard::on_update(double delta)
 
 void NumberBoard::set_number(int val)
 {
+	number = val;
 	digits.clear();
 	digit_rect.clear();
 
@@ -64,6 +65,11 @@ bool NumberBoard::init_texture(std::initializer_list<SDL_Texture*> textures)
 	}
 
 	return true;
+}
+
+int NumberBoard::get_number_on_board()
+{
+	return number;
 }
 
 

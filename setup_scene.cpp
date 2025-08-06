@@ -126,6 +126,8 @@ void SetupScene::on_enter()
 void SetupScene::on_exit()
 {
 	Mix_HaltMusic();
+	p1->finish_setting();
+	p2->finish_setting();
 }
 
 void SetupScene::on_update(double delta)
@@ -144,24 +146,30 @@ void SetupScene::on_render(SDL_Renderer* renderer)
 	else
 		start_button.on_render(renderer);
 
-	current_player->on_render(renderer, true);
 	reset_button.on_render(renderer);
 	if(current_player==p1)
 		SDL_RenderCopy(renderer, text_player1,nullptr, &player_txt);
 	else
 		SDL_RenderCopy(renderer, text_player2, nullptr, &player_txt);
 
+	SDL_RenderCopy(renderer, text_shop, nullptr, &shop_txt);
+	SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Coin), nullptr, &coin_tex);
+
 	for (auto& iter : shop_item_list)
 		iter->on_render(renderer);
 
+	current_player->on_render(renderer, true);
+
 	for (auto& iter : shop_item_list)
 	{
+		static SDL_Rect test = { 50,30,525,600 };
 		if (iter->get_status() == Button::Status::Hovered)
 		{
 			switch (current_view_ship)
 			{
 			case ShipType::Destroyer:
-
+				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Test_Ship_detel), 210);
+				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Test_Ship_detel), nullptr, &test);
 				break;
 			case ShipType::LightCruiser:
 
@@ -196,14 +204,9 @@ void SetupScene::on_render(SDL_Renderer* renderer)
 			default:
 				break;
 			}
-			SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Test_Ship_detel), 210);
-			static SDL_Rect test = { 50,30,525,600 };
-			SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Test_Ship_detel), nullptr, &test);
+
 		}
 	}
-
-	SDL_RenderCopy(renderer, text_shop, nullptr, &shop_txt);
-	SDL_RenderCopy(renderer,ResourcesManager::instance()->get_texture(ResID::Tex_Coin), nullptr, &coin_tex);
 
 	draw_rect(renderer);
 
@@ -225,8 +228,8 @@ void SetupScene::on_input(const SDL_Event& event)
 
 void SetupScene::draw_rect(SDL_Renderer* renderer)
 {
-	SDL_RenderDrawLine(renderer, 650, 360, 1250, 360);//market
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderDrawLine(renderer, 650, 360, 1250, 360);//market
 	SDL_RenderDrawRect(renderer, &side_rect);
 }
 

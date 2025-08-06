@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-	board.set_board_pos({30, 50});
+	board.set_board_pos({30, 30});
 }
 
 Player::~Player()
@@ -77,16 +77,6 @@ void Player::set_board_pos(SDL_Point pos)
 	board.set_board_pos(pos);
 }
 
-bool Player::finish_round()
-{
-	if (board.finish_hit_time())
-	{
-		board.reset_hit_time();
-		return true;
-	}
-	return false;
-}
-
 void Player::draw_cover(SDL_Renderer* renderer)
 {
 	board.draw_cover(renderer);
@@ -115,9 +105,18 @@ Board* Player::get_board()
 
 void Player::finish_setting()
 {
-	auto it = std::remove_if(ship_list.begin(), ship_list.end(),
-		[](auto& e) { return !e->is_in_board(); });
-	ship_list.erase(it, ship_list.end());
+	for (auto it = ship_list.begin(); it != ship_list.end(); )
+	{
+		if (!(*it)->is_in_board())
+		{
+			delete* it;
+			it = ship_list.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
 }
 
 void Player::reset()
@@ -127,16 +126,28 @@ void Player::reset()
 	have_ship_in_move = false;
 	current_ship = nullptr;
 
-	for (auto iter : ship_list)
+	for (auto& iter : ship_list)
 	{
 		delete iter;
 	}
+
 	ship_list.clear();
 }
 
 int Player::get_coin()
 {
 	return coin_have;
+}
+
+int Player::get_atk_time()
+{
+	atk_time = 0;
+	for (auto& ship : ship_list)
+	{
+		atk_time+=ship->get_atk_time();
+	}
+
+	return atk_time;
 }
 
 
