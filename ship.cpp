@@ -1,11 +1,10 @@
 #include"ship.h"
 #include<iostream>
 
-void Ship::init_ship(SDL_Texture* texture, SDL_Point first_pos, Board* board,
+void Ship::init_ship(SDL_Texture* texture,
 					int size, int hp, int atk_time, int defense_time, SkillType skill1,int time_1, SkillType skill2,int time_2)
 {
 	ship_texture = texture;
-	player_board = board;
 
 	ship_size = size;
 	render_rect.h = SIZE_TILE, render_rect.w = SIZE_TILE * size;
@@ -18,6 +17,11 @@ void Ship::init_ship(SDL_Texture* texture, SDL_Point first_pos, Board* board,
 	skill1_time = time_1;
 	this->skill_2 = skill2;
 	skill2_time = time_2;
+}
+
+void Ship::set_board_in(Board* board)
+{
+	player_board = board;
 }
 
 void Ship::on_update(double delta)
