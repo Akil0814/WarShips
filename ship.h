@@ -14,11 +14,10 @@ public:
 	Ship()=default;
 	~Ship() = default;
 
-	void init_ship(SDL_Texture* texture,SDL_Point first_pos,Board* board,
-					int size,int hp,int datk_time,int defense_time,
-					SkillType skill1 = SkillType::NONE,int time_1=0,SkillType skill2 = SkillType::NONE, int time_2 = 0);
-
+	
 	void init_pos(SDL_Point first_pos);
+	void set_position(const SDL_Point& pos);
+	void set_board_in(Board* board);
 
 	void on_update(double delta);
 	void on_render(SDL_Renderer* renderer);
@@ -36,8 +35,13 @@ public:
 	bool check_motion()const;
 
 
-private:
-	void set_position(const SDL_Point& pos);
+
+protected:
+
+	void init_ship(SDL_Texture* texture,
+		int size, int hp, int datk_time, int defense_time,
+		SkillType skill1 = SkillType::NONE, int time_1 = 0, SkillType skill2 = SkillType::NONE, int time_2 = 0);
+
 	bool check_cursor_hit(int x, int y)const;
 	void update_rect();
 	void rotate_ship();
