@@ -1,12 +1,8 @@
 #include"setting_scene.h"
 
-SettingScene::SettingScene()
-{
-}
+SettingScene::SettingScene() = default;
 
-SettingScene::~SettingScene()
-{
-}
+SettingScene::~SettingScene() = default;
 
 void SettingScene::on_enter()
 {
