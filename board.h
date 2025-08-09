@@ -5,7 +5,6 @@
 
 #include"ship.h"
 
-#include"skill_type.h"
 #include"tile.h"
 #include"bullet.h"
 #include"animation.h"
@@ -22,7 +21,7 @@ public:
 
 	void on_render(SDL_Renderer* renderer);
 	void on_update(double delta);
-	void on_input(const SDL_Event& event, SkillType type);
+	void on_input(const SDL_Event& event);
 
 
 	void set_size(int row, int col);
@@ -44,8 +43,6 @@ public:
 
 	void draw_cover(SDL_Renderer* renderer);
 	void reset_board();
-	bool is_on_animation();
-
 
 private:
 
@@ -72,7 +69,6 @@ private:
 	int col = 20;
 
 	TileBoard board;
-	SkillType current_skill = SkillType::NONE;
 
 	SDL_Point mouse_pos = {0};
 	SDL_Point mouse_click_tile_center = {0};

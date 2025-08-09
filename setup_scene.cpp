@@ -3,13 +3,13 @@
 SetupScene::SetupScene()
 	:next_button({ 30,650,80,40 }, { 35,655,70,30 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "NEXT"),
-		ResourcesManager::instance()->get_sound(ResID::Sound_Click_Down), ResourcesManager::instance()->get_sound(ResID::Sound_Click_Up)),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr),
 	start_button({ 30,650,80,40 }, { 35,655,70,30 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "START"),
-		ResourcesManager::instance()->get_sound(ResID::Sound_Click_Down), ResourcesManager::instance()->get_sound(ResID::Sound_Click_Up)),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr),
 	reset_button({ 500,650,80,40 }, { 505,655,70,30 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "Reset"),
-		ResourcesManager::instance()->get_sound(ResID::Sound_Click_Down), ResourcesManager::instance()->get_sound(ResID::Sound_Click_Up)),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr),
 
 	get_LightCruiser({ 665, 415, 120,  40 },{ 665, 415, 120,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_LightCruiser),nullptr, nullptr),
 	get_HeavyCruiser({ 665, 475, 120,  40 },{ 665, 475, 120,  40 }, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_HeavyCruiser),nullptr, nullptr),
@@ -54,7 +54,10 @@ SetupScene::SetupScene()
 
 }
 
-SetupScene::~SetupScene() = default;
+SetupScene::~SetupScene()
+{
+
+}
 
 void SetupScene::on_enter()
 {

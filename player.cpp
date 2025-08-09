@@ -42,9 +42,9 @@ void Player::on_update(double delta, bool setup)
 }
 
 
-void Player::take_hit(const SDL_Event& event,SkillType type)
+void Player::on_input(const SDL_Event& event)
 {
-	board.on_input(event,type);
+	board.on_input(event);
 }
 
 void Player::on_input(const SDL_Event& event,bool setup)
