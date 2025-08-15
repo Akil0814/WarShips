@@ -16,46 +16,46 @@ Ship* ShipFactory::creat_ship(ShipType type,Board* board)
 		new_ship=new Destroyer;
 
 		break;
-	//case ShipType::LightCruiser:
-	//	new_ship->init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_LightCruiser), ship_pos, board,
-	//		3, 2, 1,0);
-	//	break;
-	//case ShipType::HeavyCruiser:
-	//	new_ship->init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_HeavyCruiser), ship_pos, board,
-	//		3, 3, 1, 0);
-	//	break;
-	//case ShipType::SuperCruiser:
-	//	new_ship->init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_SuperCruiser), ship_pos, board,
-	//		3, 3, 3, 1,SkillType::Attack_3L, 1);
-	//	break;
-	//case ShipType::BattleCruiser:
-	//	new_ship->init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_BattleCruiser), ship_pos, board,
-	//		4, 4, 3, 1,SkillType::Attack_3L,1);
-	//	break;
-	//case ShipType::Battleship:
-	//	new_ship->init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Battleship), ship_pos, board,
-	//		4, 4, 4, 2, SkillType::Attack_5L,1);
-	//	break;
-	//case ShipType::AviationBattleship:
-	//	new_ship->init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_AviationBattleship), ship_pos, board,
-	//		5, 5, 4, 0,SkillType::Attack_5C,1, SkillType::Detect_3x3,2);
-	//	break;
-	//case ShipType::AircraftCarrier:
-	//	new_ship->init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_AircraftCarrier), ship_pos, board,
-	//		5, 5, 3, 0,SkillType::Attack_3x3,1,SkillType::Detect_13C,3);
-	//	break;
-	//case ShipType::LightCarrier:
-	//	new_ship->init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_LightCarrier), ship_pos, board,
-	//		5, 4, 2, 0, SkillType::Attack_5C,1, SkillType::Detect_3x3,3);
-	//	break;
-	//case ShipType::Submarine:
-	//	new_ship->init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Submarine), ship_pos, board, 
-	//		3, 3, 1, 0,SkillType::Invisible);
-	//	break;
-	//case ShipType::RepairShip:
-	//	new_ship->init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_RepairShip), ship_pos, board, 
-	//		3, 3, 0, 0,SkillType::Repair,7);
-	//	break;
+	case ShipType::LightCruiser:
+		new_ship = new LightCruiser;
+
+		break;
+	case ShipType::HeavyCruiser:
+		new_ship = new HeavyCruiser;
+
+		break;
+	case ShipType::SuperCruiser:
+		new_ship = new SuperCruiser;
+
+		break;
+	case ShipType::BattleCruiser:
+		new_ship = new BattleCruiser;
+
+		break;
+	case ShipType::Battleship:
+		new_ship = new Battleship;
+
+		break;
+	case ShipType::AviationBattleship:
+		new_ship = new AviationBattleship;
+
+		break;
+	case ShipType::AircraftCarrier:
+		new_ship = new AircraftCarrier;
+
+		break;
+	case ShipType::LightCarrier:
+		new_ship = new LightCarrier;
+
+		break;
+	case ShipType::Submarine:
+		new_ship = new Submarine;
+
+		break;
+	case ShipType::RepairShip:
+		new_ship = new RepairShip;
+
+		break;
 	default:
 		break;
 	}

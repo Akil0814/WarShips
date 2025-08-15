@@ -69,7 +69,7 @@
     <ClInclude Include="game_manager.h" />
     <ClInclude Include="heavy_cruiser.h" />
     <ClInclude Include="light_carrier.h" />
-    <ClInclude Include="l\light_cruiser.h" />
+    <ClInclude Include="light_cruiser.h" />
     <ClInclude Include="manager.h" />
     <ClInclude Include="menu_scene.h" />
     <ClInclude Include="number_board.h" />

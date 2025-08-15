@@ -14,7 +14,7 @@ Scene* ScenePool::get_scene(SceneType type)
 
 	case SceneType::Setting:
 		if (cheek_invalid(setting_scene))
-			setting_scene = new SettingScene;
+			//setting_scene = new SettingScene;
 		return setting_scene;
 		break;
 

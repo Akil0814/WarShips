@@ -2,7 +2,20 @@
 #include<SDL.h>
 #include"ship.h"
 #include"ship_type.h"
+
 #include"destroyer.h"
+#include"light_cruiser.h"
+#include"heavy_cruiser.h"
+#include"super_cruiser.h"
+#include"battle_cruiser.h"
+#include"battleship.h"
+#include"aviation_battleship.h"
+#include"aircraft_carrier.h"
+#include"light_carrier.h"
+#include"submarine.h"
+#include"repair_ship.h"
+
+
 #include"board.h"
 
 class Board;

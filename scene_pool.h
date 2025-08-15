@@ -5,7 +5,7 @@
 #include "menu_scene.h"
 #include "setup_scene.h"
 #include "game_scene.h"
-#include "setting_scene.h"
+//#include "setting_scene.h"
 #include "settlement_scene.h"
 
 

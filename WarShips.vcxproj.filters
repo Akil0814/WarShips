@@ -235,9 +235,6 @@
     <ClInclude Include="heavy_cruiser.h">
       <Filter>Ship\Type</Filter>
     </ClInclude>
-    <ClInclude Include="l\light_cruiser.h">
-      <Filter>Ship\Type</Filter>
-    </ClInclude>
     <ClInclude Include="battle_cruiser.h">
       <Filter>Ship\Type</Filter>
     </ClInclude>
@@ -254,6 +251,9 @@
       <Filter>Ship\Type</Filter>
     </ClInclude>
     <ClInclude Include="repair_ship.h">
+      <Filter>Ship\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="light_cruiser.h">
       <Filter>Ship\Type</Filter>
     </ClInclude>
   </ItemGroup>
