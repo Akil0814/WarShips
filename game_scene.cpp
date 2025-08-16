@@ -78,9 +78,9 @@ void GameScene::on_enter()
 				next_player_turn();
 		});
 
-
 	Mix_FadeInMusic(ResourcesManager::instance()->get_music(ResID::Music_In_Game), -1,3000);
 }
+
 void GameScene::on_exit()
 {
 	Mix_HaltMusic();
@@ -89,15 +89,16 @@ void GameScene::on_exit()
 void GameScene::on_update(double delta)
 {
 	next_player_button.on_update(delta);
-	current_player->on_update(delta);
+	get_other_player()->on_update(delta);
 }
+
 void GameScene::on_render(SDL_Renderer* renderer)
 {
 	next_player_button.on_render(renderer);
-	
+
 	current_player->on_render(renderer);
+	current_player->draw_cover(renderer);
 	get_other_player()->on_render(renderer);
-	get_other_player()->draw_cover(renderer);
 
 	for (auto& iter : skill_button_list)
 		iter->on_render(renderer);
@@ -105,12 +106,22 @@ void GameScene::on_render(SDL_Renderer* renderer)
 	for (auto& iter : skill_num_board_list)
 		iter->on_render(renderer);
 
+	if (current_player == p1)
+	{
+		SDL_RenderCopy(renderer, text_player1, nullptr, &player1_text_rect);
+	}
+	else
+	{
+		SDL_RenderCopy(renderer, text_player2, nullptr, &player2_text_rect);
+	}
+
 	SDL_SetRenderDrawColor(renderer, back_ground_color.r, back_ground_color.g, back_ground_color.b, back_ground_color.a);
 }
+
 void GameScene::on_input(const SDL_Event& event)
 {
 	if(missile_num!=0)
-		current_player->on_input(event);
+		get_other_player()->on_input(event);
 
 	next_player_button.on_input(event);
 

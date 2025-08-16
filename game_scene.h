@@ -24,7 +24,6 @@ private:
 
 
 	Button missile_button;
-
 	
 	SkillType current_skill_type = SkillType::NONE;
 	Button* current_button;
@@ -34,12 +33,16 @@ private:
 
 private:
 
+
 	Player* p1 = nullptr;
 	Player* p2 = nullptr;
 	Player* current_player = nullptr;
 
 	SDL_Texture* text_player1 = nullptr;
 	SDL_Texture* text_player2 = nullptr;
+
+	SDL_Rect player1_text_rect = { 180,300,300,80 };
+	SDL_Rect player2_text_rect = { 800,300,300,80 };
 
 	Button next_player_button;
 

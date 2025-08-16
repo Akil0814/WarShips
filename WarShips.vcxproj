@@ -25,6 +25,7 @@
     <ClCompile Include="battleship.h" />
     <ClCompile Include="board.cpp" />
     <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="bullet_manager.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effect_manager.cpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="battle_cruiser.h" />
     <ClInclude Include="board.h" />
     <ClInclude Include="bullet.h" />
+    <ClInclude Include="bullet_manager.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="destroyer.h" />
     <ClInclude Include="effect.h" />

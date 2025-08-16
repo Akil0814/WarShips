@@ -146,6 +146,9 @@
     <ClCompile Include="battleship.h">
       <Filter>Ship\Type</Filter>
     </ClCompile>
+    <ClCompile Include="bullet_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu_scene.h">
@@ -255,6 +258,9 @@
     </ClInclude>
     <ClInclude Include="light_cruiser.h">
       <Filter>Ship\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet_manager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -70,6 +70,8 @@ private:
 
 	TileBoard board;
 
+	Bullet* missile=nullptr;
+
 	SDL_Point mouse_pos = {0};
 	SDL_Point mouse_click_tile_center = {0};
 
