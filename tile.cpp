@@ -26,14 +26,19 @@ void Tile::move_ship()
     ship_on_tile = nullptr;
 }
 
-void Tile::mark_miss()
+void Tile::take_hit()
 {
-    if (status == Status::Unknown)
-        status = Status::Miss;
-}
+    if (status == Status::Hit)//同一个目标位置不会反复受到打击
+        return;
 
-void Tile::mark_hit()
-{
-    if (status == Status::Unknown && have_ship)
+    if (ship_on_tile == nullptr);
+    return;
+
+    if (ship_on_tile->can_defense()&& status != Status::Defend)//每一个目标位置只能防御一次
+        status = Status::Defend;
+    else
         status = Status::Hit;
+
+    ship_on_tile->take_damage();
+
 }

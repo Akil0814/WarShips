@@ -24,7 +24,7 @@ void EffectManager::on_render(SDL_Renderer* renderer)
 }
 
 //以渲染矩形的方式渲染
-void EffectManager::show_effect(EffectID effect_type, const SDL_Rect& rect, double angle)
+void EffectManager::show_effect(EffectID effect_type, const SDL_Rect rect, double angle)
 {
 	auto effect_prototype = effect_pool.find(effect_type);
 
@@ -40,7 +40,7 @@ void EffectManager::show_effect(EffectID effect_type, const SDL_Rect& rect, doub
 }
 
 //以渲染目标点的方式渲染
-void EffectManager::show_effect(EffectID effect_type, const SDL_Point& pos, double angle)
+void EffectManager::show_effect(EffectID effect_type, const SDL_Point pos, double angle)
 {
 	auto effect_prototype = effect_pool.find(effect_type);
 
@@ -56,7 +56,7 @@ void EffectManager::show_effect(EffectID effect_type, const SDL_Point& pos, doub
 }
 
 //给在不同场景 调用的相同特效 设置不同回调
-void EffectManager::show_effect(EffectID effect_type,const SDL_Rect& rect, double angle,std::function<void()> finished)
+void EffectManager::show_effect(EffectID effect_type,const SDL_Rect rect, double angle,std::function<void()> finished)
 {
 	auto effect_prototype = effect_pool.find(effect_type);
 
@@ -73,7 +73,7 @@ void EffectManager::show_effect(EffectID effect_type,const SDL_Rect& rect, doubl
 }
 
 //给在不同场景 调用的相同特效 设置不同回调
-void EffectManager::show_effect(EffectID effect_type, const SDL_Point& pos, double angle, std::function<void()> finished)
+void EffectManager::show_effect(EffectID effect_type, const SDL_Point pos, double angle, std::function<void()> finished)
 {
 	auto effect_prototype = effect_pool.find(effect_type);
 

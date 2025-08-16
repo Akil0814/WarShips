@@ -20,15 +20,11 @@ public:
 
     void move_ship();
 
-    void mark_miss();
-
-    void mark_hit();
+    void take_hit();
 
 private:
 
     Status status = Status::Unknown;
 
     Ship* ship_on_tile = nullptr;
-
-    bool   have_ship = false;
 };

@@ -54,6 +54,7 @@ public:
 	void reset_on_holed();
 
 	int get_time_on_click()const;
+
 	Status get_status()const;
 	bool check_on_holed()const;
 

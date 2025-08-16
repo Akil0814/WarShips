@@ -29,7 +29,6 @@ void Player::on_render(SDL_Renderer* renderer,bool setup)
 		current_ship->on_render(renderer);
 }
 
-
 void Player::on_update(double delta)
 {
 	board.on_update(delta);//局内
@@ -40,7 +39,6 @@ void Player::on_update(double delta, bool setup)
 	for (auto& ship : ship_list)
 		ship->on_update(delta);
 }
-
 
 void Player::on_input(const SDL_Event& event)
 {
@@ -88,7 +86,6 @@ void Player::add_ship(Ship* new_ship)
 		ship_list.push_back(new_ship);
 }
 
-
 bool Player::spend_coin(int cost)
 {
 	if (cost > coin_have)
@@ -105,7 +102,7 @@ Board* Player::get_board()
 
 void Player::finish_setting()
 {
-	for (auto it = ship_list.begin(); it != ship_list.end(); )
+	for (auto it = ship_list.begin(); it != ship_list.end(); )//删除不在棋盘上的船
 	{
 		if (!(*it)->is_in_board())
 		{
@@ -150,6 +147,18 @@ int Player::get_atk_time()
 	return atk_time;
 }
 
-
-
-
+void Player::check_remaining_ship()
+{
+	for (auto it = ship_list.begin(); it != ship_list.end(); )
+	{
+		if ((*it)->is_sink())
+		{
+			delete* it;
+			it = ship_list.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+}

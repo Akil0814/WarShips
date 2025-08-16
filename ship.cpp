@@ -178,6 +178,12 @@ void Ship::take_damage()
 		sink = true;
 }
 
+bool Ship::can_defense()
+{
+	return defense_time;
+}
+
+
 bool Ship::is_sink()const
 {
 	return sink;
@@ -203,9 +209,8 @@ bool Ship::check_motion()const
 	return ship_in_move;
 }
 
-void Ship::init_pos(SDL_Point first_pos)
+void Ship::init_pos(SDL_Point& first_pos)
 {
 	last_position = first_pos;
 	set_position(first_pos);
-
 }

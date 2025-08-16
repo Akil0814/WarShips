@@ -35,6 +35,7 @@ public:
 	bool check_available(int x,int y, int ship_size, bool is_horizontal);
 	bool finish_hit_time()const;
 	void reset_hit_time();
+	bool is_on_animation();
 
 	static SDL_Texture* tile_hit;
 	static SDL_Texture* tile_miss;
@@ -51,7 +52,6 @@ private:
 	void on_mouse_move(const SDL_Event& e);
 
 private:
-	bool on_animation = false;
 
 	bool move_in_board = false;
 	bool click_in_board = false;

@@ -1,6 +1,7 @@
 #include "board.h"
 #include <cmath>
 
+//特效rect需要多个 加入队列管理
 
 SDL_Texture* Board::tile_hit = nullptr;
 SDL_Texture* Board::tile_miss = nullptr;
@@ -44,43 +45,42 @@ void Board::on_update(double delta)
         find_target = false;
 
         if (board[index_y][index_x].has_ship())
+        {
+            rect_explosion_target = {
+            board_render_x + index_x * SIZE_TILE - 20,
+            board_render_y + index_y * SIZE_TILE - 40,
+            SIZE_TILE + 40, SIZE_TILE + 40 };
+
             EffectManager::instance()->show_effect(EffectID::Explosion1, rect_explosion_target, 0, [this]()
-                {
-                    on_animation = false;
-                    board[index_y][index_x].change_status(Tile::Status::Hit);
-                    finish_hit = true;
-                });
+            {
+                board[index_y][index_x].take_hit();
+                finish_hit = true;
+            });
+        }
+
         else
-            EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0,[this]()
+        {
+            rect_water_splash = {
+            board_render_x + index_x * SIZE_TILE - 20,
+            board_render_y + index_y * SIZE_TILE,
+            SIZE_TILE + 40, SIZE_TILE
+            };
+            EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0, [this]()
                 {
-                    on_animation = false;
                     board[index_y][index_x].change_status(Tile::Status::Miss);
                     finish_hit = true;
                 });
+        }
     }
 }
 
 void Board::on_input(const SDL_Event& event)
 {
     on_mouse_move(event);
-
-    if (on_animation) 
-        return;
-
     on_mouse_click(event);
 }
 
-void Board::set_size(int r, int c)
-{
-    row = r; col = c;
-    board.assign(row, std::vector<Tile>(col));
-}
 
-void Board::set_board_pos(SDL_Point pt)
-{
-    board_render_x = pt.x;
-    board_render_y = pt.y;
-}
 
 void Board::on_mouse_move(const SDL_Event& event)
 {
@@ -107,46 +107,31 @@ void Board::on_mouse_click(const SDL_Event& event)
     if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
     {
         int x = (event.button.x - board_render_x) / SIZE_TILE;
-        int y = (event.button.y - board_render_y) / SIZE_TILE;
+        int y = (event.button.y - board_render_y) / SIZE_TILE;//计算位置
 
         if (x < 0 || x >= col || y < 0 || y >= row)
             return;
 
         index_x = x;
         index_y = y;
+
         mouse_click_tile_center =
         {
             board_render_x + x * SIZE_TILE + SIZE_TILE / 2,
             board_render_y + y * SIZE_TILE + SIZE_TILE / 2
         };
 
-        auto status = board[y][x].get_status();
+        rect_select_target = {
+            board_render_x + x * SIZE_TILE - 20,
+            board_render_y + y * SIZE_TILE - 20,
+            SIZE_TILE + 40, SIZE_TILE + 40
+        };
 
-        if (status == Tile::Status::Unknown)
-        {
-            rect_select_target = {
-                board_render_x + x * SIZE_TILE - 20,
-                board_render_y + y * SIZE_TILE - 20,
-                SIZE_TILE + 40, SIZE_TILE + 40
-            };
-            rect_water_splash = {
-                board_render_x + x * SIZE_TILE - 20,
-                board_render_y + y * SIZE_TILE,
-                SIZE_TILE + 40, SIZE_TILE
-            };
-            rect_explosion_target = {
-                board_render_x + x * SIZE_TILE - 20,
-                board_render_y + y * SIZE_TILE - 40,
-                SIZE_TILE + 40, SIZE_TILE + 40
-            };
 
-            EffectManager::instance()->show_effect(EffectID::SelectTarget, rect_select_target, 0, [this]()
-                {
-                    this->find_target = true;
-                });
-
-            on_animation = true;
-        }
+        EffectManager::instance()->show_effect(EffectID::SelectTarget, rect_select_target, 0, [this]()
+            {
+                this->find_target = true;
+            });
     }
 }
 
@@ -293,39 +278,6 @@ bool Board::check_available(int x,int y, int ship_size, bool is_horizontal)
     return true;
 }
 
-void Board::show_board()
-{
-    for (int y = 0; y < row; ++y)
-    {
-        for (int x = 0; x < col; ++x)
-        {
-            if (board[y][x].has_ship())
-                std::cout << " 1";
-            else
-                std::cout << " 0";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
-}
-
-bool Board::finish_hit_time()const
-{
-    return finish_hit;
-}
-
-void Board::reset_hit_time()
-{
-    finish_hit = false;
-}
-
-void Board::draw_cover(SDL_Renderer* renderer)
-{
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 54);
-    SDL_Rect rect = { board_render_x,board_render_y,SIZE_TILE * col ,SIZE_TILE * row };
-    SDL_RenderFillRect(renderer, &rect);
-}
-
 void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int ship_size, bool is_horizontal)
 {
     SDL_Point grid_pos = { 0 };
@@ -371,4 +323,49 @@ void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int sh
 void Board::reset_board()
 {
     board.assign(row, std::vector<Tile>(col));
+}
+
+void Board::set_size(int r, int c)
+{
+    row = r; col = c;
+    board.assign(row, std::vector<Tile>(col));
+}
+
+void Board::set_board_pos(SDL_Point pt)
+{
+    board_render_x = pt.x;
+    board_render_y = pt.y;
+}
+
+bool Board::finish_hit_time()const
+{
+    return finish_hit;
+}
+
+void Board::reset_hit_time()
+{
+    finish_hit = false;
+}
+
+void Board::draw_cover(SDL_Renderer* renderer)
+{
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 54);
+    SDL_Rect rect = { board_render_x,board_render_y,SIZE_TILE * col ,SIZE_TILE * row };
+    SDL_RenderFillRect(renderer, &rect);
+}
+
+void Board::show_board()
+{
+    for (int y = 0; y < row; ++y)
+    {
+        for (int x = 0; x < col; ++x)
+        {
+            if (board[y][x].has_ship())
+                std::cout << " 1";
+            else
+                std::cout << " 0";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
 }

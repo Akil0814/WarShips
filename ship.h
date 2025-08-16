@@ -15,8 +15,9 @@ public:
 	~Ship() = default;
 
 	
-	void init_pos(SDL_Point first_pos);
+	void init_pos(SDL_Point& first_pos);
 	void set_position(const SDL_Point& pos);
+
 	void set_board_in(Board* board);
 
 	void on_update(double delta);
@@ -29,6 +30,8 @@ public:
 	int get_skill_2_time()const;
 
 	void take_damage();
+	bool can_defense();
+
 	bool is_in_board()const;
 	bool is_sink() const;
 	int get_atk_time() const;

@@ -60,7 +60,7 @@ Ship* ShipFactory::creat_ship(ShipType type,Board* board)
 		break;
 	}
 
-	new_ship->set_position(ship_pos);
+	new_ship->init_pos(ship_pos);
 	new_ship->set_board_in(board);
 	update_pos();
 	return new_ship;
