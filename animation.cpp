@@ -67,7 +67,7 @@ void Animation::on_render(SDL_Renderer* renderer, SDL_Rect& rect, double angle =
 	SDL_RenderCopyEx(renderer,tex,nullptr,&rect,angle,&center,SDL_FLIP_NONE);
 }
 
-void Animation::on_render(SDL_Renderer* renderer, const SDL_Point& pos_dst, double angle) const
+void Animation::on_render(SDL_Renderer* renderer, const SDL_Point& pos_dst, double angle = 0) const
 {
     SDL_Texture* tex = texture_list->get_texture(idx_frame);
     if (!tex) 

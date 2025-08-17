@@ -6,7 +6,7 @@
 #include"ship.h"
 
 #include"tile.h"
-#include"bullet.h"
+#include"bullet_manager.h"
 #include"animation.h"
 #include"resources_manager.h"
 #include"effect_manager.h"
@@ -69,8 +69,6 @@ private:
 	int col = 20;
 
 	TileBoard board;
-
-	Bullet* missile=nullptr;
 
 	SDL_Point mouse_pos = {0};
 	SDL_Point mouse_click_tile_center = {0};

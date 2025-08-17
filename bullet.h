@@ -32,6 +32,6 @@ private:
     double speed = 0.0;             // 速度(px/s)
     bool valid = false;             // 有效标志
     double angle_rot = 0.0;         // 角度(度)
-    int size_x = 78, size_y = 28;   // 子弹纹理尺寸
+    int size_x = 58, size_y = 21;   // 子弹纹理尺寸
 };
 

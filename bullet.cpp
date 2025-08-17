@@ -54,11 +54,14 @@ void Bullet::on_render(SDL_Renderer* renderer) const
 {
     if (valid)
     {
-        SDL_Point pt{
+        SDL_Rect rect{
         static_cast<int>(fx - size_x / 2),
-        static_cast<int>(fy - size_y / 2)
+        static_cast<int>(fy - size_y / 2),
+        size_x,size_y
         };
-        animation.on_render(renderer, pt, angle_rot);
+
+
+        animation.on_render(renderer, rect, angle_rot);
     }
 
 }

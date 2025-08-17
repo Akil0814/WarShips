@@ -18,9 +18,7 @@ void Board::on_render(SDL_Renderer* renderer)
     draw_board(renderer);
 
     EffectManager::instance()->on_render(renderer);
-
-    if(missile!=nullptr)
-        missile->on_render(renderer);////////////////
+    BulletManager::instance()->on_render(renderer);
 
     // 渲染所有格子状态
     for (int y = 0; y < row; ++y) {
@@ -41,9 +39,7 @@ void Board::on_render(SDL_Renderer* renderer)
 void Board::on_update(double delta)
 {
     EffectManager::instance()->on_update(delta);//局内
-
-    if (missile != nullptr)
-        missile->on_update(delta);
+    BulletManager::instance()->on_update(delta);
 
     if (find_target)
     {
@@ -137,9 +133,8 @@ void Board::on_mouse_click(const SDL_Event& event)
         EffectManager::instance()->show_effect(EffectID::SelectTarget, rect_select_target, 0, [this]()
             {
                 this->find_target = true;
-                missile = new Bullet;
-                missile->fire({ 0,0 }, mouse_click_tile_center, 400);
             });
+        BulletManager::instance()->fire({ 0,0 }, mouse_click_tile_center);
     }
 }
 
