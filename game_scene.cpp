@@ -92,9 +92,19 @@ void GameScene::on_update(double delta)
 	next_player_button.on_update(delta);
 	get_other_player()->on_update(delta);
 
+	if (get_other_player()->get_board()->finish_hit_time())
+	{
+		missile_num--;
+		missile_count->set_number(missile_num);
+		get_other_player()->get_board()->reset_hit_time();
+	}
+
 	if (!get_other_player()->have_remaining_ship())
 	{
-		std::cout << "game end" << std::endl;
+		if (!get_other_player()->get_board()->is_on_animation())
+		{
+			GameManager::instance()->switch_scene(SceneType::Settlement);
+		}
 	}
 	
 }

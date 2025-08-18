@@ -1,6 +1,11 @@
 #include "board.h"
 #include <cmath>
 
+/*
+加入bullet类 将特效渲染交给子弹管理器，在fire同时传入目标位置与渲染信息 在子弹到达时渲染特效
+向子弹管理器传入this指针在特效播完时修改棋盘信息
+*/
+
 SDL_Texture* Board::tile_hit = nullptr;
 SDL_Texture* Board::tile_miss = nullptr;
 SDL_Texture* Board::tile_detected = nullptr;
@@ -25,8 +30,6 @@ void Board::on_render(SDL_Renderer* renderer)
 {
     draw_board(renderer);
 
-    EffectManager::instance()->on_render(renderer);
-    BulletManager::instance()->on_render(renderer);
 
     // 渲染所有格子状态
     for (int y = 0; y < row; ++y) {
@@ -64,6 +67,9 @@ void Board::on_render(SDL_Renderer* renderer)
             }
         }
     }
+
+    EffectManager::instance()->on_render(renderer);
+    BulletManager::instance()->on_render(renderer);
 }
 
 void Board::on_update(double delta)
@@ -74,7 +80,7 @@ void Board::on_update(double delta)
 
     if (find_target)
     {
-        //BulletManager::instance()->fire({ 720,500 }, mouse_click_tile_center);
+        BulletManager::instance()->fire({ 720,500 }, mouse_click_tile_center);
 
 
         if (board[index_y][index_x].has_ship())
@@ -131,15 +137,11 @@ void Board::on_mouse_move(const SDL_Event& event)
 
 void Board::on_mouse_click(const SDL_Event& event)
 {
-    //if (!is_inside(event.button.x, event.button.y) || on_animation)
-    if (!is_inside(event.button.x, event.button.y)|| find_target)
+    if (!is_inside(event.button.x, event.button.y)|| set_target)
         return;
-
-
 
     if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
     {
-        on_animation = true;
         int x = (event.button.x - board_render_x) / SIZE_TILE;
         int y = (event.button.y - board_render_y) / SIZE_TILE;//计算位置
 
@@ -148,6 +150,8 @@ void Board::on_mouse_click(const SDL_Event& event)
 
         index_x = x;
         index_y = y;
+
+        set_target = true;
 
         mouse_click_tile_center =
         {
@@ -161,10 +165,13 @@ void Board::on_mouse_click(const SDL_Event& event)
             SIZE_TILE + 40, SIZE_TILE + 40
         };
 
-
+        on_animation = true;
+        start_hit = true;
+        ++total_atk_time;
         EffectManager::instance()->show_effect(EffectID::SelectTarget, rect_select_target, 0, [this]()
             {
-                this->find_target = true;
+                set_target = false;
+                find_target = true;
             });
     }
 }
@@ -396,12 +403,12 @@ void Board::set_board_pos(SDL_Point pt)
 
 bool Board::finish_hit_time()const
 {
-    return finish_hit;
+    return start_hit;
 }
 
 void Board::reset_hit_time()
 {
-    finish_hit = false;
+    start_hit = false;
 }
 
 void Board::draw_cover(SDL_Renderer* renderer)
@@ -445,3 +452,9 @@ bool  Board::is_on_animation()
 {
     return on_animation;
 }
+
+int Board::get_atk_time_on_board()const
+{
+    return total_atk_time;
+}
+

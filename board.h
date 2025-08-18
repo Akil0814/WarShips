@@ -40,7 +40,7 @@ public:
 	void reset_hit_time();
 	bool is_on_animation();
 
-
+	int get_atk_time_on_board()const;
 
 	void show_board();////////////////////////////////
 	void show_board(int x);
@@ -65,14 +65,16 @@ private:
 private:
 
 
-
-
 	bool move_in_board = false;
 	bool click_in_board = false;
 
 	bool find_target = false;
-	bool finish_hit = false;
+	bool start_hit = false;
 	bool on_animation = false;
+	bool set_target = false;
+
+	int total_atk_time = 0;
+	int hit_time = 0;
 
 	int board_render_x = 0;
 	int board_render_y = 0;
