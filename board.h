@@ -29,6 +29,9 @@ public:
 
 	SDL_Point place_ship(Ship* ship,SDL_Point pos, int ship_size, bool is_horizontal);
 	void show_place_feasibility(SDL_Renderer* renderer,SDL_Point pos, int ship_size, bool is_horizontal);
+
+	void ship_sink(SDL_Point pos, int ship_size, bool is_horizontal);
+
 	void move_ship(SDL_Point pos, int ship_size, bool is_horizontal);
 
 	bool is_inside(int x, int y) const;
@@ -37,13 +40,21 @@ public:
 	void reset_hit_time();
 	bool is_on_animation();
 
-	static SDL_Texture* tile_hit;
-	static SDL_Texture* tile_miss;
+
 
 	void show_board();////////////////////////////////
+	void show_board(int x);
+
 
 	void draw_cover(SDL_Renderer* renderer);
 	void reset_board();
+
+	static SDL_Texture* tile_hit;
+	static SDL_Texture* tile_miss;
+	static SDL_Texture* tile_detected;
+	static SDL_Texture* tile_defance;
+	static SDL_Texture* tile_sink;
+
 
 private:
 
@@ -53,11 +64,15 @@ private:
 
 private:
 
+
+
+
 	bool move_in_board = false;
 	bool click_in_board = false;
 
 	bool find_target = false;
 	bool finish_hit = false;
+	bool on_animation = false;
 
 	int board_render_x = 0;
 	int board_render_y = 0;

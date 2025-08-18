@@ -36,6 +36,7 @@ public:
 	bool is_sink() const;
 	int get_atk_time() const;
 	bool check_motion()const;
+	void update_in_board_pos(SDL_Point pos);
 
 
 
@@ -70,6 +71,8 @@ private:
 	SDL_Texture* ship_texture = nullptr;
 
 	SDL_Point absolute_position = {0};
+	SDL_Point inboard_position = { 0 };
+
 	SDL_Point last_position = { 0 };
 
 	SDL_Point delta = { 0 };

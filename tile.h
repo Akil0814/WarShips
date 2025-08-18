@@ -6,7 +6,7 @@ class Ship;
 
 class Tile {
 public:
-    enum class Status { Unknown, Miss, Hit, Defend, Detected };
+    enum class Status { Unknown, Miss, Hit, Defend, Detected,Sink };
 
     Tile() = default;
 
@@ -27,4 +27,6 @@ private:
     Status status = Status::Unknown;
 
     Ship* ship_on_tile = nullptr;
+
+
 };

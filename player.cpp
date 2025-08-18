@@ -147,7 +147,7 @@ int Player::get_atk_time()
 	return atk_time;
 }
 
-void Player::check_remaining_ship()
+bool Player::have_remaining_ship()
 {
 	for (auto it = ship_list.begin(); it != ship_list.end(); )
 	{
@@ -161,4 +161,9 @@ void Player::check_remaining_ship()
 			++it;
 		}
 	}
+
+	if (ship_list.empty())
+		return false;
+
+	return true;
 }

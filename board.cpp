@@ -1,14 +1,22 @@
 #include "board.h"
 #include <cmath>
 
-//特效rect需要多个 加入队列管理
-
 SDL_Texture* Board::tile_hit = nullptr;
 SDL_Texture* Board::tile_miss = nullptr;
+SDL_Texture* Board::tile_detected = nullptr;
+SDL_Texture* Board::tile_defance = nullptr;
+SDL_Texture* Board::tile_sink = nullptr;
+
 
 Board::Board()
 {
     board.assign(row, std::vector<Tile>(col));
+
+    tile_hit = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_hit);
+    tile_miss= ResourcesManager::instance()->get_texture(ResID::Tex_Tile_miss);
+    tile_detected = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_unknow);
+    tile_defance= ResourcesManager::instance()->get_texture(ResID::Tex_Tile_defance);
+    tile_sink = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_sink);
 }
 
 Board::~Board() = default;
@@ -30,7 +38,29 @@ void Board::on_render(SDL_Renderer* renderer)
                 SIZE_TILE, SIZE_TILE};
             switch (board[y][x].get_status())
             {
+            case Tile::Status::Detected:
+                SDL_RenderCopy(renderer, tile_detected, nullptr, &rect);
+                break;
 
+            case Tile::Status::Miss:
+                SDL_RenderCopy(renderer, tile_miss, nullptr, &rect);
+
+                break;
+
+            case Tile::Status::Hit:
+                SDL_RenderCopy(renderer, tile_hit, nullptr, &rect);
+                break;
+
+            case Tile::Status::Defend:
+                SDL_RenderCopy(renderer, tile_defance, nullptr, &rect);
+                break;
+
+            case Tile::Status::Sink:
+                SDL_RenderCopy(renderer, tile_sink, nullptr, &rect);
+                break;
+
+            default:
+                break;
             }
         }
     }
@@ -41,10 +71,11 @@ void Board::on_update(double delta)
     EffectManager::instance()->on_update(delta);//局内
     BulletManager::instance()->on_update(delta);
 
+
     if (find_target)
     {
-        std::cout << "board find target" << std::endl;
-        find_target = false;
+        //BulletManager::instance()->fire({ 720,500 }, mouse_click_tile_center);
+
 
         if (board[index_y][index_x].has_ship())
         {
@@ -53,10 +84,10 @@ void Board::on_update(double delta)
             board_render_y + index_y * SIZE_TILE - 40,
             SIZE_TILE + 40, SIZE_TILE + 40 };
 
-            EffectManager::instance()->show_effect(EffectID::Explosion1, rect_explosion_target, 0, [this]()
+            EffectManager::instance()->show_effect(EffectID::Explosion1, rect_explosion_target, 0, [&, ix = index_x, iy = index_y]()
             {
-                board[index_y][index_x].take_hit();
-                finish_hit = true;
+                board[iy][ix].take_hit();
+                this->on_animation = false;
             });
         }
 
@@ -67,12 +98,15 @@ void Board::on_update(double delta)
             board_render_y + index_y * SIZE_TILE,
             SIZE_TILE + 40, SIZE_TILE
             };
-            EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0, [this]()
+            EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0, [&, ix = index_x, iy = index_y]()
                 {
-                    board[index_y][index_x].change_status(Tile::Status::Miss);
-                    finish_hit = true;
+                    board[iy][ix].change_status(Tile::Status::Miss);
+                    this->on_animation = false;
                 });
         }
+
+        find_target = false;
+        show_board(5);
     }
 }
 
@@ -81,8 +115,6 @@ void Board::on_input(const SDL_Event& event)
     on_mouse_move(event);
     on_mouse_click(event);
 }
-
-
 
 void Board::on_mouse_move(const SDL_Event& event)
 {
@@ -99,15 +131,15 @@ void Board::on_mouse_move(const SDL_Event& event)
 
 void Board::on_mouse_click(const SDL_Event& event)
 {
-    if (!is_inside(event.button.x, event.button.y))
-    {
-        click_in_board = false;
+    //if (!is_inside(event.button.x, event.button.y) || on_animation)
+    if (!is_inside(event.button.x, event.button.y)|| find_target)
         return;
-    }
 
-    click_in_board = true;
+
+
     if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
     {
+        on_animation = true;
         int x = (event.button.x - board_render_x) / SIZE_TILE;
         int y = (event.button.y - board_render_y) / SIZE_TILE;//计算位置
 
@@ -134,7 +166,6 @@ void Board::on_mouse_click(const SDL_Event& event)
             {
                 this->find_target = true;
             });
-        BulletManager::instance()->fire({ 0,0 }, mouse_click_tile_center);
     }
 }
 
@@ -219,6 +250,7 @@ SDL_Point Board::place_ship(Ship* ship, SDL_Point pos, int ship_size, bool is_ho
             }
         }
         show_board();
+        ship->update_in_board_pos({ x,y });
         return { (x * SIZE_TILE) + board_render_x,(y * SIZE_TILE) + board_render_y };
     }
     return { -1,-1 };
@@ -248,6 +280,28 @@ void Board::move_ship(SDL_Point pos, int ship_size, bool is_horizontal)
             }
         }
         show_board();
+}
+
+void Board::ship_sink(SDL_Point pos, int ship_size, bool is_horizontal)
+{
+    if (is_horizontal)
+    {
+        for (int i = 0; i < ship_size; ++i)
+        {
+            board[pos.y][pos.x + i].change_status(Tile::Status::Sink);
+            std::cout << "change" << std::endl;
+        }
+    }
+    else
+    {
+        for (int i = 0; i < ship_size; ++i)
+        {
+            board[pos.y][pos.x + i].change_status(Tile::Status::Sink);
+            std::cout << "change" << std::endl;
+
+        }
+    }
+    show_board();
 }
 
 bool Board::check_available(int x,int y, int ship_size, bool is_horizontal)
@@ -371,4 +425,23 @@ void Board::show_board()
         std::cout << std::endl;
     }
     std::cout << std::endl;
+}
+
+void Board::show_board(int x)
+{
+    for (int y = 0; y < row; ++y)
+    {
+        for (int x = 0; x < col; ++x)
+        {
+
+                std::cout <<static_cast<int>(board[y][x].get_status())<<" ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+}
+
+bool  Board::is_on_animation()
+{
+    return on_animation;
 }

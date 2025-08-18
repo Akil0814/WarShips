@@ -21,6 +21,7 @@ public:
 
     // 返回子弹是否有效
     bool is_valid() const;
+    SDL_Point get_end_pos()const;
 
 private:
     Animation animation;

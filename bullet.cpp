@@ -60,7 +60,6 @@ void Bullet::on_render(SDL_Renderer* renderer) const
         size_x,size_y
         };
 
-
         animation.on_render(renderer, rect, angle_rot);
     }
 
@@ -69,3 +68,9 @@ void Bullet::on_render(SDL_Renderer* renderer) const
 bool Bullet::is_valid() const {
     return valid;
 }
+
+SDL_Point Bullet::get_end_pos()const
+{
+    return { static_cast<int>(end_x),static_cast<int>(end_y) };
+}
+

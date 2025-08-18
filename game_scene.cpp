@@ -47,13 +47,9 @@ GameScene::GameScene():
 
 	skill_button_list.push_back(&missile_button);
 
-	std::cout << "creat scene" << std::endl;
-
 	text_player1 = TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_256), "Player1 Turn");
-	std::cout << "creat scene2" << std::endl;
-
 	text_player2 = TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_256), "Player2 Turn");
-	std::cout << "creat scene3" << std::endl;
+	
 }
 
 GameScene::~GameScene()
@@ -75,6 +71,11 @@ void GameScene::on_enter()
 
 	next_player_button.set_on_click([this]
 		{
+			if (get_other_player()->get_board()->is_on_animation())
+			{
+				Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
+			}
+			else
 				next_player_turn();
 		});
 
@@ -90,6 +91,12 @@ void GameScene::on_update(double delta)
 {
 	next_player_button.on_update(delta);
 	get_other_player()->on_update(delta);
+
+	if (!get_other_player()->have_remaining_ship())
+	{
+		std::cout << "game end" << std::endl;
+	}
+	
 }
 
 void GameScene::on_render(SDL_Renderer* renderer)

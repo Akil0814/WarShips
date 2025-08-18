@@ -5,9 +5,9 @@ void BulletManager :: on_update(double delta)
 	for (auto& iter : bullet_list)
 	{
 		iter->on_update(delta);
-		if (!(iter->is_valid())&&on_fire)
+		if (!iter->is_valid())
 		{
-			on_fire;
+			on_arrive(iter);
 		}
 	}
 
@@ -27,19 +27,19 @@ void  BulletManager::on_render(SDL_Renderer* renderer)
 void  BulletManager::fire(SDL_Point start, SDL_Point end)
 {
 	auto b = std::make_unique<Bullet>();
-	b->fire(start, end, 400);
+	b->fire(start, end, 600);
 	bullet_list.push_back(std::move(b));
-	if (on_fire)
-		on_fire;
 }
 
-void BulletManager::set_on_fire(std::function<void()> func)
+
+
+void BulletManager::on_fire(std::unique_ptr<Bullet>& bullet)
 {
-	on_fire = func;
+
 }
 
-void BulletManager::set_on_arrive(std::function<void()> func)
+void BulletManager::on_arrive(std::unique_ptr<Bullet>& bullet)
 {
-	on_arrive = func;
+	SDL_Point pos=bullet->get_end_pos();
 }
  

@@ -37,6 +37,13 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	texture_pool[ResID::Tex_Range] = IMG_LoadTexture(renderer, "res/UI/range.png");
 	texture_pool[ResID::Tex_Bombs] = IMG_LoadTexture(renderer, "res/UI/bombs.png");
 
+	texture_pool[ResID::Tex_Tile_hit] = IMG_LoadTexture(renderer, "res/Map_texture/tile_hit.png");
+	texture_pool[ResID::Tex_Tile_miss] = IMG_LoadTexture(renderer, "res/Map_texture/tile_miss.png");
+	texture_pool[ResID::Tex_Tile_unknow] = IMG_LoadTexture(renderer, "res/Map_texture/tile_unknow.png");
+	texture_pool[ResID::Tex_Tile_defance] = IMG_LoadTexture(renderer, "res/Map_texture/tile_defance.png");
+	texture_pool[ResID::Tex_Tile_sink] = IMG_LoadTexture(renderer, "res/Map_texture/tile_sink.png");
+
+
 
 	texture_pool[ResID::Tex_SetTarget] = IMG_LoadTexture(renderer, "res/set_target.png");
 	texture_pool[ResID::Tex_Hand] = IMG_LoadTexture(renderer, "res/hand.png");

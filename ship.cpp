@@ -174,15 +174,20 @@ void Ship::take_damage()
 		defense_time--;
 	else
 		hp--;
+
 	if (hp <= 0)
+	{
+		player_board->ship_sink(inboard_position, ship_size, horizontal);
 		sink = true;
+		std::cout << "sink" << std::endl;
+	}
+	std::cout << "hp:" << hp << std::endl;
 }
 
 bool Ship::can_defense()
 {
 	return defense_time;
 }
-
 
 bool Ship::is_sink()const
 {
@@ -213,4 +218,9 @@ void Ship::init_pos(SDL_Point& first_pos)
 {
 	last_position = first_pos;
 	set_position(first_pos);
+}
+
+void Ship::update_in_board_pos(SDL_Point pos)
+{
+	inboard_position = pos;
 }

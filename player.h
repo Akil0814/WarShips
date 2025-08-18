@@ -25,7 +25,7 @@ public:
 	void add_ship(Ship* new_ship);
 	void finish_setting();
 	void reset();
-	void check_remaining_ship();
+	bool have_remaining_ship();
 
 	bool spend_coin(int cost);
 	int get_coin();

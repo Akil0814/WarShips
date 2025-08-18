@@ -61,9 +61,13 @@ enum class ResID
 	Tex_Hand,
 
 	//ÆåÅÌÌùÍ¼
-	//Tex_Tile_hit,
-	//Tex_Tile_miss,
-	//Tex_Tile_unknow,
+	Tex_Tile_hit,
+	Tex_Tile_miss,
+	Tex_Tile_unknow,
+	Tex_Tile_defance,
+	Tex_Tile_sink,
+
+
 
 	//½¢´¬ÌùÍ¼
 	Tex_Test_Ship_detel,/////////////////////////////////////////////////////////

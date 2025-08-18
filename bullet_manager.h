@@ -22,16 +22,14 @@ public:
 	void on_render(SDL_Renderer* renderer);
 
 	void fire(SDL_Point start, SDL_Point end);
-	void set_on_fire(std::function<void()> func);
-	void set_on_arrive(std::function<void()> func);
+	void on_fire(std::unique_ptr<Bullet>& bullet);
+	void on_arrive(std::unique_ptr<Bullet>& bullet);
 
 protected:
 	BulletManager() {};
 	~BulletManager() {};
 
 private:
-	std::function<void()> on_arrive = nullptr;
-	std::function<void()> on_fire = nullptr;
 
 	std::vector<std::unique_ptr<Bullet>> bullet_list;
 };
