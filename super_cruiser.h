@@ -5,7 +5,7 @@ class SuperCruiser :public Ship
 public:
 	SuperCruiser()
 	{
-		Ship::init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_SuperCruiser), 3, 3, 3, 1);
+		Ship::init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_SuperCruiser), 3, 3, 2, 1);
 	}
 	~SuperCruiser()
 	{

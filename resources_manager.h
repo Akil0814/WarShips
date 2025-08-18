@@ -20,6 +20,9 @@ enum class ResID
 //--------------------------ÒôÐ§×ÊÔ´------------------------------//
 	Sound_Coin,
 	Sound_Click,
+	Sound_Click_Down,
+	Sound_Click_Up,
+
 	Sound_Button_Metal,
 	Sound_Error,
 	Sound_Put_In_Water,
@@ -71,6 +74,19 @@ enum class ResID
 
 	//½¢´¬ÌùÍ¼
 	Tex_Test_Ship_detel,/////////////////////////////////////////////////////////
+
+
+	Tex_Ship_Infrom_Destroyer,//ÇýÖð
+	Tex_Ship_Infrom_LightCruiser,//ÇáÑ²
+	Tex_Ship_Infrom_HeavyCruiser,//ÖØÑ²
+	Tex_Ship_Infrom_SuperCruiser,//³¬Ñ²
+	Tex_Ship_Infrom_BattleCruiser,//Õ½Ñ²
+	Tex_Ship_Infrom_Battleship,//Õ½ÁÐ
+	Tex_Ship_Infrom_AviationBattleship,//º½Õ½
+	Tex_Ship_Infrom_AircraftCarrier,//º½Ä¸
+	Tex_Ship_Infrom_LightCarrier,//Çáº½
+	Tex_Ship_Infrom_Submarine,//Ç±Í§
+	Tex_Ship_Infrom_RepairShip,//Î¬ÐÞ
 
 
 	Tex_Ship_Destroyer,//ÇýÖð

@@ -12,7 +12,6 @@ SDL_Texture* Board::tile_detected = nullptr;
 SDL_Texture* Board::tile_defance = nullptr;
 SDL_Texture* Board::tile_sink = nullptr;
 
-
 Board::Board()
 {
     board.assign(row, std::vector<Tile>(col));
@@ -296,16 +295,13 @@ void Board::ship_sink(SDL_Point pos, int ship_size, bool is_horizontal)
         for (int i = 0; i < ship_size; ++i)
         {
             board[pos.y][pos.x + i].change_status(Tile::Status::Sink);
-            std::cout << "change" << std::endl;
         }
     }
     else
     {
         for (int i = 0; i < ship_size; ++i)
         {
-            board[pos.y][pos.x + i].change_status(Tile::Status::Sink);
-            std::cout << "change" << std::endl;
-
+            board[pos.y + i][pos.x].change_status(Tile::Status::Sink);
         }
     }
     show_board();
@@ -457,4 +453,3 @@ int Board::get_atk_time_on_board()const
 {
     return total_atk_time;
 }
-

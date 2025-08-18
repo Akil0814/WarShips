@@ -3,7 +3,7 @@
 MenuScene::MenuScene()
 	:button_start({ 100,50,200,70 }, { 100,50,200,70 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_128), "   Start   "),
-		ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr)
+		ResourcesManager::instance()->get_sound(ResID::Sound_Click_Down), ResourcesManager::instance()->get_sound(ResID::Sound_Click_Up))
 {
 	button_start.set_on_click([]
 		{

@@ -50,6 +50,20 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 
 	texture_pool[ResID::Tex_Test_Ship_detel] = IMG_LoadTexture(renderer, "res/Ship/ship_inform.png");
 
+
+	texture_pool[ResID::Tex_Ship_Infrom_Destroyer] = IMG_LoadTexture(renderer, "res/Ship/ship_inform_Destroyer.png");
+	texture_pool[ResID::Tex_Ship_Infrom_LightCruiser] = IMG_LoadTexture(renderer, "res/Ship/ship_inform_LightCruiser.png");
+	texture_pool[ResID::Tex_Ship_Infrom_HeavyCruiser] = IMG_LoadTexture(renderer, "res/Ship/ship_inform_HeavyCruiser.png");
+	texture_pool[ResID::Tex_Ship_Infrom_SuperCruiser] = IMG_LoadTexture(renderer, "res/Ship/ship_inform_SuperCruiser.png");
+	texture_pool[ResID::Tex_Ship_Infrom_BattleCruiser] = IMG_LoadTexture(renderer, "res/Ship/ship_inform_BattleCruiser.png");
+	texture_pool[ResID::Tex_Ship_Infrom_Battleship] = IMG_LoadTexture(renderer, "res/Ship/ship_inform_Battleship.png");
+	texture_pool[ResID::Tex_Ship_Infrom_AviationBattleship] = IMG_LoadTexture(renderer, "res/Ship/ship_inform_AviationBattleship.png");
+	texture_pool[ResID::Tex_Ship_Infrom_AircraftCarrier] = IMG_LoadTexture(renderer, "res/Ship/ship_inform_AircraftCarrier.png");
+	texture_pool[ResID::Tex_Ship_Infrom_LightCarrier] = IMG_LoadTexture(renderer, "res/Ship/ship_inform_LightCarrier.png");
+	texture_pool[ResID::Tex_Ship_Infrom_Submarine] = IMG_LoadTexture(renderer, "res/Ship/ship_inform_Submarine.png");
+	texture_pool[ResID::Tex_Ship_Infrom_RepairShip] = IMG_LoadTexture(renderer, "res/Ship/ship_inform_RepairShip.png");
+
+
 	texture_pool[ResID::Tex_Ship_Destroyer] = IMG_LoadTexture(renderer, "res/Ship/Destroyer.png");
 	texture_pool[ResID::Tex_Ship_LightCruiser] = IMG_LoadTexture(renderer, "res/Ship/LightCruiser.png");
 	texture_pool[ResID::Tex_Ship_HeavyCruiser] = IMG_LoadTexture(renderer, "res/Ship/HeavyCruiser.png");
@@ -131,6 +145,9 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	sound_pool[ResID::Sound_Fire_3] = Mix_LoadWAV("res/Sound/fire_4.wav");
 
 	sound_pool[ResID::Sound_Click] = Mix_LoadWAV("res/Sound/click.wav");
+	sound_pool[ResID::Sound_Click_Down] = Mix_LoadWAV("res/Sound/click_down.wav");
+	sound_pool[ResID::Sound_Click_Up] = Mix_LoadWAV("res/Sound/click_up.wav");
+
 	sound_pool[ResID::Sound_Coin] = Mix_LoadWAV("res/Sound/coin.wav");
 	sound_pool[ResID::Sound_Button_Metal] = Mix_LoadWAV("res/Sound/button_metal.wav");
 

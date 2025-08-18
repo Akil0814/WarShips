@@ -3,13 +3,13 @@
 SetupScene::SetupScene()
 	:next_button({ 30,650,80,40 }, { 35,655,70,30 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "NEXT"),
-		ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Click_Down), ResourcesManager::instance()->get_sound(ResID::Sound_Click_Up)),
 	start_button({ 30,650,80,40 }, { 35,655,70,30 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "START"),
-		ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Click_Down), ResourcesManager::instance()->get_sound(ResID::Sound_Click_Up)),
 	reset_button({ 500,650,80,40 }, { 505,655,70,30 },
 		TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "Reset"),
-		ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Click_Down), ResourcesManager::instance()->get_sound(ResID::Sound_Click_Up)),
 
 	get_LightCruiser({ 665, 415, 120,  40 },{ 665, 415, 120,  40 },ResourcesManager::instance()->get_texture(ResID::Tex_Ship_LightCruiser),nullptr, nullptr),
 	get_HeavyCruiser({ 665, 475, 120,  40 },{ 665, 475, 120,  40 }, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_HeavyCruiser),nullptr, nullptr),
@@ -168,38 +168,48 @@ void SetupScene::on_render(SDL_Renderer* renderer)
 			switch (current_view_ship)
 			{
 			case ShipType::Destroyer:
-				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Test_Ship_detel), 210);
-				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Test_Ship_detel), nullptr, &test);
+				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_Destroyer), 210);
+				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_Destroyer), nullptr, &test);
 				break;
 			case ShipType::LightCruiser:
-
+				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_LightCruiser), 210);
+				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_LightCruiser), nullptr, &test);
 				break;
 			case ShipType::HeavyCruiser:
-
+				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_HeavyCruiser), 210);
+				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_HeavyCruiser), nullptr, &test);
 				break;
 			case ShipType::SuperCruiser:
-
+				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_SuperCruiser), 210);
+				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_SuperCruiser), nullptr, &test);
 				break;
 			case ShipType::BattleCruiser:
-
+				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_BattleCruiser), 210);
+				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_BattleCruiser), nullptr, &test);
 				break;
 			case ShipType::Battleship:
-
+				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_Battleship), 210);
+				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_Battleship), nullptr, &test);
 				break;
 			case ShipType::AviationBattleship:
-
+				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_AviationBattleship), 210);
+				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_AviationBattleship), nullptr, &test);
 				break;
 			case ShipType::AircraftCarrier:
-
+				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_AircraftCarrier), 210);
+				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_AircraftCarrier), nullptr, &test);
 				break;
 			case ShipType::LightCarrier:
-
+				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_LightCarrier), 210);
+				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_LightCarrier), nullptr, &test);
 				break;
 			case ShipType::Submarine:
-
+				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_Submarine), 210);
+				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_Submarine), nullptr, &test);
 				break;
 			case ShipType::RepairShip:
-
+				SDL_SetTextureAlphaMod(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_RepairShip), 210);
+				SDL_RenderCopy(renderer, ResourcesManager::instance()->get_texture(ResID::Tex_Ship_Infrom_RepairShip), nullptr, &test);
 				break;
 			default:
 				break;
