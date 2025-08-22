@@ -84,6 +84,11 @@ SDL_Point Bullet::get_end_pos()const
 
 void Bullet::on_arrive()
 {
+
+    Board* board = effect_board;
+    SDL_Point index = effect_index;
+
+    if (!board) return;
     if (effect_board->get_tile_board()[effect_index.y][effect_index.x].has_ship())
     {
         SDL_Rect rect_explosion_target = {
@@ -92,9 +97,9 @@ void Bullet::on_arrive()
 
         //effect_board->show_board(5);
 
-        EffectManager::instance()->show_effect(EffectID::Explosion1, rect_explosion_target, 0, [this]()
+        EffectManager::instance()->show_effect(EffectID::Explosion1, rect_explosion_target, 0, [board,index]()
             {
-                effect_board->get_tile_board()[effect_index.y][effect_index.x].take_hit();
+                board->get_tile_board()[index.y][index.x].take_hit();
             });
     }
     else
@@ -107,9 +112,9 @@ void Bullet::on_arrive()
         effect_board->get_tile_board()[effect_index.y][effect_index.x].change_status(Tile::Status::Miss);
         //effect_board->show_board(5);
 
-        EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0, [this]()
+        EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0, [board,index]()
             {
-                effect_board->get_tile_board()[effect_index.y][effect_index.x].change_status(Tile::Status::Miss);
+                board->get_tile_board()[index.y][index.x].change_status(Tile::Status::Miss);
             });
     }
 

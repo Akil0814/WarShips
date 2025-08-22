@@ -171,6 +171,12 @@ bool Ship::is_in_board()const
 void Ship::take_damage()
 {
 	std::cout << "_________________________________________________________" << std::endl;
+	if (sink == true)
+	{
+		std::cout << "sink alrady:" << hp << std::endl;
+		return;
+	}
+
 
 	std::cout << "befor take damage HP:"<<hp << std::endl;
 	std::cout << "befor take damage DT:" << defense_time << std::endl;
