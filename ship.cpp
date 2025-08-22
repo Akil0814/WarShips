@@ -170,18 +170,32 @@ bool Ship::is_in_board()const
  
 void Ship::take_damage()
 {
+	std::cout << "_________________________________________________________" << std::endl;
+
+	std::cout << "befor take damage HP:"<<hp << std::endl;
+	std::cout << "befor take damage DT:" << defense_time << std::endl;
+
 	if (defense_time > 0)
+	{
+		std::cout << "use DT:" << std::endl;
 		defense_time--;
+	}
 	else
+	{
+		std::cout << "use HP:" << std::endl;
 		hp--;
+	}
 
 	if (hp <= 0)
 	{
 		player_board->ship_sink(inboard_position, ship_size, horizontal);
 		sink = true;
-		std::cout << "sink" << std::endl;
+		std::cout << "ship sink after take damager" << std::endl;
 	}
-	std::cout << "hp:" << hp << std::endl;
+
+	std::cout << "after take damage HP:" << hp << std::endl;
+	std::cout << "after take damage DT:" << defense_time << std::endl;
+
 }
 
 bool Ship::can_defense()

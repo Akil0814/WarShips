@@ -79,7 +79,6 @@ void Board::on_update(double delta)
 
     if (find_target)
     {
-        BulletManager::instance()->fire({ 720,500 }, mouse_click_tile_center);
 
 
         if (board[index_y][index_x].has_ship())
@@ -89,10 +88,13 @@ void Board::on_update(double delta)
             board_render_y + index_y * SIZE_TILE - 40,
             SIZE_TILE + 40, SIZE_TILE + 40 };
 
+            board[index_y][index_x].take_hit();
+            show_board(5);
+
             EffectManager::instance()->show_effect(EffectID::Explosion1, rect_explosion_target, 0, [&, ix = index_x, iy = index_y]()
             {
-                board[iy][ix].take_hit();
                 this->on_animation = false;
+
             });
         }
 
@@ -103,15 +105,17 @@ void Board::on_update(double delta)
             board_render_y + index_y * SIZE_TILE,
             SIZE_TILE + 40, SIZE_TILE
             };
+
+            board[index_y][index_x].change_status(Tile::Status::Miss);
+            show_board(5);
+
             EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0, [&, ix = index_x, iy = index_y]()
                 {
-                    board[iy][ix].change_status(Tile::Status::Miss);
                     this->on_animation = false;
                 });
         }
 
         find_target = false;
-        show_board(5);
     }
 }
 
@@ -167,6 +171,7 @@ void Board::on_mouse_click(const SDL_Event& event)
         on_animation = true;
         start_hit = true;
         ++total_atk_time;
+        BulletManager::instance()->fire({ 720,500 }, mouse_click_tile_center);
         EffectManager::instance()->show_effect(EffectID::SelectTarget, rect_select_target, 0, [this]()
             {
                 set_target = false;
@@ -255,7 +260,6 @@ SDL_Point Board::place_ship(Ship* ship, SDL_Point pos, int ship_size, bool is_ho
                 board[y + i][x].place_ship(ship);
             }
         }
-        show_board();
         ship->update_in_board_pos({ x,y });
         return { (x * SIZE_TILE) + board_render_x,(y * SIZE_TILE) + board_render_y };
     }
@@ -285,7 +289,7 @@ void Board::move_ship(SDL_Point pos, int ship_size, bool is_horizontal)
                 board[y + i][x].move_ship();
             }
         }
-        show_board();
+        //show_board();
 }
 
 void Board::ship_sink(SDL_Point pos, int ship_size, bool is_horizontal)
@@ -304,7 +308,7 @@ void Board::ship_sink(SDL_Point pos, int ship_size, bool is_horizontal)
             board[pos.y + i][pos.x].change_status(Tile::Status::Sink);
         }
     }
-    show_board();
+    //show_board();
 }
 
 bool Board::check_available(int x,int y, int ship_size, bool is_horizontal)
@@ -444,7 +448,7 @@ void Board::show_board(int x)
     std::cout << std::endl;
 }
 
-bool  Board::is_on_animation()
+bool Board::is_on_animation()
 {
     return on_animation;
 }
@@ -452,4 +456,9 @@ bool  Board::is_on_animation()
 int Board::get_atk_time_on_board()const
 {
     return total_atk_time;
+}
+
+std::vector<std::vector<Tile>>& Board::get_tile_board()
+{
+    return board;
 }

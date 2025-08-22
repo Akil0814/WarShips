@@ -28,17 +28,30 @@ void Tile::move_ship()
 
 void Tile::take_hit()
 {
-    if (status == Status::Hit)//同一个目标位置不会反复受到打击
+    if (status == Status::Hit)
+    {
+        std::cout << "is hit befor on same tile"<<std::endl;
         return;
+    }  
 
     if (ship_on_tile == nullptr)
+    {
+        std::cout << "no ship on tile" << std::endl;
         return;
+    }
 
-    if (ship_on_tile->can_defense()&& status != Status::Defend)//每一个目标位置只能防御一次
+    if (ship_on_tile->can_defense() && status != Status::Defend)//每一个目标位置只能防御一次
+    {
         status = Status::Defend;
-    else
-        status = Status::Hit;
+        std::cout << "change tile to defend" << std::endl;
 
+    }
+    else
+    {
+        status = Status::Hit;
+        std::cout << "change tile to hit" << std::endl;
+
+    }
     ship_on_tile->take_damage();
 
 }

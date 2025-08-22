@@ -49,6 +49,8 @@ public:
 	void draw_cover(SDL_Renderer* renderer);
 	void reset_board();
 
+	std::vector<std::vector<Tile>>& get_tile_board();
+
 	static SDL_Texture* tile_hit;
 	static SDL_Texture* tile_miss;
 	static SDL_Texture* tile_detected;

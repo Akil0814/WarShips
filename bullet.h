@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <cmath>
+#include "board.h"
 #include "animation.h"
 #include "atlas_manager.h"
 
@@ -11,20 +12,22 @@ public:
     ~Bullet();
 
     // 发射子弹: start 起点, end 终点, spd 速度 (px/s)
-    void fire(const SDL_Point& start, const SDL_Point& end, double spd);
+    void fire(const SDL_Point& start, const SDL_Point& end, double spd, Board* board, SDL_Point index);
 
-    // 更新子弹位置和动画
     void on_update(double delta);
 
-    // 渲染子弹到屏幕
     void on_render(SDL_Renderer* renderer) const;
 
-    // 返回子弹是否有效
+    void on_arrive();
+
     bool is_valid() const;
     SDL_Point get_end_pos()const;
 
 private:
     Animation animation;
+    Board* effect_board;
+    SDL_Point effect_index;
+    SDL_Point end_pos;
 
     double fx = 0.0, fy = 0.0;      // 浮点位置
     double dirX = 0.0, dirY = 0.0;  // 单位方向向量

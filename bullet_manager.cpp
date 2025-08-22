@@ -24,10 +24,10 @@ void  BulletManager::on_render(SDL_Renderer* renderer)
 	}
 }
 
-void  BulletManager::fire(SDL_Point start, SDL_Point end)
+void  BulletManager::fire(SDL_Point bullet_start, SDL_Point bullet_end,Board* effect_board,SDL_Point index)
 {
 	auto b = std::make_unique<Bullet>();
-	b->fire(start, end, 600);
+	b->fire(bullet_start, bullet_end, 600);
 	bullet_list.push_back(std::move(b));
 }
 
