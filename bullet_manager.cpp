@@ -1,4 +1,6 @@
 #include"bullet_manager.h"
+#include"board.h"
+
 
 void BulletManager :: on_update(double delta)
 {
@@ -27,7 +29,7 @@ void  BulletManager::on_render(SDL_Renderer* renderer)
 void  BulletManager::fire(SDL_Point bullet_start, SDL_Point bullet_end,Board* effect_board,SDL_Point index)
 {
 	auto b = std::make_unique<Bullet>();
-	b->fire(bullet_start, bullet_end, 600);
+	b->fire(bullet_start, bullet_end, 600,effect_board,index);
 	bullet_list.push_back(std::move(b));
 }
 

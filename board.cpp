@@ -75,48 +75,6 @@ void Board::on_update(double delta)
 {
     EffectManager::instance()->on_update(delta);//¾ÖÄÚ
     BulletManager::instance()->on_update(delta);
-
-
-    if (find_target)
-    {
-
-
-        if (board[index_y][index_x].has_ship())
-        {
-            rect_explosion_target = {
-            board_render_x + index_x * SIZE_TILE - 20,
-            board_render_y + index_y * SIZE_TILE - 40,
-            SIZE_TILE + 40, SIZE_TILE + 40 };
-
-            board[index_y][index_x].take_hit();
-            show_board(5);
-
-            EffectManager::instance()->show_effect(EffectID::Explosion1, rect_explosion_target, 0, [&, ix = index_x, iy = index_y]()
-            {
-                this->on_animation = false;
-
-            });
-        }
-
-        else
-        {
-            rect_water_splash = {
-            board_render_x + index_x * SIZE_TILE - 20,
-            board_render_y + index_y * SIZE_TILE,
-            SIZE_TILE + 40, SIZE_TILE
-            };
-
-            board[index_y][index_x].change_status(Tile::Status::Miss);
-            show_board(5);
-
-            EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0, [&, ix = index_x, iy = index_y]()
-                {
-                    this->on_animation = false;
-                });
-        }
-
-        find_target = false;
-    }
 }
 
 void Board::on_input(const SDL_Event& event)
@@ -140,7 +98,7 @@ void Board::on_mouse_move(const SDL_Event& event)
 
 void Board::on_mouse_click(const SDL_Event& event)
 {
-    if (!is_inside(event.button.x, event.button.y)|| set_target)
+    if (!is_inside(event.button.x, event.button.y))
         return;
 
     if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
@@ -168,10 +126,9 @@ void Board::on_mouse_click(const SDL_Event& event)
             SIZE_TILE + 40, SIZE_TILE + 40
         };
 
-        on_animation = true;
         start_hit = true;
         ++total_atk_time;
-        BulletManager::instance()->fire({ 720,500 }, mouse_click_tile_center);
+        BulletManager::instance()->fire({ 720,500 }, mouse_click_tile_center,this,{ index_x, index_y});
         EffectManager::instance()->show_effect(EffectID::SelectTarget, rect_select_target, 0, [this]()
             {
                 set_target = false;

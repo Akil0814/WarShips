@@ -1,4 +1,6 @@
 #include"bullet.h"
+#include "board.h"
+
 
 Bullet::Bullet() {
     animation.set_frame(AtlasManager::instance()->get_atlas(AtlasID::MissileOnFire));
@@ -85,15 +87,29 @@ void Bullet::on_arrive()
     if (effect_board->get_tile_board()[effect_index.y][effect_index.x].has_ship())
     {
         SDL_Rect rect_explosion_target = {
-        end_pos.x-20,
-        end_pos.y - 40,
+        end_pos.x-40,end_pos.y-60,
         SIZE_TILE + 40, SIZE_TILE + 40 };
 
-        effect_board->show_board(5);
+        //effect_board->show_board(5);
 
         EffectManager::instance()->show_effect(EffectID::Explosion1, rect_explosion_target, 0, [this]()
             {
                 effect_board->get_tile_board()[effect_index.y][effect_index.x].take_hit();
+            });
+    }
+    else
+    {
+        SDL_Rect rect_water_splash = {
+        end_pos.x- 40,end_pos.y-20,
+        SIZE_TILE + 40, SIZE_TILE
+        };
+
+        effect_board->get_tile_board()[effect_index.y][effect_index.x].change_status(Tile::Status::Miss);
+        //effect_board->show_board(5);
+
+        EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0, [this]()
+            {
+                effect_board->get_tile_board()[effect_index.y][effect_index.x].change_status(Tile::Status::Miss);
             });
     }
 

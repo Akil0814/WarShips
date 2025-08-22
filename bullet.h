@@ -1,10 +1,10 @@
 #pragma once
-
 #include <SDL.h>
 #include <cmath>
-#include "board.h"
 #include "animation.h"
 #include "atlas_manager.h"
+
+class Board;
 
 class Bullet {
 public:

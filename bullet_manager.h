@@ -2,7 +2,6 @@
 #include"SDL.h"
 #include"manager.h"
 #include"bullet.h"
-#include"board.h"
 #include<vector>
 #include<memory>
 #include<functional>
@@ -12,6 +11,7 @@ enum class BulletType
 	Missile
 };
 
+class Board;
 
 class BulletManager :public Manager<BulletManager>
 {
