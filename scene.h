@@ -16,8 +16,8 @@ public:
 
 protected:
 
-	int WINDOW_WIDTH = 400;
-	int WINDOW_HEIGHT = 600;
+	int WINDOW_WIDTH = 1280;
+	int WINDOW_HEIGHT = 720;
 
 	SDL_Color back_ground_color = { 175,175,175,255 };
 

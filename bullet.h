@@ -3,6 +3,7 @@
 #include <cmath>
 #include "animation.h"
 #include "atlas_manager.h"
+#include"resources_manager.h"
 
 class Board;
 

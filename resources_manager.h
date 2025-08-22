@@ -18,22 +18,26 @@ enum class ResID
 
 //---------------------------------------------------------------//
 //--------------------------音效资源------------------------------//
-	Sound_Coin,
+	Sound_Next_Player,
+	Sound_Button_Metal,
 	Sound_Click,
 	Sound_Click_Down,
 	Sound_Click_Up,
-
-	Sound_Button_Metal,
-	Sound_Error,
-	Sound_Put_In_Water,
+	Sound_Coin,
 	Sound_Entering_Water,
+	Sound_Error,
 
+	Sound_Explosion_1,
+	Sound_Explosion_2,
+	Sound_Explosion_3,
 
 	Sound_Fire_1,
 	Sound_Fire_2,
 	Sound_Fire_3,
-	Sound_Fire_4,
 
+	Sound_Put_In_Water,
+	Sound_Repair,
+	Sound_UnderWater_Explosion,
 
 //---------------------------------------------------------------//
 //--------------------------音乐资源------------------------------//

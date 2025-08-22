@@ -139,22 +139,28 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 //---------------------------------------------------------------//
 //--------------------------“Ù–ß◊ ‘¥------------------------------//
 
-	sound_pool[ResID::Sound_Fire_1] = Mix_LoadWAV("res/Sound/fire_1.wav");
-	sound_pool[ResID::Sound_Fire_2] = Mix_LoadWAV("res/Sound/fire_2.wav");
-	sound_pool[ResID::Sound_Fire_3] = Mix_LoadWAV("res/Sound/fire_3.wav");
-	sound_pool[ResID::Sound_Fire_3] = Mix_LoadWAV("res/Sound/fire_4.wav");
-
+	sound_pool[ResID::Sound_Next_Player] = Mix_LoadWAV("res/Sound/next_player.wav");
+	sound_pool[ResID::Sound_Button_Metal] = Mix_LoadWAV("res/Sound/button_metal.wav");
 	sound_pool[ResID::Sound_Click] = Mix_LoadWAV("res/Sound/click.wav");
 	sound_pool[ResID::Sound_Click_Down] = Mix_LoadWAV("res/Sound/click_down.wav");
 	sound_pool[ResID::Sound_Click_Up] = Mix_LoadWAV("res/Sound/click_up.wav");
-
 	sound_pool[ResID::Sound_Coin] = Mix_LoadWAV("res/Sound/coin.wav");
-	sound_pool[ResID::Sound_Button_Metal] = Mix_LoadWAV("res/Sound/button_metal.wav");
-
-	sound_pool[ResID::Sound_Error] = Mix_LoadWAV("res/Sound/error.wav");
 	sound_pool[ResID::Sound_Entering_Water] = Mix_LoadWAV("res/Sound/entering_water.wav");
-	sound_pool[ResID::Sound_Put_In_Water] = Mix_LoadWAV("res/Sound/put_in_water.wav");
+	sound_pool[ResID::Sound_Error] = Mix_LoadWAV("res/Sound/error.wav");
 
+	sound_pool[ResID::Sound_Explosion_1] = Mix_LoadWAV("res/Sound/explosion_1.wav");
+	sound_pool[ResID::Sound_Explosion_2] = Mix_LoadWAV("res/Sound/explosion_2.wav");
+	sound_pool[ResID::Sound_Explosion_3] = Mix_LoadWAV("res/Sound/explosion_3.wav");
+
+	sound_pool[ResID::Sound_Fire_1] = Mix_LoadWAV("res/Sound/fire_1.wav");
+	sound_pool[ResID::Sound_Fire_2] = Mix_LoadWAV("res/Sound/fire_2.wav");
+	sound_pool[ResID::Sound_Fire_3] = Mix_LoadWAV("res/Sound/fire_3.wav");
+
+	sound_pool[ResID::Sound_Put_In_Water] = Mix_LoadWAV("res/Sound/put_in_water.wav");
+	sound_pool[ResID::Sound_Repair] = Mix_LoadWAV("res/Sound/repair.wav");
+	sound_pool[ResID::Sound_UnderWater_Explosion] = Mix_LoadWAV("res/Sound/underwater_explosion.wav");
+
+	Mix_AllocateChannels(64);
 	std::cout << "sound check" << std::endl;
 
 	for (const auto& pair : sound_pool)

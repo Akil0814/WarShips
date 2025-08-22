@@ -9,7 +9,7 @@ GameManager::GameManager()
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 	SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
 
-	window = SDL_CreateWindow("WarShip!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 600, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("WarShip!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);
 	init_assert(window, u8"SDL_CreateWindow Error");
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);//硬件加速 垂直同步 目标纹理
@@ -35,6 +35,7 @@ int GameManager::run(int argc, char** argv)
 {
 	Uint64 last_counter = SDL_GetPerformanceCounter();
 	const Uint64 counter_freq = SDL_GetPerformanceFrequency();//获取高性能计数器的频率
+	std::srand(static_cast<unsigned>(std::time(nullptr)));
 
 	SceneManager::instance()->set_current_scene(ScenePool::instance()->get_scene(SceneType::Menu));
 

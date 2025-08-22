@@ -1,6 +1,12 @@
 #include"bullet.h"
 #include "board.h"
-
+#include"tile.h"
+/*
+* 1 随机炮弹发射位置
+* 2 发射音效 击中音效
+* 
+* 
+*/
 
 Bullet::Bullet() {
     animation.set_frame(AtlasManager::instance()->get_atlas(AtlasID::MissileOnFire));
@@ -12,6 +18,7 @@ Bullet::~Bullet() {}
 
 void Bullet::fire(const SDL_Point& start, const SDL_Point& end, double spd,Board* board, SDL_Point index)
 {
+
     fx = static_cast<double>(start.x);
     fy = static_cast<double>(start.y);
     end_x = static_cast<double>(end.x);
@@ -30,7 +37,7 @@ void Bullet::fire(const SDL_Point& start, const SDL_Point& end, double spd,Board
     else {
         dirX = dirY = 0.0;
     }
-    // 将弧度转为度用于渲染旋转
+
     angle_rot = std::atan2(dy, dx) * 180.0 / 3.14159265358979323846;
 
     speed = spd;
@@ -84,37 +91,60 @@ SDL_Point Bullet::get_end_pos()const
 
 void Bullet::on_arrive()
 {
-
+    std::cout << "change 3" << std::endl;
     Board* board = effect_board;
     SDL_Point index = effect_index;
 
     if (!board) return;
-    if (effect_board->get_tile_board()[effect_index.y][effect_index.x].has_ship())
+    if (effect_board->get_tile_board()[effect_index.y][effect_index.x].has_ship()&&
+        effect_board->get_tile_board()[effect_index.y][effect_index.x].get_status()!=Tile::Status::Sink)
     {
         SDL_Rect rect_explosion_target = {
-        end_pos.x-40,end_pos.y-60,
+        end_pos.x-30,end_pos.y-50,
         SIZE_TILE + 40, SIZE_TILE + 40 };
 
-        //effect_board->show_board(5);
 
         EffectManager::instance()->show_effect(EffectID::Explosion1, rect_explosion_target, 0, [board,index]()
             {
                 board->get_tile_board()[index.y][index.x].take_hit();
             });
+        switch (rand() % 3)
+        {
+        case 0:
+            Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Explosion_1), 0);
+            break;
+        case 1:
+            Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Explosion_2), 0);
+            break;
+        case 2:
+            Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Explosion_3), 0);
+            break;
+        }
+
     }
-    else
+    else if(!effect_board->get_tile_board()[effect_index.y][effect_index.x].has_ship())
     {
         SDL_Rect rect_water_splash = {
-        end_pos.x- 40,end_pos.y-20,
+        end_pos.x- 35,end_pos.y-15,
         SIZE_TILE + 40, SIZE_TILE
         };
 
-        effect_board->get_tile_board()[effect_index.y][effect_index.x].change_status(Tile::Status::Miss);
-        //effect_board->show_board(5);
-
+        Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Entering_Water), 0);
         EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0, [board,index]()
             {
                 board->get_tile_board()[index.y][index.x].change_status(Tile::Status::Miss);
+            });
+    }
+    else if (effect_board->get_tile_board()[effect_index.y][effect_index.x].get_status() == Tile::Status::Sink)
+    {
+        SDL_Rect rect_water_splash = {
+        end_pos.x - 35,end_pos.y - 15,
+        SIZE_TILE + 40, SIZE_TILE
+        };
+
+        Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_UnderWater_Explosion), 0);
+        EffectManager::instance()->show_effect(EffectID::WaterSplash, rect_water_splash, 0, [board, index]()
+            {
             });
     }
 

@@ -10,6 +10,7 @@ SettlementScene::~SettlementScene()
 
 void SettlementScene::on_enter()
 {
+	Mix_FadeInMusic(ResourcesManager::instance()->get_music(ResID::Music_Game_End), -1, 1000);
 
 }
 void SettlementScene::on_exit()

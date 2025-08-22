@@ -31,6 +31,20 @@ void  BulletManager::fire(SDL_Point bullet_start, SDL_Point bullet_end,Board* ef
 	auto b = std::make_unique<Bullet>();
 	b->fire(bullet_start, bullet_end, 600,effect_board,index);
 	bullet_list.push_back(std::move(b));
+	switch (rand() % 3)
+	{
+	case 0:
+		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Fire_1), 0);
+		break;
+	case 1:
+		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Fire_2), 0);
+
+		break;
+	case 2:
+		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Fire_3), 0);
+		break;
+	}
+
 }
 
 

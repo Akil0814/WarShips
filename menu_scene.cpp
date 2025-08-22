@@ -16,9 +16,6 @@ MenuScene::~MenuScene() = default;
 
 void MenuScene::on_enter()
 {
-	WINDOW_WIDTH = 400;
-	WINDOW_HEIGHT = 600;
-	SDL_SetWindowSize(GameManager::instance()->get_window(), WINDOW_WIDTH, WINDOW_HEIGHT);
 
 }
 void MenuScene::on_exit() {}

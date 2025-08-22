@@ -71,12 +71,10 @@ void GameScene::on_enter()
 
 	next_player_button.set_on_click([this]
 		{
-			if (get_other_player()->get_board()->is_on_animation())
-			{
-				Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
-			}
-			else
-				next_player_turn();
+
+				//Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
+			Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Next_Player), 0);
+			next_player_turn();
 		});
 
 	Mix_FadeInMusic(ResourcesManager::instance()->get_music(ResID::Music_In_Game), -1,3000);

@@ -47,10 +47,7 @@ bool AtlasManager::load_atlas()
 			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion1_0006),
 			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion1_0007),
 			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion1_0008),
-			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion1_0009),
-			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion1_0010),
-			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion1_0011),
-			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion1_0012) }))
+			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion1_0009), }))
 		return false;
 	atlas_pool[AtlasID::Explosion1] = atlas;
 
@@ -67,10 +64,7 @@ bool AtlasManager::load_atlas()
 			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion2_0010),
 			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion2_0011),
 			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion2_0012),
-			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion2_0013),
-			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion2_0014),
-			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion2_0015),
-			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion2_0016) }))
+			ResourcesManager::instance()->get_texture(ResID::Tex_Explosion2_0013)}))
 		return false;
 	atlas_pool[AtlasID::Explosion2] = atlas;
 

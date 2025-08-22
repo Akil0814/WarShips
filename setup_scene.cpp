@@ -61,9 +61,6 @@ SetupScene::~SetupScene()
 
 void SetupScene::on_enter()
 {
-	WINDOW_WIDTH = 1280;
-	WINDOW_HEIGHT = 720;
-	SDL_SetWindowSize(GameManager::instance()->get_window(), WINDOW_WIDTH, WINDOW_HEIGHT);
 	p1 = GameManager::instance()->get_player1();
 	p2 = GameManager::instance()->get_player2();
 	text_player1 = TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "Player1:");
