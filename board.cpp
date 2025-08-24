@@ -1,10 +1,6 @@
 #include "board.h"
 #include <cmath>
 
-/*
-加入bullet类 将特效渲染交给子弹管理器，在fire同时传入目标位置与渲染信息 在子弹到达时渲染特效
-向子弹管理器传入this指针在特效播完时修改棋盘信息
-*/
 
 SDL_Texture* Board::tile_hit = nullptr;
 SDL_Texture* Board::tile_miss = nullptr;
