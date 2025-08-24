@@ -28,6 +28,7 @@ Board::~Board() = default;
 void Board::on_render(SDL_Renderer* renderer)
 {
     draw_board(renderer);
+    //show_atk_feasibility(renderer, mouse_pos);
 
 
     // 渲染所有格子状态
@@ -299,7 +300,7 @@ bool Board::check_available(int x,int y, int ship_size, bool is_horizontal)
     return true;
 }
 
-void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int ship_size, bool is_horizontal)
+void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int ship_size, bool is_horizontal)  
 {
     SDL_Point grid_pos = { 0 };
 
@@ -340,6 +341,44 @@ void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int sh
 
     SDL_RenderFillRect(renderer, &rect);
 }
+
+void Board::show_atk_feasibility(SDL_Renderer* renderer, SDL_Point pos)
+{
+
+    SDL_Point grid_pos = { 0 };
+
+    if (pos.x - board_render_x < -(SIZE_TILE / 2) || pos.y - board_render_y < -(SIZE_TILE / 2))
+    {
+        int g_pos_x = std::floor(double(pos.x - board_render_x) / SIZE_TILE);
+        int g_pos_y = std::floor(double(pos.y - board_render_y) / SIZE_TILE);
+
+        grid_pos = { g_pos_x,g_pos_y };
+    }
+    else
+    {
+        grid_pos =
+        {
+            (pos.x - board_render_x) / SIZE_TILE,
+            (pos.y - board_render_y) / SIZE_TILE
+        };
+    }
+
+    if ((pos.x - board_render_x) % SIZE_TILE > SIZE_TILE / 2)
+        grid_pos.x++;
+
+    if ((pos.y - board_render_y) % SIZE_TILE > SIZE_TILE / 2)
+        grid_pos.y++;
+
+    SDL_Rect rect = { board_render_x + grid_pos.x * SIZE_TILE,
+                    board_render_y + grid_pos.y * SIZE_TILE,
+                    SIZE_TILE,SIZE_TILE };
+
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 50);
+
+    SDL_RenderFillRect(renderer, &rect);
+
+}
+
 
 void Board::reset_board()
 {

@@ -160,7 +160,7 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	sound_pool[ResID::Sound_Repair] = Mix_LoadWAV("res/Sound/repair.wav");
 	sound_pool[ResID::Sound_UnderWater_Explosion] = Mix_LoadWAV("res/Sound/underwater_explosion.wav");
 
-	Mix_AllocateChannels(64);
+	Mix_AllocateChannels(32);
 	std::cout << "sound check" << std::endl;
 
 	for (const auto& pair : sound_pool)

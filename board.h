@@ -29,6 +29,9 @@ public:
 
 	SDL_Point place_ship(Ship* ship,SDL_Point pos, int ship_size, bool is_horizontal);
 	void show_place_feasibility(SDL_Renderer* renderer,SDL_Point pos, int ship_size, bool is_horizontal);
+	void show_atk_feasibility(SDL_Renderer* renderer, SDL_Point pos);
+
+
 
 	void ship_sink(SDL_Point pos, int ship_size, bool is_horizontal);
 
