@@ -1,7 +1,6 @@
 #include "board.h"
 #include <cmath>
 
-
 SDL_Texture* Board::tile_hit = nullptr;
 SDL_Texture* Board::tile_miss = nullptr;
 SDL_Texture* Board::tile_detected = nullptr;
@@ -24,8 +23,7 @@ Board::~Board() = default;
 void Board::on_render(SDL_Renderer* renderer)
 {
     draw_board(renderer);
-    //show_atk_feasibility(renderer, mouse_pos);
-
+    show_atk_feasibility(renderer, mouse_pos);
 
     // 渲染所有格子状态
     for (int y = 0; y < row; ++y) {
@@ -43,7 +41,6 @@ void Board::on_render(SDL_Renderer* renderer)
 
             case Tile::Status::Miss:
                 SDL_RenderCopy(renderer, tile_miss, nullptr, &rect);
-
                 break;
 
             case Tile::Status::Hit:
@@ -125,7 +122,7 @@ void Board::on_mouse_click(const SDL_Event& event)
 
         start_hit = true;
         ++total_atk_time;
-        BulletManager::instance()->fire({ 720,500 }, mouse_click_tile_center,this,{ index_x, index_y});
+        BulletManager::instance()->fire(mouse_click_tile_center,this,{ index_x, index_y});
         EffectManager::instance()->show_effect(EffectID::SelectTarget, rect_select_target, 0, [this]()
             {
                 set_target = false;
@@ -340,6 +337,8 @@ void Board::show_place_feasibility(SDL_Renderer* renderer, SDL_Point pos, int sh
 
 void Board::show_atk_feasibility(SDL_Renderer* renderer, SDL_Point pos)
 {
+    if (!move_in_board)
+        return;
 
     SDL_Point grid_pos = { 0 };
 
@@ -359,22 +358,15 @@ void Board::show_atk_feasibility(SDL_Renderer* renderer, SDL_Point pos)
         };
     }
 
-    if ((pos.x - board_render_x) % SIZE_TILE > SIZE_TILE / 2)
-        grid_pos.x++;
-
-    if ((pos.y - board_render_y) % SIZE_TILE > SIZE_TILE / 2)
-        grid_pos.y++;
-
     SDL_Rect rect = { board_render_x + grid_pos.x * SIZE_TILE,
                     board_render_y + grid_pos.y * SIZE_TILE,
                     SIZE_TILE,SIZE_TILE };
 
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 50);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 50);
 
     SDL_RenderFillRect(renderer, &rect);
 
 }
-
 
 void Board::reset_board()
 {

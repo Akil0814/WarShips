@@ -23,6 +23,8 @@ public:
 	void on_render(SDL_Renderer* renderer);
 
 	void fire(SDL_Point bullet_start, SDL_Point bullet_end, Board* effect_board, SDL_Point index);
+	void fire(SDL_Point bullet_end, Board* effect_board, SDL_Point index);
+
 	void on_fire(std::unique_ptr<Bullet>& bullet);
 	void on_arrive(std::unique_ptr<Bullet>& bullet);
 

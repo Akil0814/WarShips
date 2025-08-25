@@ -29,7 +29,7 @@ void  BulletManager::on_render(SDL_Renderer* renderer)
 void  BulletManager::fire(SDL_Point bullet_start, SDL_Point bullet_end,Board* effect_board,SDL_Point index)
 {
 	auto b = std::make_unique<Bullet>();
-	b->fire(bullet_start, bullet_end, 600,effect_board,index);
+	b->fire(bullet_start, bullet_end, 500, effect_board, index);
 	bullet_list.push_back(std::move(b));
 	switch (rand() % 3)
 	{
@@ -38,7 +38,6 @@ void  BulletManager::fire(SDL_Point bullet_start, SDL_Point bullet_end,Board* ef
 		break;
 	case 1:
 		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Fire_2), 0);
-
 		break;
 	case 2:
 		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Fire_3), 0);
@@ -47,7 +46,40 @@ void  BulletManager::fire(SDL_Point bullet_start, SDL_Point bullet_end,Board* ef
 
 }
 
+void  BulletManager::fire(SDL_Point bullet_end, Board* effect_board, SDL_Point index)
+{
+	auto b = std::make_unique<Bullet>();
 
+	int pos_y ,low,high= 0;
+	if (bullet_end.y < 230)
+		low = 320, high = 620;
+	else if (bullet_end.y > 420)
+		low = 30, high = 330;
+	else
+		low = 30, high = 620;
+
+	pos_y = low + std::rand() % (high - low + 1);
+
+	std::cout << "fire at: " << pos_y << std::endl;
+	std::cout << "fire to: " << bullet_end.x << "," << bullet_end.y << std::endl;
+
+	SDL_Point bullet_start = { 640,pos_y };
+	b->fire(bullet_start, bullet_end, 500, effect_board, index);
+	bullet_list.push_back(std::move(b));
+	switch (rand() % 3)
+	{
+	case 0:
+		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Fire_1), 0);
+		break;
+	case 1:
+		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Fire_2), 0);
+		break;
+	case 2:
+		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Fire_3), 0);
+		break;
+	}
+
+}
 
 void BulletManager::on_fire(std::unique_ptr<Bullet>& bullet)
 {
