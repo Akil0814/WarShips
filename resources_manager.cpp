@@ -42,7 +42,7 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	texture_pool[ResID::Tex_Tile_unknow] = IMG_LoadTexture(renderer, "res/Map_texture/tile_unknow.png");
 	texture_pool[ResID::Tex_Tile_defance] = IMG_LoadTexture(renderer, "res/Map_texture/tile_defance.png");
 	texture_pool[ResID::Tex_Tile_sink] = IMG_LoadTexture(renderer, "res/Map_texture/tile_sink.png");
-
+	texture_pool[ResID::Tex_Tile_select] = IMG_LoadTexture(renderer, "res/Map_texture/tile_select.png");
 
 
 	texture_pool[ResID::Tex_SetTarget] = IMG_LoadTexture(renderer, "res/set_target.png");
@@ -128,6 +128,24 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	texture_pool[ResID::Tex_Explosion2_0014] = IMG_LoadTexture(renderer, "res/Explosion_2/explosion_0014.png");
 	texture_pool[ResID::Tex_Explosion2_0015] = IMG_LoadTexture(renderer, "res/Explosion_2/explosion_0015.png");
 	texture_pool[ResID::Tex_Explosion2_0016] = IMG_LoadTexture(renderer, "res/Explosion_2/explosion_0016.png");
+
+	texture_pool[ResID::Tex_Shield_0001]=IMG_LoadTexture(renderer,"res/Shield/shield_0001.png");
+	texture_pool[ResID::Tex_Shield_0002]=IMG_LoadTexture(renderer,"res/Shield/shield_0002.png");
+	texture_pool[ResID::Tex_Shield_0003]=IMG_LoadTexture(renderer,"res/Shield/shield_0003.png");
+	texture_pool[ResID::Tex_Shield_0004]=IMG_LoadTexture(renderer,"res/Shield/shield_0004.png");
+	texture_pool[ResID::Tex_Shield_0005]=IMG_LoadTexture(renderer,"res/Shield/shield_0005.png");
+	texture_pool[ResID::Tex_Shield_0006]=IMG_LoadTexture(renderer,"res/Shield/shield_0006.png");
+	texture_pool[ResID::Tex_Shield_0007]=IMG_LoadTexture(renderer,"res/Shield/shield_0007.png");
+	texture_pool[ResID::Tex_Shield_0008]=IMG_LoadTexture(renderer,"res/Shield/shield_0008.png");
+	texture_pool[ResID::Tex_Shield_0009]=IMG_LoadTexture(renderer,"res/Shield/shield_0009.png");
+	texture_pool[ResID::Tex_Shield_0010]=IMG_LoadTexture(renderer,"res/Shield/shield_0010.png");
+	texture_pool[ResID::Tex_Shield_0011]=IMG_LoadTexture(renderer,"res/Shield/shield_0011.png");
+	texture_pool[ResID::Tex_Shield_0012]=IMG_LoadTexture(renderer,"res/Shield/shield_0012.png");
+	texture_pool[ResID::Tex_Shield_0013]=IMG_LoadTexture(renderer,"res/Shield/shield_0013.png");
+	texture_pool[ResID::Tex_Shield_0014]=IMG_LoadTexture(renderer,"res/Shield/shield_0014.png");
+	texture_pool[ResID::Tex_Shield_0015]=IMG_LoadTexture(renderer,"res/Shield/shield_0015.png");
+	texture_pool[ResID::Tex_Shield_0016]=IMG_LoadTexture(renderer,"res/Shield/shield_0016.png");
+	texture_pool[ResID::Tex_Shield_0017] = IMG_LoadTexture(renderer, "res/Shield/shield_0017.png");
 
 	std::cout << "text check" << std::endl;
 

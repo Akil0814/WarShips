@@ -133,6 +133,13 @@ bool EffectManager::init_all_effect()
 	effect_pool[EffectID::Explosion2] = e;
 
 
+	e = new Effect;
+	e->set_frame(AtlasManager::instance()->get_atlas(AtlasID::Shield));
+	e->set_interval(0.1);
+	e->set_loop(false);
+	effect_pool[EffectID::Shield] = e;
+
+
 	for (const auto& pair : effect_pool)
 	{
 		if (!pair.second)

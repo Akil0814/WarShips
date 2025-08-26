@@ -8,7 +8,8 @@
 * 
 */
 
-Bullet::Bullet() {
+Bullet::Bullet()
+{
     animation.set_frame(AtlasManager::instance()->get_atlas(AtlasID::MissileOnFire));
     animation.set_interval(0.1);
     animation.set_loop(true);
@@ -121,6 +122,13 @@ void Bullet::on_arrive()
             break;
         }
 
+        if (board->get_tile_board()[index.y][index.x].get_status() == Tile::Status::Defend)
+        {
+            SDL_Rect rect_defend_target = {
+                    end_pos.x - 15,end_pos.y - 25,
+                    SIZE_TILE, SIZE_TILE+10 };
+            EffectManager::instance()->show_effect(EffectID::Shield, rect_defend_target, 0, []() {});
+        }
     }
     else if(!effect_board->get_tile_board()[effect_index.y][effect_index.x].has_ship())
     {

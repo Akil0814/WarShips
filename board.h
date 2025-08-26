@@ -59,6 +59,10 @@ public:
 	static SDL_Texture* tile_detected;
 	static SDL_Texture* tile_defance;
 	static SDL_Texture* tile_sink;
+	static SDL_Texture* tile_select;
+	static SDL_Texture* tex_set_target;
+	static SDL_Texture* tex_hand;
+
 
 
 private:

@@ -73,6 +73,8 @@ enum class ResID
 	Tex_Tile_unknow,
 	Tex_Tile_defance,
 	Tex_Tile_sink,
+	Tex_Tile_select,
+
 
 
 
@@ -213,6 +215,26 @@ enum class ResID
 	Tex_WaterSplash_Multiple_0004,
 	Tex_WaterSplash_Multiple_0005,
 	Tex_WaterSplash_Multiple_0006,
+
+
+	Tex_Shield_0001,
+	Tex_Shield_0002,
+	Tex_Shield_0003,
+	Tex_Shield_0004,
+	Tex_Shield_0005,
+	Tex_Shield_0006,
+	Tex_Shield_0007,
+	Tex_Shield_0008,
+	Tex_Shield_0009,
+	Tex_Shield_0010,
+	Tex_Shield_0011,
+	Tex_Shield_0012,
+	Tex_Shield_0013,
+	Tex_Shield_0014,
+	Tex_Shield_0015,
+	Tex_Shield_0016,
+	Tex_Shield_0017
+
 };
 
 typedef std::unordered_map<ResID, TTF_Font*> FontPool;

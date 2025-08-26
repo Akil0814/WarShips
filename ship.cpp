@@ -2,7 +2,7 @@
 #include<iostream>
 
 void Ship::init_ship(SDL_Texture* texture,
-					int size, int hp, int atk_time, int defense_time, SkillType skill1,int time_1, SkillType skill2,int time_2)
+					int size, int hp, int atk_time, int defense_time, SkillType skill,int time)
 {
 	ship_texture = texture;
 
@@ -13,10 +13,8 @@ void Ship::init_ship(SDL_Texture* texture,
 	this->atk_time = atk_time;
 	this->defense_time = defense_time;
 
-	this->skill_1 = skill1;
-	skill1_time = time_1;
-	this->skill_2 = skill2;
-	skill2_time = time_2;
+	this->skill = skill;
+	skill_time = time;
 }
 
 void Ship::set_board_in(Board* board)
@@ -153,14 +151,9 @@ bool Ship::check_cursor_hit(int x, int y)const
 		y >= collision_rect.y && y < (collision_rect.y + collision_rect.h);
 }
 
-SkillType Ship::get_skill_1()const
+SkillType Ship::get_skill()const
 {
-	return skill_1;
-}
-
-SkillType Ship::get_skill_2()const
-{
-	return skill_2;
+	return skill;
 }
 
 bool Ship::is_in_board()const
@@ -219,14 +212,9 @@ int Ship::get_atk_time()const
 	return atk_time;
 }
 
-int Ship::get_skill_1_time()const
+int Ship::get_skill_time()const
 {
-	return skill1_time;
-}
-
-int Ship::get_skill_2_time()const
-{
-	return skill2_time;
+	return skill_time;
 }
 
 bool Ship::check_motion()const
@@ -244,3 +232,14 @@ void Ship::update_in_board_pos(SDL_Point pos)
 {
 	inboard_position = pos;
 }
+
+bool Ship::can_detect()const
+{
+	return can_be_detect;
+}
+
+void Ship::set_can_detect(bool d)
+{
+	can_be_detect = d;
+}
+

@@ -17,6 +17,7 @@ enum class EffectID
 	Explosion1,
 	Explosion2,
 	ExplosionMax,
+	Shield
 };
 
 typedef std::unordered_map<EffectID, Effect*> EffectPool;

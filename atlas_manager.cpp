@@ -68,6 +68,31 @@ bool AtlasManager::load_atlas()
 		return false;
 	atlas_pool[AtlasID::Explosion2] = atlas;
 
+
+
+
+	atlas = new Atlas;
+	if (!atlas->add_Textures({ ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0001),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0002),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0003),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0004),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0005),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0006),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0007),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0008),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0009),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0010),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0011),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0012),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0013),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0014),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0015),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0016),
+	ResourcesManager::instance()->get_texture(ResID::Tex_Shield_0017) }))
+		return false;
+
+	atlas_pool[AtlasID::Shield] = atlas;
+
 		did_load_atlas = true;
 	return true;
 }

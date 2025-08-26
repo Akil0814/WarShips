@@ -5,7 +5,11 @@ SDL_Texture* Board::tile_hit = nullptr;
 SDL_Texture* Board::tile_miss = nullptr;
 SDL_Texture* Board::tile_detected = nullptr;
 SDL_Texture* Board::tile_defance = nullptr;
+SDL_Texture* Board::tile_select = nullptr;
 SDL_Texture* Board::tile_sink = nullptr;
+SDL_Texture* Board::tex_hand = nullptr;
+SDL_Texture* Board::tex_set_target = nullptr;
+
 
 Board::Board()
 {
@@ -16,6 +20,9 @@ Board::Board()
     tile_detected = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_unknow);
     tile_defance= ResourcesManager::instance()->get_texture(ResID::Tex_Tile_defance);
     tile_sink = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_sink);
+    tile_select = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_select);
+    tex_set_target = ResourcesManager::instance()->get_texture(ResID::Tex_SetTarget);
+
 }
 
 Board::~Board() = default;
@@ -63,6 +70,16 @@ void Board::on_render(SDL_Renderer* renderer)
 
     EffectManager::instance()->on_render(renderer);
     BulletManager::instance()->on_render(renderer);
+
+    if (move_in_board)
+    {
+
+        SDL_Rect set_target_rect = {
+             mouse_pos.x-13, mouse_pos.y-13,
+             26,26};
+
+        SDL_RenderCopy(renderer, tex_set_target, nullptr, &set_target_rect);
+    }
 }
 
 void Board::on_update(double delta)
@@ -79,14 +96,18 @@ void Board::on_input(const SDL_Event& event)
 
 void Board::on_mouse_move(const SDL_Event& event)
 {
-    if (is_inside(event.motion.x, event.motion.y)) {
+    if (is_inside(event.motion.x, event.motion.y))
+    {
         move_in_board = true;
         mouse_pos.x = event.motion.x;
         mouse_pos.y = event.motion.y;
+        SDL_ShowCursor(SDL_DISABLE);
+
     }
     else
     {
         move_in_board = false;
+        SDL_ShowCursor(SDL_ENABLE);
     }
 }
 
@@ -180,8 +201,8 @@ SDL_Point Board::place_ship(Ship* ship, SDL_Point pos, int ship_size, bool is_ho
 
     if (pos.x - board_render_x < -(SIZE_TILE / 2) || pos.y - board_render_y < -(SIZE_TILE / 2))
     {
-        x = std::floor(double(pos.x - board_render_x) / SIZE_TILE);
-        y = std::floor(double(pos.y - board_render_y) / SIZE_TILE);
+        x = std::floor(double(pos.x - board_render_x) / SIZE_TILE));
+        y = std::floor(double(pos.y - board_render_y) / SIZE_TILE));
     }
     else
     {
@@ -361,6 +382,8 @@ void Board::show_atk_feasibility(SDL_Renderer* renderer, SDL_Point pos)
     SDL_Rect rect = { board_render_x + grid_pos.x * SIZE_TILE,
                     board_render_y + grid_pos.y * SIZE_TILE,
                     SIZE_TILE,SIZE_TILE };
+
+    SDL_RenderCopy(renderer, tile_select, nullptr, &rect);
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 50);
 

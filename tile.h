@@ -1,6 +1,7 @@
 #pragma once
 #define SIZE_TILE 30
 #include<SDL.h>
+#include"effect_manager.h"
 
 class Ship;
 
@@ -21,6 +22,8 @@ public:
     void move_ship();
 
     void take_hit();
+
+    bool can_defense();
 
 private:
 

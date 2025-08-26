@@ -7,10 +7,7 @@ public:
 	{
 		Ship::init_ship(ResourcesManager::instance()->get_texture(ResID::Tex_Ship_LightCruiser), 3, 2, 1, 0);
 	}
-	~LightCruiser()
-	{
-
-	}
+	~LightCruiser(){}
 
 private:
 

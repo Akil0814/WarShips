@@ -13,7 +13,8 @@ enum class AtlasID
 	Explosion1,
 	Explosion2,
 	ExplosionMax,
-	ExCalibur
+	ExCalibur,
+	Shield
 };
 
 typedef std::unordered_map<AtlasID, Atlas*>AtlasPool;

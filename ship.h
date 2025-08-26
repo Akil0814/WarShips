@@ -24,10 +24,9 @@ public:
 	void on_render(SDL_Renderer* renderer);
 	void on_input(const SDL_Event& event);
 
-	SkillType get_skill_1()const;
-	int get_skill_1_time()const;
-	SkillType get_skill_2()const;
-	int get_skill_2_time()const;
+	SkillType get_skill()const;
+	int get_skill_time()const;
+	void use_skill();
 
 	void take_damage();
 	bool can_defense();
@@ -37,6 +36,7 @@ public:
 	int get_atk_time() const;
 	bool check_motion()const;
 	void update_in_board_pos(SDL_Point pos);
+	bool can_detect()const;
 
 
 
@@ -44,7 +44,9 @@ protected:
 
 	void init_ship(SDL_Texture* texture,
 		int size, int hp, int datk_time, int defense_time,
-		SkillType skill1 = SkillType::NONE, int time_1 = 0, SkillType skill2 = SkillType::NONE, int time_2 = 0);
+		SkillType skill = SkillType::NONE, int time = 0);
+
+	void set_can_detect(bool d);
 
 	bool check_cursor_hit(int x, int y)const;
 	void update_rect();
@@ -58,11 +60,8 @@ private:
 	int atk_time = 0;
 	int defense_time = 0;
 
-	SkillType skill_1 = SkillType::NONE;
-	int skill1_time = 0;
-
-	SkillType skill_2 = SkillType::NONE;
-	int skill2_time = 0;
+	SkillType skill = SkillType::NONE;
+	int skill_time = 0;
 
 	Board* player_board = nullptr;
 
@@ -82,9 +81,9 @@ private:
 
 	bool horizontal = true;
 	bool sink = false;
+	bool can_be_detect = true;
 
 	bool ship_in_move = false;
 	bool ship_in_rotate = false;
 	bool ship_in_board = false;
-
 };

@@ -51,7 +51,6 @@ void Tile::take_hit()
     {
         status = Status::Defend;
         std::cout << "change tile to defend" << std::endl;
-
     }
     else
     {
@@ -62,3 +61,9 @@ void Tile::take_hit()
     ship_on_tile->take_damage();
 
 }
+
+bool Tile::can_defense()
+{
+   return ship_on_tile->can_defense();
+}
+
