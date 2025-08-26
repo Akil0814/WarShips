@@ -14,10 +14,6 @@ Skill* SkillFactory::get_skill(SkillType type)
 		break;
 	case SkillType::Detect_13C:
 		break;
-	case SkillType::Attack_3L:
-		break;
-	case SkillType::Attack_5L:
-		break;
 	case SkillType::Attack_5C:
 		break;
 	case SkillType::Attack_3x3:

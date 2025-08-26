@@ -201,8 +201,8 @@ SDL_Point Board::place_ship(Ship* ship, SDL_Point pos, int ship_size, bool is_ho
 
     if (pos.x - board_render_x < -(SIZE_TILE / 2) || pos.y - board_render_y < -(SIZE_TILE / 2))
     {
-        x = std::floor(double(pos.x - board_render_x) / SIZE_TILE));
-        y = std::floor(double(pos.y - board_render_y) / SIZE_TILE));
+        x = std::floor(double(pos.x - board_render_x) / SIZE_TILE);
+        y = std::floor(double(pos.y - board_render_y) / SIZE_TILE);
     }
     else
     {

@@ -37,7 +37,7 @@ public:
 
 private:
 
-	int coin_have = 210;
+	int coin_have = 5000;
 
 	bool is_win = false;
 	bool have_ship_in_move = false;

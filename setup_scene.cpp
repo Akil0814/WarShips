@@ -101,17 +101,17 @@ void SetupScene::on_enter()
 	get_RepairShip.set_on_hovered([this] {current_view_ship = ShipType::RepairShip; });
 
 
-	get_Destroyer.set_on_click([this] { try_add_ship(ShipType::Destroyer, 10); });
-	get_LightCruiser.set_on_click([this] { try_add_ship(ShipType::LightCruiser, 10); });
-	get_HeavyCruiser.set_on_click([this] { try_add_ship(ShipType::HeavyCruiser, 10); });
-	get_SuperCruiser.set_on_click([this] { try_add_ship(ShipType::SuperCruiser, 10); });
-	get_BattleCruiser.set_on_click([this] { try_add_ship(ShipType::BattleCruiser, 10); });
-	get_Battleship.set_on_click([this] { try_add_ship(ShipType::Battleship, 10); });
-	get_AviationBattleship.set_on_click([this] { try_add_ship(ShipType::AviationBattleship, 10); });
-	get_AircraftCarrier.set_on_click([this] { try_add_ship(ShipType::AircraftCarrier, 10); });
-	get_LightCarrier.set_on_click([this] { try_add_ship(ShipType::LightCarrier, 10); });
-	get_Submarine.set_on_click([this] { try_add_ship(ShipType::Submarine, 10); });
-	get_RepairShip.set_on_click([this] { try_add_ship(ShipType::RepairShip, 10); });
+	get_Destroyer.set_on_click([this] { try_add_ship(ShipType::Destroyer, 250); });
+	get_LightCruiser.set_on_click([this] { try_add_ship(ShipType::LightCruiser, 300); });
+	get_HeavyCruiser.set_on_click([this] { try_add_ship(ShipType::HeavyCruiser, 350); });
+	get_SuperCruiser.set_on_click([this] { try_add_ship(ShipType::SuperCruiser, 750); });
+	get_BattleCruiser.set_on_click([this] { try_add_ship(ShipType::BattleCruiser, 700); });
+	get_Battleship.set_on_click([this] { try_add_ship(ShipType::Battleship, 950); });
+	get_AviationBattleship.set_on_click([this] { try_add_ship(ShipType::AviationBattleship, 1250); });
+	get_AircraftCarrier.set_on_click([this] { try_add_ship(ShipType::AircraftCarrier, 1250); });
+	get_LightCarrier.set_on_click([this] { try_add_ship(ShipType::LightCarrier, 850); });
+	get_Submarine.set_on_click([this] { try_add_ship(ShipType::Submarine, 450); });
+	get_RepairShip.set_on_click([this] { try_add_ship(ShipType::RepairShip, 300); });
 
 	current_player = p1;
 	player_coin_num.set_gap(10);
