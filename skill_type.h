@@ -6,7 +6,6 @@ enum class SkillType
 	Detect_3x3,
 	Detect_13C,
 
-	//Attack_3L,
 	Attack_5C,
 	Attack_3x3,
 
