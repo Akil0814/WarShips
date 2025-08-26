@@ -114,7 +114,7 @@ void SetupScene::on_enter()
 	get_RepairShip.set_on_click([this] { try_add_ship(ShipType::RepairShip, 10); });
 
 	current_player = p1;
-
+	player_coin_num.set_gap(10);
 	player_coin_num.set_number(current_player->get_coin());
 
 	Mix_FadeInMusic(ResourcesManager::instance()->get_music(ResID::Music_Setup),-1,3000);
@@ -132,6 +132,7 @@ void SetupScene::on_update(double delta)
 	for (auto& iter : shop_item_list)
 		iter->on_update(delta);
 	current_player->on_update(delta,true);
+	player_coin_num.on_update(delta);
 }
 
 void SetupScene::on_render(SDL_Renderer* renderer)
@@ -251,6 +252,7 @@ void SetupScene::try_add_ship(ShipType new_ship, int cost)
 	}
 	else
 	{
+		player_coin_num.flash_once();
 		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
 	}
 }

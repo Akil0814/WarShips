@@ -10,9 +10,12 @@
 class NumberBoard
 {
 public:
+	NumberBoard();
 	void on_render(SDL_Renderer* renderer);
 	void on_update(double delta);
 	void set_number(int val);
+	void set_gap(int g);
+	void flash_once();
 
 	void set_rect_for_ones_place(SDL_Rect rect);
 	bool init_texture(std::initializer_list<SDL_Texture*> textures);
@@ -34,6 +37,12 @@ public:
 private:
 
 	int number = 0;
+	int gap = 0;
+	bool flash = false;
+	int flash_frame =4;
+	int flash_times =0;
+
+	Timer effect_timer;
 	SDL_Rect first_digits = {0};
 	std::vector<int> digits;
 	std::vector<SDL_Rect> digit_rect;

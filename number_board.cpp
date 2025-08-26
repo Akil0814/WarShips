@@ -1,10 +1,27 @@
 #include"number_board.h"
 
+NumberBoard::NumberBoard()
+{
+	effect_timer.set_one_shot(true);
+	effect_timer.set_wait_time(0.3);
+	effect_timer.pause();
+	effect_timer.set_on_timeout([this] {this->flash = false; });
+}
+
 void NumberBoard::on_render(SDL_Renderer* renderer)
 {
+	if(flash)
+	{
+		if(flash_times <=flash_frame)
+		{
+			flash_times++;
+			return;
+		}
+		flash_times = 0;
+	}
+
 	for (size_t i = 0; i < digits.size(); ++i)
 	{
-
 		int digit = digits[i];
 		SDL_Texture* tex = texture_list[digit];
 		SDL_RenderCopy(renderer, tex, nullptr, &digit_rect[i]);
@@ -13,7 +30,7 @@ void NumberBoard::on_render(SDL_Renderer* renderer)
 
 void NumberBoard::on_update(double delta)
 {
-
+	effect_timer.on_update(delta);
 }
 
 void NumberBoard::set_number(int val)
@@ -35,7 +52,8 @@ void NumberBoard::set_number(int val)
 
 	for (size_t i = 0; i < digits.size(); ++i)
 	{
-		digit_rect.push_back(SDL_Rect{ first_digits.x - (int)(i * (first_digits.w)), first_digits.y, first_digits.w, first_digits.h });
+		digit_rect.push_back(SDL_Rect{ first_digits.x - (int)(i * (first_digits.w)-i*gap), first_digits.y,
+								first_digits.w, first_digits.h });
 	}
 }
 
@@ -71,5 +89,18 @@ int NumberBoard::get_number_on_board()
 {
 	return number;
 }
+
+void NumberBoard::set_gap(int g)
+{
+	gap = g;
+}
+
+void NumberBoard::flash_once()
+{
+	flash = true;
+	effect_timer.restart();
+	effect_timer.resume();
+}
+
 
 
