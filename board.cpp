@@ -416,6 +416,9 @@ void Board::show_atk_feasibility(SDL_Renderer* renderer, SDL_Point pos)
         // nothing
         break;
     case SkillType::Missile:
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 50);
+        add_rect(grid_pos.x, grid_pos.y);
+        break;
     case SkillType::Repair:
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 50);
         add_rect(grid_pos.x, grid_pos.y);
