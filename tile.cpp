@@ -28,23 +28,8 @@ void Tile::move_ship()
 
 void Tile::take_hit()
 {
-    if (ship_on_tile == nullptr)
-    {
-        std::cout << "no ship on tile" << std::endl;
+    if (ship_on_tile == nullptr ||status == Status::Sink|| status == Status::Hit)
         return;
-    }
-
-    if (status == Status::Sink)
-    {
-        std::cout << "Tile:sink alrady" << std::endl;
-        return;
-    }
-
-    if (status == Status::Hit)
-    {
-        std::cout << "is hit befor on same tile"<<std::endl;
-        return;
-    }  
 
 
     if (ship_on_tile->can_defense())
@@ -66,4 +51,10 @@ bool Tile::can_defense()
 {
    return ship_on_tile->can_defense();
 }
+
+Ship* Tile::get_ship_on_tile()
+{
+    return ship_on_tile;
+}
+
 

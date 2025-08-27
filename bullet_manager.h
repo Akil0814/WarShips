@@ -2,6 +2,7 @@
 #include"SDL.h"
 #include"manager.h"
 #include"bullet.h"
+#include"skill_type.h"
 #include<vector>
 #include<memory>
 #include<functional>
@@ -24,9 +25,11 @@ public:
 
 	void fire(SDL_Point bullet_start, SDL_Point bullet_end, Board* effect_board, SDL_Point index);
 	void fire(SDL_Point bullet_end, Board* effect_board, SDL_Point index);
+	void fire(SDL_Point bullet_end, Board* effect_board, SDL_Point index, SkillType skill);
 
 	void on_fire(std::unique_ptr<Bullet>& bullet);
 	void on_arrive(std::unique_ptr<Bullet>& bullet);
+	void focus_fire(SDL_Point bullet_end, Board* effect_board, SDL_Point index, SkillType skill);
 
 protected:
 	BulletManager() {};

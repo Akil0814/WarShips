@@ -29,9 +29,9 @@ void Player::on_render(SDL_Renderer* renderer,bool setup)
 		current_ship->on_render(renderer);
 }
 
-void Player::on_update(double delta)
+void Player::on_update(double delta, SkillType& current_skill)
 {
-	board.on_update(delta);//局内
+	board.on_update(delta,current_skill);//局内
 }
 
 void Player::on_update(double delta, bool setup)
@@ -119,7 +119,7 @@ void Player::finish_setting()
 void Player::reset()
 {
 	board.reset_board();
-	coin_have = 210;
+	coin_have = 5000;
 	have_ship_in_move = false;
 	current_ship = nullptr;
 
@@ -166,4 +166,29 @@ bool Player::have_remaining_ship()
 		return false;
 
 	return true;
+}
+
+int Player::get_skill_time(SkillType skill)
+{
+	int skill_time = 0;
+
+	for (auto& ship : ship_list)
+	{
+		if(ship->get_skill_type()==skill)
+			skill_time += ship->get_skill_time();
+	}
+
+	return skill_time;
+}
+
+void Player::use_skill(SkillType skill)
+{
+	for (auto& ship : ship_list)
+	{
+		if (ship->get_skill_type() == skill)
+		{
+			ship->use_skill();
+			return;
+		}
+	}
 }

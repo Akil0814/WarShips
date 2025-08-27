@@ -25,6 +25,8 @@ public:
 
     bool can_defense();
 
+    Ship* get_ship_on_tile();
+
 private:
 
     Status status = Status::Unknown;

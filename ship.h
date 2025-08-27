@@ -3,7 +3,6 @@
 #include"board.h"
 #include"tile.h"
 #include"effect_manager.h"
-#include"skill.h"
 #include"skill_type.h"
 
 class Board;
@@ -24,7 +23,7 @@ public:
 	void on_render(SDL_Renderer* renderer);
 	void on_input(const SDL_Event& event);
 
-	SkillType get_skill()const;
+	SkillType get_skill_type()const;
 	int get_skill_time()const;
 	void use_skill();
 

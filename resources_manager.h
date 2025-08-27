@@ -38,6 +38,7 @@ enum class ResID
 	Sound_Put_In_Water,
 	Sound_Repair,
 	Sound_UnderWater_Explosion,
+	Sound_Fail_Fire,
 
 //---------------------------------------------------------------//
 //--------------------------“Ù¿÷◊ ‘¥------------------------------//
@@ -63,6 +64,11 @@ enum class ResID
 	Tex_Atk_Time,
 	Tex_Range,
 	Tex_Bombs,
+	Tex_Detect_3x3,
+	Tex_Detect_13C,
+	Tex_Attack_5C,
+	Tex_Attack_3x3,
+	Tex_Repair,
 
 	Tex_SetTarget,
 	Tex_Hand,

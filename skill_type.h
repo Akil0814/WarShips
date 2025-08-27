@@ -2,6 +2,7 @@
 enum class SkillType
 {
 	NONE,
+	Missile,
 
 	Detect_3x3,
 	Detect_13C,
@@ -9,5 +10,5 @@ enum class SkillType
 	Attack_5C,
 	Attack_3x3,
 
-	Repair,
+	Repair
 };

@@ -37,6 +37,13 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	texture_pool[ResID::Tex_Range] = IMG_LoadTexture(renderer, "res/UI/range.png");
 	texture_pool[ResID::Tex_Bombs] = IMG_LoadTexture(renderer, "res/UI/bombs.png");
 
+	texture_pool[ResID::Tex_Detect_3x3]=IMG_LoadTexture(renderer,"res/UI/skill_d9c.png");
+	texture_pool[ResID::Tex_Detect_13C]=IMG_LoadTexture(renderer,"res/UI/skill_d13c.png");
+	texture_pool[ResID::Tex_Attack_5C ]=IMG_LoadTexture(renderer,"res/UI/skill_a5c.png");
+	texture_pool[ResID::Tex_Attack_3x3]=IMG_LoadTexture(renderer,"res/UI/skill_a9c.png");
+	texture_pool[ResID::Tex_Repair] = IMG_LoadTexture(renderer, "res/UI/skill_r.png");
+	
+
 	texture_pool[ResID::Tex_Tile_hit] = IMG_LoadTexture(renderer, "res/Map_texture/tile_hit.png");
 	texture_pool[ResID::Tex_Tile_miss] = IMG_LoadTexture(renderer, "res/Map_texture/tile_miss.png");
 	texture_pool[ResID::Tex_Tile_unknow] = IMG_LoadTexture(renderer, "res/Map_texture/tile_unknow.png");
@@ -177,6 +184,7 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	sound_pool[ResID::Sound_Put_In_Water] = Mix_LoadWAV("res/Sound/put_in_water.wav");
 	sound_pool[ResID::Sound_Repair] = Mix_LoadWAV("res/Sound/repair.wav");
 	sound_pool[ResID::Sound_UnderWater_Explosion] = Mix_LoadWAV("res/Sound/underwater_explosion.wav");
+	sound_pool[ResID::Sound_Fail_Fire] = Mix_LoadWAV("res/Sound/fail_fire.wav");
 
 	Mix_AllocateChannels(32);
 	std::cout << "sound check" << std::endl;

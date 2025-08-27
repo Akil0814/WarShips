@@ -4,12 +4,26 @@
 
 GameScene::GameScene():
 	next_player_button({ 1100,650,150,50 }, { 1105,655,140,40 },
-	TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "next player"),
-	ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr),
-
+		 TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_72), "next player"),
+		 ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr),
 	missile_button({ 30,650,50,50 }, { 30,652,50,45 },
 		 ResourcesManager::instance()->get_texture(ResID::Tex_Atk_Time),
-		 ResourcesManager::instance()->get_sound(ResID::Sound_Click), nullptr)
+		 ResourcesManager::instance()->get_sound(ResID::Sound_Button_Metal), nullptr),
+	Detect_3x3_button({ 180,650,50,50 }, { 180,650,50,50 },
+		ResourcesManager::instance()->get_texture(ResID::Tex_Detect_3x3),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Button_Metal), nullptr),
+	Detect_13C_button({ 240,650,50,50 }, { 240,650,50,50 },
+		ResourcesManager::instance()->get_texture(ResID::Tex_Detect_13C),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Button_Metal), nullptr),
+	Attack_5C_button({ 300,650,50,50 }, { 300,650,50,50 },
+		ResourcesManager::instance()->get_texture(ResID::Tex_Attack_5C),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Button_Metal), nullptr),
+	Attack_3x3_button({ 360,650,50,50 }, { 360,650,50,50 },
+		ResourcesManager::instance()->get_texture(ResID::Tex_Attack_3x3),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Button_Metal), nullptr),
+	Repair_button({ 420,650,50,50 }, { 420,650,50,50 },
+		ResourcesManager::instance()->get_texture(ResID::Tex_Repair),
+		ResourcesManager::instance()->get_sound(ResID::Sound_Button_Metal), nullptr)
 {
 
 	number_board_prototype.init_texture({ ResourcesManager::instance()->get_texture(ResID::Tex_Num_0),
@@ -24,37 +38,96 @@ GameScene::GameScene():
 	ResourcesManager::instance()->get_texture(ResID::Tex_Num_9) });
 
 	missile_count=number_board_prototype.clone();
-
 	missile_count->set_rect_for_ones_place({ 105,655,30,40 });
+	missile_count->set_gap(10);
+	missile_count->set_number(0);
 
-
-	skill_num_board_list.push_back(missile_count.get());
-
-
-	for (auto& iter : skill_num_board_list)
-	{
-		iter->set_number(0);
-	}
-
-	//////////////////////////////////////////
+	skill_count = number_board_prototype.clone();
+	skill_count->set_rect_for_ones_place({ 700,655,30,40 });
+	skill_count->set_gap(10);
+	skill_count->set_number(0);
 
 	missile_button.set_on_click([this]
 		{
 			reset_all_button();
 			missile_button.set_on_holed();
 			missile_button.set_status(Button::Status::Pushed);
+			current_skill_type = SkillType::Missile;
+			skill_count->set_number(0);
+			get_other_player()->get_board()->if_can_take_action(missile_num);
+		});
+
+
+	Detect_3x3_button.set_on_click([this]
+		{
+			reset_all_button();
+			Detect_3x3_button.set_on_holed();
+			Detect_3x3_button.set_status(Button::Status::Pushed);
+			current_skill_type = SkillType::Detect_3x3;
+			skill_count->set_number(current_player->get_skill_time(SkillType::Detect_3x3));
+			skill_time = skill_count->get_number_on_board();
+			get_other_player()->get_board()->if_can_take_action(skill_time);
+		});
+
+	Detect_13C_button.set_on_click([this]
+		{
+			reset_all_button();
+			Detect_13C_button.set_on_holed();
+			Detect_13C_button.set_status(Button::Status::Pushed);
+			current_skill_type = SkillType::Detect_13C;
+			skill_count->set_number(current_player->get_skill_time(SkillType::Detect_13C));
+			skill_time = skill_count->get_number_on_board();
+			get_other_player()->get_board()->if_can_take_action(skill_time);
+		});
+
+	Attack_5C_button.set_on_click([this]
+		{
+			reset_all_button();
+			Attack_5C_button.set_on_holed();
+			Attack_5C_button.set_status(Button::Status::Pushed);
+			current_skill_type = SkillType::Attack_5C;
+			skill_count->set_number(current_player->get_skill_time(SkillType::Attack_5C));
+			skill_time = skill_count->get_number_on_board();
+			get_other_player()->get_board()->if_can_take_action(skill_time);
+		});
+
+	Attack_3x3_button.set_on_click([this]
+		{
+			reset_all_button();
+			Attack_3x3_button.set_on_holed();
+			Attack_3x3_button.set_status(Button::Status::Pushed);
+			current_skill_type = SkillType::Attack_3x3;
+			skill_count->set_number(current_player->get_skill_time(SkillType::Attack_3x3));
+			skill_time = skill_count->get_number_on_board();
+			get_other_player()->get_board()->if_can_take_action(skill_time);
+		});
+
+	Repair_button.set_on_click([this]
+		{
+			reset_all_button();
+			Repair_button.set_on_holed();
+			Repair_button.set_status(Button::Status::Pushed);
+			current_skill_type = SkillType::Repair;
+			skill_count->set_number(current_player->get_skill_time(SkillType::Repair));
+			skill_time = skill_count->get_number_on_board();
+			get_other_player()->get_board()->if_can_take_action(skill_time);
 		});
 
 	skill_button_list.push_back(&missile_button);
+	skill_button_list.push_back(&Detect_3x3_button);
+	skill_button_list.push_back(&Detect_13C_button);
+	skill_button_list.push_back(&Attack_5C_button);
+	skill_button_list.push_back(&Attack_3x3_button);
+	skill_button_list.push_back(&Repair_button);
+
+
+	
 
 	text_player1 = TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_256), "Player1 Turn");
-	text_player2 = TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_256), "Player2 Turn");
-	
+	text_player2 = TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_256), "Player2 Turn");	
 }
 
-GameScene::~GameScene()
-{
-}
+GameScene::~GameScene(){}
 
 void GameScene::on_enter()
 {
@@ -68,16 +141,16 @@ void GameScene::on_enter()
 	missile_num = current_player->get_atk_time();
 	missile_count->set_number(missile_num);
 
-
 	next_player_button.set_on_click([this]
 		{
-
-				//Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Error), 0);
 			Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Next_Player), 0);
 			next_player_turn();
 		});
 
 	Mix_FadeInMusic(ResourcesManager::instance()->get_music(ResID::Music_In_Game), -1,3000);
+
+	round_time = 0;
+	missile_add = 0;
 }
 
 void GameScene::on_exit()
@@ -88,13 +161,42 @@ void GameScene::on_exit()
 void GameScene::on_update(double delta)
 {
 	next_player_button.on_update(delta);
-	get_other_player()->on_update(delta);
 
-	if (get_other_player()->get_board()->finish_hit_time())
+
+	get_other_player()->on_update(delta,current_skill_type);
+
+
+	if (get_other_player()->get_board()->get_action_time())
 	{
-		missile_num--;
-		missile_count->set_number(missile_num);
-		get_other_player()->get_board()->reset_hit_time();
+		switch (current_skill_type)
+		{
+		case SkillType::NONE:
+			break;
+		case SkillType::Missile:
+			missile_num = missile_num - get_other_player()->get_board()->get_action_time();
+			get_other_player()->get_board()->reset_action_time();
+			missile_count->set_number(missile_num);
+			get_other_player()->get_board()->if_can_take_action(missile_num);
+			break;
+
+		case SkillType::Detect_3x3:
+		case SkillType::Detect_13C:
+		case SkillType::Attack_5C:
+		case SkillType::Attack_3x3:
+		case SkillType::Repair:
+			skill_time = skill_time - get_other_player()->get_board()->get_action_time();
+			get_other_player()->get_board()->reset_action_time();
+			skill_count->set_number(skill_time);
+			get_other_player()->get_board()->if_can_take_action(skill_time);
+			current_player->use_skill(current_skill_type);
+			std::cout <<"skill_time:" << skill_time << std::endl;
+			std::cout << "skill_count_board:" << skill_count->get_number_on_board() << std::endl;
+
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	if (!get_other_player()->have_remaining_ship())
@@ -111,34 +213,36 @@ void GameScene::on_render(SDL_Renderer* renderer)
 {
 	next_player_button.on_render(renderer);
 
+	missile_button.on_render(renderer);
+	missile_count->on_render(renderer);
+	if (round_time)
+	{
+		for (auto& iter : skill_button_list)
+			iter->on_render(renderer);
+		skill_count->on_render(renderer);
+	}
+
 	current_player->on_render(renderer);
 	current_player->draw_cover(renderer);
 	get_other_player()->on_render(renderer);
 
-	for (auto& iter : skill_button_list)
-		iter->on_render(renderer);
-
-	for (auto& iter : skill_num_board_list)
-		iter->on_render(renderer);
-
 	if (current_player == p1)
-	{
 		SDL_RenderCopy(renderer, text_player1, nullptr, &player1_text_rect);
-	}
 	else
-	{
 		SDL_RenderCopy(renderer, text_player2, nullptr, &player2_text_rect);
-	}
 
 	SDL_SetRenderDrawColor(renderer, back_ground_color.r, back_ground_color.g, back_ground_color.b, back_ground_color.a);
 }
 
 void GameScene::on_input(const SDL_Event& event)
 {
-	if(missile_num!=0)
-		get_other_player()->on_input(event);
+	get_other_player()->on_input(event);
 
 	next_player_button.on_input(event);
+	missile_button.on_input(event);
+
+	if (round_time==0)
+		return;
 
 	for (auto iter : skill_button_list)
 		iter->on_input(event);
@@ -161,7 +265,14 @@ void GameScene::reset_all_button()
 
 void GameScene::next_player_turn()
 {
+	++round_time;
+	if (round_time > 15)
+		++missile_add;
+
 	current_player == p1 ? current_player=p2 : current_player=p1;
-	missile_num = current_player->get_atk_time();
+	missile_num = current_player->get_atk_time()+missile_add;
 	missile_count->set_number(missile_num);
+	skill_count->set_number(0);
+	reset_all_button();
+
 }

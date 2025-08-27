@@ -28,6 +28,12 @@ void  BulletManager::on_render(SDL_Renderer* renderer)
 
 void  BulletManager::fire(SDL_Point bullet_start, SDL_Point bullet_end,Board* effect_board,SDL_Point index)
 {
+	if (!effect_board->is_inside(bullet_end.x, bullet_end.y))
+	{
+		std::cout << "fire not in board"<<std::endl;
+		return;
+	}
+
 	auto b = std::make_unique<Bullet>();
 	b->fire(bullet_start, bullet_end, 500, effect_board, index);
 	bullet_list.push_back(std::move(b));
@@ -43,7 +49,6 @@ void  BulletManager::fire(SDL_Point bullet_start, SDL_Point bullet_end,Board* ef
 		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Fire_3), 0);
 		break;
 	}
-
 }
 
 void  BulletManager::fire(SDL_Point bullet_end, Board* effect_board, SDL_Point index)
@@ -78,8 +83,52 @@ void  BulletManager::fire(SDL_Point bullet_end, Board* effect_board, SDL_Point i
 		Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Fire_3), 0);
 		break;
 	}
-
 }
+
+void  BulletManager::fire(SDL_Point bullet_end, Board* effect_board, SDL_Point index,SkillType skill)
+{
+	switch (skill)
+	{
+	case SkillType::NONE:
+		return;
+		break;
+	case SkillType::Missile:
+		std::cout << "Missile "<< std::endl;
+		fire(bullet_end, effect_board, index);
+		break;
+	case SkillType::Attack_5C:
+		std::cout << "Atk 5c" << std::endl;
+
+		fire({ bullet_end.x,0 }, bullet_end, effect_board, index);//center
+
+		fire({ bullet_end.x,0 }, { bullet_end.x,bullet_end.y - SIZE_TILE }, effect_board, { index.x,index.y - 1 });//up
+		fire({ bullet_end.x,0 }, { bullet_end.x,bullet_end.y + SIZE_TILE }, effect_board, { index.x,index.y + 1 });//down
+		fire({ bullet_end.x + SIZE_TILE,0 }, { bullet_end.x + SIZE_TILE,bullet_end.y }, effect_board, { index.x + 1,index.y });//right
+		fire({ bullet_end.x - SIZE_TILE,0 }, { bullet_end.x - SIZE_TILE,bullet_end.y }, effect_board, { index.x - 1,index.y });//left
+
+		break;
+	case SkillType::Attack_3x3:
+		std::cout << "Atk 9c" << std::endl;
+
+		fire({ bullet_end.x,0 }, bullet_end, effect_board, index);
+
+		fire({ bullet_end.x,0 }, { bullet_end.x,bullet_end.y - SIZE_TILE }, effect_board, { index.x,index.y - 1 });//up
+		fire({ bullet_end.x,0 }, { bullet_end.x,bullet_end.y + SIZE_TILE }, effect_board, { index.x,index.y + 1 });//down
+		fire({ bullet_end.x + SIZE_TILE,0 }, { bullet_end.x + SIZE_TILE,bullet_end.y }, effect_board, { index.x + 1,index.y });//right
+		fire({ bullet_end.x - SIZE_TILE,0 }, { bullet_end.x - SIZE_TILE,bullet_end.y }, effect_board, { index.x - 1,index.y });//left
+
+		fire({ bullet_end.x + SIZE_TILE,0 }, { bullet_end.x + SIZE_TILE,bullet_end.y - SIZE_TILE }, effect_board, { index.x + 1,index.y - 1 });//up r
+		fire({ bullet_end.x - SIZE_TILE,0 }, { bullet_end.x - SIZE_TILE,bullet_end.y - SIZE_TILE }, effect_board, { index.x - 1,index.y - 1 });//up l
+
+		fire({ bullet_end.x + SIZE_TILE,0 }, { bullet_end.x + SIZE_TILE,bullet_end.y + SIZE_TILE }, effect_board, { index.x + 1,index.y + 1 });//down r
+		fire({ bullet_end.x - SIZE_TILE,0 }, { bullet_end.x - SIZE_TILE,bullet_end.y + SIZE_TILE }, effect_board, { index.x - 1,index.y + 1 });//down l
+		break;
+	default:
+		break;
+	}
+}
+
+
 
 void BulletManager::on_fire(std::unique_ptr<Bullet>& bullet)
 {

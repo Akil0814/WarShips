@@ -2,9 +2,7 @@
 #include<unordered_map>
 #include"board.h"
 #include"ship.h"
-#include"skill.h"
 #include"skill_type.h"
-#include"skill_factory.h"
 
 
 class Player
@@ -16,7 +14,7 @@ public:
 	void on_render(SDL_Renderer* renderer);
 	void on_render(SDL_Renderer* renderer,bool set_up);
 
-	void on_update(double delta);
+	void on_update(double delta, SkillType& current_skill);
 	void on_update(double delta, bool setup);
 
 	void on_input(const SDL_Event& event);
@@ -30,6 +28,8 @@ public:
 	bool spend_coin(int cost);
 	int get_coin();
 	int get_atk_time();
+	int get_skill_time(SkillType skill);
+	void use_skill(SkillType skill);
 
 	void draw_cover(SDL_Renderer* renderer);
 	void set_board_pos(SDL_Point pos);

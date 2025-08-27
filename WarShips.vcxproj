@@ -47,8 +47,6 @@
     <ClCompile Include="ship.cpp" />
     <ClCompile Include="ship_factory.cpp" />
     <ClCompile Include="ship_type.h" />
-    <ClCompile Include="skill.cpp" />
-    <ClCompile Include="skill_factory.cpp" />
     <ClCompile Include="super_cruiser.h" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="timer.cpp" />
@@ -85,8 +83,6 @@
     <ClInclude Include="settlement_scene.h" />
     <ClInclude Include="ship.h" />
     <ClInclude Include="ship_factory.h" />
-    <ClInclude Include="skill.h" />
-    <ClInclude Include="skill_factory.h" />
     <ClInclude Include="skill_type.h" />
     <ClInclude Include="submarine.h" />
     <ClInclude Include="tile.h" />

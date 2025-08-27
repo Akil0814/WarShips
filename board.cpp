@@ -82,10 +82,11 @@ void Board::on_render(SDL_Renderer* renderer)
     }
 }
 
-void Board::on_update(double delta)
+void Board::on_update(double delta,SkillType& current_skill)
 {
     EffectManager::instance()->on_update(delta);//局内
     BulletManager::instance()->on_update(delta);
+    this->skill_using = current_skill;
 }
 
 void Board::on_input(const SDL_Event& event)
@@ -102,7 +103,6 @@ void Board::on_mouse_move(const SDL_Event& event)
         mouse_pos.x = event.motion.x;
         mouse_pos.y = event.motion.y;
         SDL_ShowCursor(SDL_DISABLE);
-
     }
     else
     {
@@ -113,42 +113,59 @@ void Board::on_mouse_move(const SDL_Event& event)
 
 void Board::on_mouse_click(const SDL_Event& event)
 {
-    if (!is_inside(event.button.x, event.button.y))
+    if (!is_inside(event.button.x, event.button.y)|| skill_using ==SkillType::NONE)
         return;
 
-    if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
+    if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT )
     {
+        if (!can_take_action)
+        {
+            Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Fail_Fire), 0);
+            return;
+        }
+
+        start_action = true;
+        ++action_time;
         int x = (event.button.x - board_render_x) / SIZE_TILE;
         int y = (event.button.y - board_render_y) / SIZE_TILE;//计算位置
-
         if (x < 0 || x >= col || y < 0 || y >= row)
             return;
 
         index_x = x;
         index_y = y;
 
-        set_target = true;
-
         mouse_click_tile_center =
         {
             board_render_x + x * SIZE_TILE + SIZE_TILE / 2,
             board_render_y + y * SIZE_TILE + SIZE_TILE / 2
         };
-
         rect_select_target = {
             board_render_x + x * SIZE_TILE - 20,
             board_render_y + y * SIZE_TILE - 20,
             SIZE_TILE + 40, SIZE_TILE + 40
         };
 
-        start_hit = true;
-        ++total_atk_time;
-        BulletManager::instance()->fire(mouse_click_tile_center,this,{ index_x, index_y});
-        EffectManager::instance()->show_effect(EffectID::SelectTarget, rect_select_target, 0, [this]()
-            {
-                set_target = false;
-                find_target = true;
-            });
+        switch (skill_using)
+        {
+        case SkillType::NONE:
+            break;
+        case SkillType::Missile:
+        case SkillType::Attack_5C:
+        case SkillType::Attack_3x3:
+            EffectManager::instance()->show_effect(EffectID::SelectTarget, rect_select_target, 0, [](){});
+            BulletManager::instance()->fire(mouse_click_tile_center, this, { index_x, index_y }, skill_using);
+            ++total_atk_time;
+            break;
+
+        case SkillType::Detect_3x3:
+        case SkillType::Detect_13C:
+            detect_board(skill_using, { index_x, index_y });
+            break;
+        case SkillType::Repair:
+            break;
+        default:
+            break;
+        }   
     }
 }
 
@@ -378,17 +395,72 @@ void Board::show_atk_feasibility(SDL_Renderer* renderer, SDL_Point pos)
             (pos.y - board_render_y) / SIZE_TILE
         };
     }
+    SDL_Rect rect;
 
-    SDL_Rect rect = { board_render_x + grid_pos.x * SIZE_TILE,
-                    board_render_y + grid_pos.y * SIZE_TILE,
-                    SIZE_TILE,SIZE_TILE };
+    std::vector<SDL_Rect> highlight_rects;
 
-    SDL_RenderCopy(renderer, tile_select, nullptr, &rect);
+    auto add_rect = [&](int gx, int gy) {
+        if (gx < 0 || gx >= col || gy < 0 || gy >= row) return;
+        highlight_rects.push_back
+        ({
+            board_render_x + gx * SIZE_TILE,
+            board_render_y + gy * SIZE_TILE,
+            SIZE_TILE,
+            SIZE_TILE
+            });
+        };
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 50);
+    switch (skill_using)
+    {
+    case SkillType::NONE:
+        // nothing
+        break;
+    case SkillType::Missile:
+    case SkillType::Repair:
+        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 50);
+        add_rect(grid_pos.x, grid_pos.y);
+        break;
+    case SkillType::Attack_3x3:
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 50);
+        for (int j = grid_pos.y - 1; j <= grid_pos.y + 1; ++j)
+            for (int i = grid_pos.x - 1; i <= grid_pos.x + 1; ++i)
+                add_rect(i, j);
+        break;
+    case SkillType::Detect_3x3:
+        SDL_SetRenderDrawColor(renderer, 50, 255, 255, 50);
+        for (int j = grid_pos.y - 1; j <= grid_pos.y + 1; ++j)
+            for (int i = grid_pos.x - 1; i <= grid_pos.x + 1; ++i)
+                add_rect(i, j);
+        break;
+    case SkillType::Detect_13C:
+        SDL_SetRenderDrawColor(renderer, 50, 255, 255, 50);
+        // 中心 3×3
+        for (int j = grid_pos.y - 1; j <= grid_pos.y + 1; ++j)
+            for (int i = grid_pos.x - 1; i <= grid_pos.x + 1; ++i)
+                add_rect(i, j);
+        // 上下左右再多一格
+        add_rect(grid_pos.x - 2, grid_pos.y);
+        add_rect(grid_pos.x + 2, grid_pos.y);
+        add_rect(grid_pos.x, grid_pos.y - 2);
+        add_rect(grid_pos.x, grid_pos.y + 2);
+        break;
+    case SkillType::Attack_5C:
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 50);   // 半透明红
+        add_rect(grid_pos.x, grid_pos.y);     // 中心
+        add_rect(grid_pos.x - 1, grid_pos.y);     // 左
+        add_rect(grid_pos.x + 1, grid_pos.y);     // 右
+        add_rect(grid_pos.x, grid_pos.y - 1); // 上
+        add_rect(grid_pos.x, grid_pos.y + 1); // 下
+        break;
+    default:
+        break;
+    }
 
-    SDL_RenderFillRect(renderer, &rect);
-
+    // 真正绘制
+    for (auto& r : highlight_rects) {
+        SDL_RenderCopy(renderer, tile_select, nullptr, &r);
+        SDL_RenderFillRect(renderer, &r);
+    }
 }
 
 void Board::reset_board()
@@ -406,16 +478,6 @@ void Board::set_board_pos(SDL_Point pt)
 {
     board_render_x = pt.x;
     board_render_y = pt.y;
-}
-
-bool Board::finish_hit_time()const
-{
-    return start_hit;
-}
-
-void Board::reset_hit_time()
-{
-    start_hit = false;
 }
 
 void Board::draw_cover(SDL_Renderer* renderer)
@@ -468,4 +530,67 @@ int Board::get_atk_time_on_board()const
 std::vector<std::vector<Tile>>& Board::get_tile_board()
 {
     return board;
+}
+
+
+void Board::detect_board(SkillType type, SDL_Point c)
+{
+    auto apply = [&](int i, int j)
+    {
+            if (i < 0 || i >= col || j < 0 || j >= row)
+                return;
+        auto& tile = board[j][i];
+        if (tile.has_ship()&& tile.get_status()==Tile::Status::Unknown)
+        {
+            if (auto* ship = tile.get_ship_on_tile(); ship && ship->can_detect())
+            {
+                tile.change_status(Tile::Status::Detected);
+            }
+        }
+    };
+
+    if (type == SkillType::Detect_3x3) {
+        for (int j = c.y - 1; j <= c.y + 1; ++j)
+            for (int i = c.x - 1; i <= c.x + 1; ++i)
+                apply(i, j);
+
+        return;
+    }
+
+    if (type == SkillType::Detect_13C)
+    {
+        for (int j = c.y - 1; j <= c.y + 1; ++j)
+            for (int i = c.x - 1; i <= c.x + 1; ++i)
+                apply(i, j);
+
+        apply(c.x - 2, c.y);
+        apply(c.x + 2, c.y);
+        apply(c.x, c.y - 2);
+        apply(c.x, c.y + 2);
+
+        return;
+    }
+}
+
+
+
+
+void Board::if_can_take_action(bool can)
+{
+    can_take_action = can;
+}
+
+bool Board::have_action()
+{
+    return start_action;
+}
+
+int Board::get_action_time()
+{
+    return action_time;
+}
+
+void Board::reset_action_time()
+{
+    action_time = 0;
 }

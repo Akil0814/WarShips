@@ -10,6 +10,7 @@
 #include"animation.h"
 #include"resources_manager.h"
 #include"effect_manager.h"
+#include"skill_type.h"
 
 class Board
 {
@@ -20,7 +21,7 @@ public:
 	~Board();
 
 	void on_render(SDL_Renderer* renderer);
-	void on_update(double delta);
+	void on_update(double delta, SkillType& current_skill);
 	void on_input(const SDL_Event& event);
 
 
@@ -39,18 +40,21 @@ public:
 
 	bool is_inside(int x, int y) const;
 	bool check_available(int x,int y, int ship_size, bool is_horizontal);
-	bool finish_hit_time()const;
-	void reset_hit_time();
 	bool is_on_animation();
-
 	int get_atk_time_on_board()const;
 
 	void show_board();////////////////////////////////
-	void show_board(int x);
+	void show_board(int x);//////////////////
 
 
 	void draw_cover(SDL_Renderer* renderer);
 	void reset_board();
+
+
+	void if_can_take_action(bool can);
+	bool have_action();
+	int get_action_time();
+	void reset_action_time();
 
 	std::vector<std::vector<Tile>>& get_tile_board();
 
@@ -63,13 +67,12 @@ public:
 	static SDL_Texture* tex_set_target;
 	static SDL_Texture* tex_hand;
 
-
-
 private:
 
 	void draw_board(SDL_Renderer* renderer);
 	void on_mouse_click(const SDL_Event& e);
 	void on_mouse_move(const SDL_Event& e);
+	void detect_board(SkillType type, SDL_Point index_center);
 
 private:
 
@@ -77,13 +80,13 @@ private:
 	bool move_in_board = false;
 	bool click_in_board = false;
 
-	bool find_target = false;
-	bool start_hit = false;
 	bool on_animation = false;
-	bool set_target = false;
+
+	bool start_action = false;
+	bool can_take_action = false;
+	int action_time = 0;
 
 	int total_atk_time = 0;
-	int hit_time = 0;
 
 	int board_render_x = 0;
 	int board_render_y = 0;
@@ -95,6 +98,7 @@ private:
 	int col = 20;
 
 	TileBoard board;
+	SkillType skill_using = SkillType::NONE;
 
 	SDL_Point mouse_pos = {0};
 	SDL_Point mouse_click_tile_center = {0};

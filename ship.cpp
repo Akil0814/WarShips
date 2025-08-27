@@ -151,7 +151,7 @@ bool Ship::check_cursor_hit(int x, int y)const
 		y >= collision_rect.y && y < (collision_rect.y + collision_rect.h);
 }
 
-SkillType Ship::get_skill()const
+SkillType Ship::get_skill_type()const
 {
 	return skill;
 }
@@ -241,5 +241,10 @@ bool Ship::can_detect()const
 void Ship::set_can_detect(bool d)
 {
 	can_be_detect = d;
+}
+
+void Ship::use_skill()
+{
+	skill_time--;
 }
 
