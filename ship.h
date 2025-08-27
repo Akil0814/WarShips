@@ -29,6 +29,7 @@ public:
 
 	void take_damage();
 	bool can_defense();
+	void reinforce();
 
 	bool is_in_board()const;
 	bool is_sink() const;

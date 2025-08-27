@@ -7,7 +7,7 @@ class Ship;
 
 class Tile {
 public:
-    enum class Status { Unknown, Miss, Hit, Defend, Detected,Sink };
+    enum class Status { Unknown, Miss, Hit, Defend, Detected, Sink, Reinforce };
 
     Tile() = default;
 
@@ -26,6 +26,8 @@ public:
     bool can_defense();
 
     Ship* get_ship_on_tile();
+
+    void reinforce_ship();
 
 private:
 

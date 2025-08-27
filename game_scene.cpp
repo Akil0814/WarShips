@@ -120,9 +120,6 @@ GameScene::GameScene():
 	skill_button_list.push_back(&Attack_3x3_button);
 	skill_button_list.push_back(&Repair_button);
 
-
-	
-
 	text_player1 = TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_256), "Player1 Turn");
 	text_player2 = TxtTextureManager::instance()->get_txt_texture(GameManager::instance()->get_renderer(), ResourcesManager::instance()->get_font(ResID::Font_256), "Player2 Turn");	
 }
@@ -162,8 +159,10 @@ void GameScene::on_update(double delta)
 {
 	next_player_button.on_update(delta);
 
-
-	get_other_player()->on_update(delta,current_skill_type);
+	if(current_skill_type== SkillType::Repair)
+		current_player->on_update(delta, current_skill_type);
+	else
+		get_other_player()->on_update(delta,current_skill_type);
 
 
 	if (get_other_player()->get_board()->get_action_time())
@@ -222,22 +221,38 @@ void GameScene::on_render(SDL_Renderer* renderer)
 		skill_count->on_render(renderer);
 	}
 
-	current_player->on_render(renderer);
-	current_player->draw_cover(renderer);
-	get_other_player()->on_render(renderer);
 
-	if (current_player == p1)
-		SDL_RenderCopy(renderer, text_player1, nullptr, &player1_text_rect);
+	if (current_skill_type == SkillType::Repair)
+	{
+		current_player->on_render(renderer);
+		get_other_player()->on_render(renderer);
+		get_other_player()->draw_cover(renderer);
+
+	}
 	else
-		SDL_RenderCopy(renderer, text_player2, nullptr, &player2_text_rect);
+	{
+		current_player->on_render(renderer);
+		current_player->draw_cover(renderer);
+		get_other_player()->on_render(renderer);
+
+		if (current_player == p1)
+			SDL_RenderCopy(renderer, text_player1, nullptr, &player1_text_rect);
+		else
+			SDL_RenderCopy(renderer, text_player2, nullptr, &player2_text_rect);
+	}
+
+
 
 	SDL_SetRenderDrawColor(renderer, back_ground_color.r, back_ground_color.g, back_ground_color.b, back_ground_color.a);
 }
 
 void GameScene::on_input(const SDL_Event& event)
 {
-	get_other_player()->on_input(event);
-
+	if (current_skill_type == SkillType::Repair)
+		current_player->on_input(event);
+	else
+		get_other_player()->on_input(event);
+	
 	next_player_button.on_input(event);
 	missile_button.on_input(event);
 

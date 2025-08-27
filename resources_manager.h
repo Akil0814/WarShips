@@ -80,9 +80,7 @@ enum class ResID
 	Tex_Tile_defance,
 	Tex_Tile_sink,
 	Tex_Tile_select,
-
-
-
+	Tex_Tile_reinforce,
 
 	//½¢´¬ÌùÍ¼
 	Tex_Test_Ship_detel,/////////////////////////////////////////////////////////

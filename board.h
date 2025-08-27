@@ -66,6 +66,7 @@ public:
 	static SDL_Texture* tile_select;
 	static SDL_Texture* tex_set_target;
 	static SDL_Texture* tex_hand;
+	static SDL_Texture* tile_reinforce;
 
 private:
 

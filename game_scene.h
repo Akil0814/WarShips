@@ -45,6 +45,8 @@ private:
 	Player* p1 = nullptr;
 	Player* p2 = nullptr;
 	Player* current_player = nullptr;
+	Player* current_update_player = nullptr;
+
 
 	SDL_Texture* text_player1 = nullptr;
 	SDL_Texture* text_player2 = nullptr;

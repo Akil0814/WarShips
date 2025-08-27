@@ -55,6 +55,10 @@ bool Tile::can_defense()
 Ship* Tile::get_ship_on_tile()
 {
     return ship_on_tile;
+
 }
 
-
+void Tile::reinforce_ship()
+{
+	ship_on_tile->reinforce();
+}

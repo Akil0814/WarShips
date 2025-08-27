@@ -50,7 +50,8 @@ bool ResourcesManager::load_from_file(SDL_Renderer* renderer)
 	texture_pool[ResID::Tex_Tile_defance] = IMG_LoadTexture(renderer, "res/Map_texture/tile_defance.png");
 	texture_pool[ResID::Tex_Tile_sink] = IMG_LoadTexture(renderer, "res/Map_texture/tile_sink.png");
 	texture_pool[ResID::Tex_Tile_select] = IMG_LoadTexture(renderer, "res/Map_texture/tile_select.png");
-
+	texture_pool[ResID::Tex_Tile_select] = IMG_LoadTexture(renderer, "res/Map_texture/tile_select.png");
+	texture_pool[ResID::Tex_Tile_reinforce] = IMG_LoadTexture(renderer, "res/Map_texture/tile_reinforce.png");
 
 	texture_pool[ResID::Tex_SetTarget] = IMG_LoadTexture(renderer, "res/set_target.png");
 	texture_pool[ResID::Tex_Hand] = IMG_LoadTexture(renderer, "res/hand.png");

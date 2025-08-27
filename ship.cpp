@@ -194,6 +194,7 @@ void Ship::take_damage()
 
 	std::cout << "after take damage HP:" << hp << std::endl;
 	std::cout << "after take damage DT:" << defense_time << std::endl;
+	std::cout << "_________________________________________________________" << std::endl;
 
 }
 
@@ -245,6 +246,14 @@ void Ship::set_can_detect(bool d)
 
 void Ship::use_skill()
 {
-	skill_time--;
+	--skill_time;
 }
+
+void Ship::reinforce()
+{
+	++defense_time;
+	std::cout << "reinforce,defense_time::" << defense_time << std::endl;
+
+}
+
 

@@ -7,6 +7,8 @@ SDL_Texture* Board::tile_detected = nullptr;
 SDL_Texture* Board::tile_defance = nullptr;
 SDL_Texture* Board::tile_select = nullptr;
 SDL_Texture* Board::tile_sink = nullptr;
+SDL_Texture* Board::tile_reinforce = nullptr;
+
 SDL_Texture* Board::tex_hand = nullptr;
 SDL_Texture* Board::tex_set_target = nullptr;
 
@@ -22,6 +24,7 @@ Board::Board()
     tile_sink = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_sink);
     tile_select = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_select);
     tex_set_target = ResourcesManager::instance()->get_texture(ResID::Tex_SetTarget);
+	tile_reinforce = ResourcesManager::instance()->get_texture(ResID::Tex_Tile_reinforce);
 
 }
 
@@ -61,7 +64,10 @@ void Board::on_render(SDL_Renderer* renderer)
             case Tile::Status::Sink:
                 SDL_RenderCopy(renderer, tile_sink, nullptr, &rect);
                 break;
-
+            case Tile::Status::Reinforce:
+                SDL_RenderCopy(renderer, tile_reinforce, nullptr, &rect);
+				break;
+            
             default:
                 break;
             }
@@ -124,8 +130,6 @@ void Board::on_mouse_click(const SDL_Event& event)
             return;
         }
 
-        start_action = true;
-        ++action_time;
         int x = (event.button.x - board_render_x) / SIZE_TILE;
         int y = (event.button.y - board_render_y) / SIZE_TILE;//º∆À„Œª÷√
         if (x < 0 || x >= col || y < 0 || y >= row)
@@ -145,6 +149,20 @@ void Board::on_mouse_click(const SDL_Event& event)
             SIZE_TILE + 40, SIZE_TILE + 40
         };
 
+        if (skill_using == SkillType::Repair)
+        {
+            if(!board[y][x].has_ship() || board[y][x].get_status() == Tile::Status::Unknown
+                || board[y][x].get_status() == Tile::Status::Sink)
+            {
+                Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Fail_Fire), 0);
+				std::cout << "cant repair" << std::endl;////////////////////
+                return;
+			}
+        }
+
+
+        start_action = true;
+        ++action_time;
         switch (skill_using)
         {
         case SkillType::NONE:
@@ -162,6 +180,10 @@ void Board::on_mouse_click(const SDL_Event& event)
             detect_board(skill_using, { index_x, index_y });
             break;
         case SkillType::Repair:
+			board[y][x].change_status(Tile::Status::Reinforce);
+			board[y][x].reinforce_ship();
+            Mix_PlayChannel(-1, ResourcesManager::instance()->get_sound(ResID::Sound_Repair), 0);
+
             break;
         default:
             break;
@@ -534,7 +556,6 @@ std::vector<std::vector<Tile>>& Board::get_tile_board()
 {
     return board;
 }
-
 
 void Board::detect_board(SkillType type, SDL_Point c)
 {
