@@ -597,8 +597,6 @@ void Board::detect_board(SkillType type, SDL_Point c)
 }
 
 
-
-
 void Board::if_can_take_action(bool can)
 {
     can_take_action = can;
