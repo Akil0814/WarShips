@@ -11,6 +11,7 @@
 5. [05-composites.md](./05-composites.md)
 6. [06-file-reference.md](./06-file-reference.md)
 7. [07-refactor-plan.md](./07-refactor-plan.md)
+8. [08-i18n-text-cache-design.md](./08-i18n-text-cache-design.md)
 
 ## 文档内容概览
 
@@ -32,6 +33,10 @@
   - 是否值得重构
   - 当前系统的主要结构问题与统一性问题
   - 分阶段重构路线、风险控制与落地顺序
+- `08-i18n-text-cache-design.md`
+  - UI 文案与本地化系统的职责划分
+  - 文本转纹理模块和缓存池设计
+  - locale 切换、脏标记、布局失效与控件接入方式
 
 ## 当前 UI 系统的核心认识
 
