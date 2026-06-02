@@ -42,7 +42,11 @@ int GameManager::run(int argc, char** argv)
 	while (!is_quit)
 	{
 		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+				is_quit = true;
 			on_input(event);
+		}
 
 		Uint64 current_counter = SDL_GetPerformanceCounter();//实现动态延时
 		double delta = (double)(current_counter - last_counter) / counter_freq;

@@ -159,39 +159,49 @@ void GameScene::on_update(double delta)
 {
 	next_player_button.on_update(delta);
 
-	if(current_skill_type== SkillType::Repair)
+	if (current_skill_type == SkillType::Repair)
 		current_player->on_update(delta, current_skill_type);
 	else
-		get_other_player()->on_update(delta,current_skill_type);
+		get_other_player()->on_update(delta, current_skill_type);
 
+	// 固定本帧被更新的玩家与棋盘
+	Player* updated = (current_skill_type == SkillType::Repair) ? current_player : get_other_player();
+	Board* ub = updated->get_board();
 
-	if (get_other_player()->get_board()->get_action_time())
+	int at = ub->get_action_time();
+	if (at > 0)
 	{
+		ub->reset_action_time();
+
 		switch (current_skill_type)
 		{
 		case SkillType::NONE:
 			break;
-		case SkillType::Missile:
-			missile_num = missile_num - get_other_player()->get_board()->get_action_time();
-			get_other_player()->get_board()->reset_action_time();
+
+		case SkillType::Missile: {
+			missile_num -= at;
+			if (missile_num < 0) missile_num = 0;  //不许负数
 			missile_count->set_number(missile_num);
-			get_other_player()->get_board()->if_can_take_action(missile_num);
+			ub->if_can_take_action(missile_num);
 			break;
+		}
 
 		case SkillType::Detect_3x3:
 		case SkillType::Detect_13C:
 		case SkillType::Attack_5C:
 		case SkillType::Attack_3x3:
-		case SkillType::Repair:
-			skill_time = skill_time - get_other_player()->get_board()->get_action_time();
-			get_other_player()->get_board()->reset_action_time();
+		case SkillType::Repair: {
+			skill_time -= at;
+			if (skill_time < 0) skill_time = 0;
 			skill_count->set_number(skill_time);
-			get_other_player()->get_board()->if_can_take_action(skill_time);
-			current_player->use_skill(current_skill_type);
-			std::cout <<"skill_time:" << skill_time << std::endl;
-			std::cout << "skill_count_board:" << skill_count->get_number_on_board() << std::endl;
+			ub->if_can_take_action(skill_time);
 
+			current_player->use_skill(current_skill_type);
+
+			std::cout << "skill_time:" << skill_time << std::endl;
+			std::cout << "skill_count_board:" << skill_count->get_number_on_board() << std::endl;
 			break;
+		}
 
 		default:
 			break;
@@ -281,7 +291,7 @@ void GameScene::reset_all_button()
 void GameScene::next_player_turn()
 {
 	++round_time;
-	if (round_time > 15)
+	if (round_time > 10)
 		++missile_add;
 
 	current_player == p1 ? current_player=p2 : current_player=p1;
