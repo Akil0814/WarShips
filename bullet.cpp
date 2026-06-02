@@ -1,12 +1,7 @@
 #include"bullet.h"
 #include "board.h"
 #include"tile.h"
-/*
-* 1 随机炮弹发射位置
-* 2 发射音效 击中音效
-* 
-* 
-*/
+
 
 Bullet::Bullet()
 {
