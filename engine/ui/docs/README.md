@@ -10,6 +10,7 @@
 4. [04-widgets.md](./04-widgets.md)
 5. [05-composites.md](./05-composites.md)
 6. [06-file-reference.md](./06-file-reference.md)
+7. [07-refactor-plan.md](./07-refactor-plan.md)
 
 ## 文档内容概览
 
@@ -27,6 +28,10 @@
   - 高层组合控件和完整 UI 界面的组织方式
 - `06-file-reference.md`
   - 当前目录下每个 `.h/.cpp` 文件的作用、主要依赖、职责摘要
+- `07-refactor-plan.md`
+  - 是否值得重构
+  - 当前系统的主要结构问题与统一性问题
+  - 分阶段重构路线、风险控制与落地顺序
 
 ## 当前 UI 系统的核心认识
 
@@ -49,4 +54,3 @@
 - `UiScreen` 如何在 `UiPanel` 之上叠加开关、过渡和焦点管理
 - `UiOptionList`、`UiMenuList`、`UiTabBar` 如何通过组合基础控件构建更高层 UI
 - 主题系统中“主题数据”和“应用主题的方法”是如何解耦的
-
