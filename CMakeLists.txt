@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(MoonLine LANGUAGES C CXX)
+project(WarShip LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -135,11 +135,11 @@ add_subdirectory(application)
 add_subdirectory(engine)
 add_subdirectory(gameplay)
 
-add_executable(MoonLine "main.cpp")
+add_executable(WarShip "main.cpp")
 
-target_include_directories(MoonLine PRIVATE
+target_include_directories(WarShip PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/imgui
 	${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/nlohmann
 )
 
-target_link_libraries(MoonLine app_lib gameplay_lib engine_lib imgui_lib ${SDL2_LIBRARIES})
+target_link_libraries(WarShip app_lib gameplay_lib engine_lib imgui_lib ${SDL2_LIBRARIES})

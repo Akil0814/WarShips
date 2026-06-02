@@ -48,7 +48,6 @@ Application:: Application()
 		SDL_Log("Failed to enter fullscreen: %s", SDL_GetError());
 		SDL_ClearError();
 
-		//fallback
 		SDL_SetWindowSize(_window, _logical_width, _logical_height);
 		SDL_SetWindowPosition(_window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	}
@@ -74,17 +73,18 @@ Application:: ~Application()
 
 bool Application::init(int argc, char** argv)
 {
-	init_assert(argc > 0 && argv && argv[0], "Application start path error");
+/*	init_assert(argc > 0 && argv && argv[0], "Application start path error");
 	init_assert(
 		ResourceBootstrapper::instance()->bootstrap(argv[0], _renderer),
 		"Resource bootstrap error"
 	);
+*/
 
 	ResourceManager* resource_manager = ResourceManager::instance();
 	init_assert(
 		resource_manager->load_font(
 			"ui.default",
-			PathManager::instance()->fonts() / "IPix.ttf",
+			"G:/Coding/Projects/WarShips/assets/fonts/IPix.ttf",
 			24
 		),
 		"Default UI font load error"

@@ -1,0 +1,28 @@
+{
+  "textures_directories": [
+    "character",
+    "stage",
+    "ui"
+  ],
+
+  "i18n_directories": [
+    "en",
+    "zh"
+  ],
+
+  "configs_directories": [
+    "character",
+    "enemy",
+    "global",
+    "scene"
+  ],
+
+  "audio_directories": [
+    "character"
+  ],
+
+  "manifests": {
+    "characters": "configs/character/characters_manifest.json",
+    "character_animations": "textures/character/character_animation.json"
+  }
+}
